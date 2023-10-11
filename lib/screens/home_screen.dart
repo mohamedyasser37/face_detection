@@ -1,6 +1,9 @@
 
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:hieroglyphic_app/screens/favorite_screen.dart';
+import 'package:hieroglyphic_app/screens/list_screen.dart';
+import 'package:hieroglyphic_app/screens/more_screen.dart';
 
 import '../widgets/drawer.dart';
 
@@ -23,9 +26,24 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.blue.withOpacity(.4),
         items: [
           _buildNavigatincomponents(icon: Icons.home_outlined,desc: "Home",),
-          _buildNavigatincomponents(icon: Icons.favorite_border_outlined,desc: "Favorite"),
-          _buildNavigatincomponents(icon: Icons.list,desc: "List"),
-          _buildNavigatincomponents(icon: Icons.more_vert_outlined,desc: "More"),
+
+          InkWell(
+            onTap: (){
+          Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => FavoriteScreen(),));
+          },
+              child: _buildNavigatincomponents(icon: Icons.favorite_border_outlined,desc: "Favorite")),
+
+          InkWell(
+              onTap: (){
+                Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => ListScreen(),));
+              },
+              child: _buildNavigatincomponents(icon: Icons.list,desc: "List")),
+
+          InkWell(
+              onTap: (){
+                Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => MoreScreen(),));
+              },
+              child: _buildNavigatincomponents(icon: Icons.more_vert_outlined,desc: "More")),
         ],
         onTap: (index) {
           setState(() {});
