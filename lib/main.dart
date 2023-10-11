@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:hieroglyphic_app/loginscreen/loginscreen.dart';
 
 import 'firebase_options.dart';
 
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home:  LoginScreen(),
     );
   }
 }
@@ -81,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
         ),
@@ -89,8 +90,6 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () async{
           try {
-            final userCredential =
-                await FirebaseAuth.instance.signInAnonymously();
             print("Signed in with temporary account.");
           } on FirebaseAuthException catch (e) {
             switch (e.code) {
