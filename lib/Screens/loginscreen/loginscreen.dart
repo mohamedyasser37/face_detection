@@ -6,9 +6,9 @@ import 'package:flutter_svg/svg.dart';
 // ignore: depend_on_referenced_packages
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hieroglyphic_app/compenets/components.dart';
-import 'package:hieroglyphic_app/loginscreen/cubit/cubit.dart';
-import 'package:hieroglyphic_app/loginscreen/cubit/state.dart';
-import 'package:hieroglyphic_app/register_screen/register_screen.dart';
+import 'package:hieroglyphic_app/Screens/loginscreen/cubit/cubit.dart';
+import 'package:hieroglyphic_app/Screens/loginscreen/cubit/state.dart';
+import 'package:hieroglyphic_app/Screens/register_screen/register_screen.dart';
 
 // ignore: must_be_immutable
 class LoginScreen extends StatelessWidget {
@@ -130,6 +130,7 @@ class LoginScreen extends StatelessWidget {
                             if (formKey.currentState!.validate()) {
                               socialloginCubit.get(context).UserLogin(
                                   email: emailController.text,
+                                  context: context,
                                   password: passwordController.text);
                             }
                           },

@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hieroglyphic_app/models/login/login_model.dart';
 import 'package:hieroglyphic_app/models/usermodel/usermodel.dart';
-import 'package:hieroglyphic_app/register_screen/cubit/state.dart';
+import 'package:hieroglyphic_app/Screens/register_screen/cubit/state.dart';
 
 class SocialRegisterCubit extends Cubit<SocialRegisterState> {
   SocialRegisterCubit() : super(SocialRegisterInitialState());

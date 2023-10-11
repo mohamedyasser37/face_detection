@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hieroglyphic_app/compenets/components.dart';
-import 'package:hieroglyphic_app/loginscreen/loginscreen.dart';
-import 'package:hieroglyphic_app/register_screen/cubit/cubit.dart';
-import 'package:hieroglyphic_app/register_screen/cubit/state.dart';
+import 'package:hieroglyphic_app/Screens/loginscreen/loginscreen.dart';
+import 'package:hieroglyphic_app/Screens/register_screen/cubit/cubit.dart';
+import 'package:hieroglyphic_app/Screens/register_screen/cubit/state.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:google_fonts/google_fonts.dart';
 
