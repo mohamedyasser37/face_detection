@@ -20,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       key: _scaffoldKey,
       bottomNavigationBar: CurvedNavigationBar(
-        backgroundColor: Colors.blue.withOpacity(.4),
+        backgroundColor: Colors.blue.withOpacity(.8),
         items: [
           _buildNavigatincomponents(icon: Icons.home_outlined,desc: "Home",),
           _buildNavigatincomponents(icon: Icons.favorite_border_outlined,desc: "Favorite"),
@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
           setState(() {});
         },
       ),
-      appBar: AppBar(title:const Text(" "),backgroundColor: Colors.blue,),
+      appBar: AppBar(title:const Text(" Home "),backgroundColor: Colors.blue,),
       drawer: MainDrawer(),
     );
   }
