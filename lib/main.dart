@@ -1,8 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:hieroglyphic_app/screens/home_screen.dart';
+import 'package:hieroglyphic_app/Screens/register_screen/register_screen.dart';
+import 'package:hieroglyphic_app/screens/favorite_screen.dart';
+import 'package:hieroglyphic_app/screens/home_screen/home_screen.dart';
+import 'package:hieroglyphic_app/screens/list_screen.dart';
+import 'package:hieroglyphic_app/screens/more_screen.dart';
 
+import 'Screens/loginscreen/loginscreen.dart';
 import 'firebase_options.dart';
 
 void main() async{
@@ -22,89 +27,18 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const HomeScreen(),
+      initialRoute:HomeScreen.routeName ,
+      routes: {
+        HomeScreen.routeName :(context) => HomeScreen(),
+        FavoriteScreen.routeName :(context) => FavoriteScreen(),
+        ListScreen.routeName :(context) => ListScreen(),
+        MoreScreen.routeName :(context) => MoreScreen(),
+      },
+      home:  HomeScreen(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async{
-          try {
-            print("Signed in with temporary account.");
-          } on FirebaseAuthException catch (e) {
-            switch (e.code) {
-              case "operation-not-allowed":
-                print("Anonymous auth hasn't been enabled for this project.");
-                break;
-              default:
-                print("Unknown error.");
-            }
-          }
-        },
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
-  }
-}
