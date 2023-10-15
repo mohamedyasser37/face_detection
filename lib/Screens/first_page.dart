@@ -7,7 +7,7 @@ class FirstPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.cyan,
-      appBar: AppBar(backgroundColor: Colors.blue,title: Text("First Page")),
+      appBar: AppBar(backgroundColor: Colors.blue,title: const Text("First Page")),
     );
   }
 }

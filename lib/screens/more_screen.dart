@@ -9,7 +9,7 @@
     Widget build(BuildContext context) {
       return Scaffold(
         backgroundColor: Colors.blueAccent,
-        appBar: AppBar(backgroundColor: Colors.blue,title: Text("MoreScreen"),),
+        appBar: AppBar(backgroundColor: Colors.blue,title: const Text("MoreScreen"),),
       );
     }
   }

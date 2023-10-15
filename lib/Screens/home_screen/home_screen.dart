@@ -15,6 +15,8 @@ import '../../widgets/drawer.dart';
 class HomeScreen extends StatelessWidget {
   static const String routeName='home';
 
+  HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -28,7 +30,7 @@ class HomeScreen extends StatelessWidget {
             appBar: AppBar(
               title: const Text(" Home "), backgroundColor: Colors.blue,),
 
-            drawer: MainDrawer(),
+            drawer: const MainDrawer(),
 
             bottomNavigationBar:
             CurvedNavigationBar(height: 50,
@@ -51,7 +53,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-List<Widget> tabs=[FirstPage(),FavoriteScreen(),ListScreen(),MoreScreen()];
+List<Widget> tabs=[const FirstPage(),const FavoriteScreen(),const ListScreen(),const MoreScreen()];
 }
 
 

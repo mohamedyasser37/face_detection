@@ -1,25 +1,44 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:hieroglyphic_app/Screens/register_screen/register_screen.dart';
+import 'package:hieroglyphic_app/Screens/loginscreen/loginscreen.dart';
+import 'package:hieroglyphic_app/compenets/cashe_helper.dart';
 import 'package:hieroglyphic_app/screens/favorite_screen.dart';
 import 'package:hieroglyphic_app/screens/home_screen/home_screen.dart';
 import 'package:hieroglyphic_app/screens/list_screen.dart';
 import 'package:hieroglyphic_app/screens/more_screen.dart';
+import 'package:hieroglyphic_app/screens/onBoarding_Screen.dart';
 
-import 'Screens/loginscreen/loginscreen.dart';
 import 'firebase_options.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await CacheHelper.init();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  Widget widget;
+  bool? onBoarding = CacheHelper.getData(key: 'onBoarding');
+  bool? Login = CacheHelper.getData(key: 'Login');
+  print(Login);
+
+  if (onBoarding != null) {
+    if (Login != null) {
+      widget = HomeScreen();
+    } else {
+      widget = LoginScreen();
+    }
+  } else {
+    widget = OnBoardingScreen();
+  }
+  runApp(MyApp(
+    startWidget: widget,
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final Widget startWidget;
+  const MyApp({super.key, required this.startWidget});
 
   @override
   Widget build(BuildContext context) {
@@ -29,16 +48,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute:HomeScreen.routeName ,
+      // initialRoute:HomeScreen.routeName ,
       routes: {
-        HomeScreen.routeName :(context) => HomeScreen(),
-        FavoriteScreen.routeName :(context) => FavoriteScreen(),
-        ListScreen.routeName :(context) => ListScreen(),
-        MoreScreen.routeName :(context) => MoreScreen(),
+        HomeScreen.routeName: (context) => HomeScreen(),
+        FavoriteScreen.routeName: (context) => const FavoriteScreen(),
+        ListScreen.routeName: (context) => const ListScreen(),
+        MoreScreen.routeName: (context) => const MoreScreen(),
       },
-      home:  HomeScreen(),
+      home: startWidget,
     );
   }
 }
-
-

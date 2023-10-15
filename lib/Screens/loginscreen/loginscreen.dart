@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 // ignore: depend_on_referenced_packages
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hieroglyphic_app/compenets/cashe_helper.dart';
 import 'package:hieroglyphic_app/compenets/components.dart';
 import 'package:hieroglyphic_app/Screens/loginscreen/cubit/cubit.dart';
 import 'package:hieroglyphic_app/Screens/loginscreen/cubit/state.dart';
@@ -19,6 +20,20 @@ class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
   @override
   Widget build(BuildContext context) {
+    void submit() {
+      CacheHelper.saveData(
+        key: 'Login',
+        value: true,
+      ).then((value) {
+        if (value) {
+          navigateAndFinish(
+            context,
+            LoginScreen(),
+          );
+        }
+      });
+    }
+
     return BlocProvider(
       create: (BuildContext context) => socialloginCubit(),
       child: BlocConsumer<socialloginCubit, SocialLoginState>(
@@ -35,8 +50,8 @@ class LoginScreen extends StatelessWidget {
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
-             // backgroundColor: Colors.transparent,
-            ),
+                // backgroundColor: Colors.transparent,
+                ),
             body: Center(
               child: SingleChildScrollView(
                 child: Padding(
@@ -132,6 +147,7 @@ class LoginScreen extends StatelessWidget {
                                   email: emailController.text,
                                   context: context,
                                   password: passwordController.text);
+                              submit();
                             }
                           },
                           text: 'Login',
