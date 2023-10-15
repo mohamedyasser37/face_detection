@@ -52,5 +52,21 @@ void changeBottomNavBar(int index,BuildContext context){
 
   emit(HomeBottomNavBar());
 }
+var isDark=false;
+void changeMode(){
+    isDark=!isDark;
+    emit(ChangeMode());
+
+
+}
+
+  var isEnglish=false;
+
+void changeLanguage(){
+  isEnglish=!isEnglish;
+    emit(ChangeLanguage());
+
+
+}
 
 }
