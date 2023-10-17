@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hieroglyphic_app/Screens/loginscreen/loginscreen.dart';
@@ -10,8 +11,10 @@ import 'package:hieroglyphic_app/screens/onBoarding_Screen.dart';
 
 import 'firebase_options.dart';
 
+List<CameraDescription>? camera;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  camera = await availableCameras();
   await CacheHelper.init();
 
   await Firebase.initializeApp(
