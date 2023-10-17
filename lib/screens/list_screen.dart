@@ -9,7 +9,7 @@ class ListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.green,
-      appBar: AppBar(backgroundColor: Colors.blue,title: const Text("ListScreen")),
+      appBar: AppBar(backgroundColor: Colors.blue,title: Text("ListScreen")),
     );
   }
 }

@@ -16,26 +16,26 @@ class _TestState extends State<Test> {
   @override
   void initState() {
     super.initState();
-    loadCamera();
+    //loadCamera();
     // loadModel();
   }
 
-  loadCamera() {
-    cameraController = CameraController(camera![0], ResolutionPreset.medium);
-    cameraController!.initialize().then((value) {
-      if (!mounted) {
-        return;
-      } else {
-        setState(() {
-          cameraController!.startImageStream((imageStream) {
-            cameraImage = imageStream;
-            print("1111111111111111111111");
-            // runModel();
-          });
-        });
-      }
-    });
-  }
+  // loadCamera() {
+  //   cameraController = CameraController(camera![0], ResolutionPreset.medium);
+  //   cameraController!.initialize().then((value) {
+  //     if (!mounted) {
+  //       return;
+  //     } else {
+  //       setState(() {
+  //         cameraController!.startImageStream((imageStream) {
+  //           cameraImage = imageStream;
+  //           print("1111111111111111111111");
+  //           // runModel();
+  //         });
+  //       });
+  //     }
+  //   });
+  // }runModel
 
   // runModel() async {
   //   if (cameraImage != null) {

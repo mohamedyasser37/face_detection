@@ -17,8 +17,8 @@ class _MainDrawerState extends State<MainDrawer> {
     return Drawer(
       child: Column(
         children: [
-          const DrawerHeader(
-            padding:EdgeInsets.all(20),
+          DrawerHeader(
+            padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               color: Colors.blue,
             ),
@@ -33,12 +33,56 @@ class _MainDrawerState extends State<MainDrawer> {
             ),
           ),
           ListTile(
-            leading: const Icon(Icons.person_pin,color:Colors.blue,),
-            title:  Text("Private information",style: Theme.of(context).textTheme.titleLarge!.copyWith(color:Theme.of(context).colorScheme.primary ),),
+            leading: Icon(
+              Icons.person_pin,
+              color: Colors.blue,
+            ),
+            title: Text(
+              "Private information",
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge!
+                  .copyWith(color: Theme.of(context).colorScheme.primary),
+            ),
           ),
           ListTile(
-            leading: const Icon(Icons.settings,color: Colors.blue,),
-            title:  Text("settings",style: Theme.of(context).textTheme.titleLarge!.copyWith(color:Theme.of(context).colorScheme.primary ),),
+            leading: Icon(
+              Icons.settings,
+              color: Colors.blue,
+            ),
+            title: Text(
+              "settings",
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge!
+                  .copyWith(color: Theme.of(context).colorScheme.primary),
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(HomeCubit.get(context).isEnglish?'Light Mode':'الوضع العادي'),
+              Switch(
+                value: HomeCubit.get(context).isDark ? true : false,
+                onChanged: (enabled) {
+                  HomeCubit.get(context).changeMode();
+                },
+              ),
+              Text(HomeCubit.get(context).isEnglish?'Dark Mode':'الوضع الليلي'),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(HomeCubit.get(context).isEnglish? 'Arabic':'عربي'),
+              Switch(
+                value: HomeCubit.get(context).isEnglish ? true : false,
+                onChanged: (enabled) {
+                  HomeCubit.get(context).changeLanguage();
+                },
+              ),
+              Text(HomeCubit.get(context).isEnglish? 'ُEnglish':'انجليزي'),
+            ],
           ),
         ],
       ),

@@ -4,12 +4,10 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:hieroglyphic_app/compenets/cashe_helper.dart';
 import 'package:hieroglyphic_app/compenets/components.dart';
 import 'package:hieroglyphic_app/Screens/loginscreen/loginscreen.dart';
 import 'package:hieroglyphic_app/Screens/register_screen/cubit/cubit.dart';
 import 'package:hieroglyphic_app/Screens/register_screen/cubit/state.dart';
-import 'package:hieroglyphic_app/screens/home_screen/home_screen.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -27,20 +25,6 @@ class RegisterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void submit() {
-      CacheHelper.saveData(
-        key: 'Login',
-        value: true,
-      ).then((value) {
-        if (value) {
-          navigateAndFinish(
-            context,
-            LoginScreen(),
-          );
-        }
-      });
-    }
-
     return BlocProvider(
       create: (BuildContext context) => SocialRegisterCubit(),
       child: BlocConsumer<SocialRegisterCubit, SocialRegisterState>(
@@ -189,9 +173,7 @@ class RegisterScreen extends StatelessWidget {
                                         name: nameController.text,
                                         phone: phoneController.text,
                                       );
-                                      submit();
-                                                  navigateTo(context, HomeScreen());
-
+                                      navigateTo(context, LoginScreen());
                                     }
                                   },
                                   text: 'Register',

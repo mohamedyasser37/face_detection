@@ -15,8 +15,6 @@ import '../../widgets/drawer.dart';
 class HomeScreen extends StatelessWidget {
   static const String routeName='home';
 
-  HomeScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<HomeCubit, HomeState>(
@@ -53,7 +51,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-List<Widget> tabs=[const FirstPage(),const FavoriteScreen(),const ListScreen(),const MoreScreen()];
+List<Widget> tabs=[FirstPage(),FavoriteScreen(),ListScreen(),MoreScreen()];
 }
 
 

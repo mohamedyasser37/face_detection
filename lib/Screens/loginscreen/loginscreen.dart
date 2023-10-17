@@ -5,12 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 // ignore: depend_on_referenced_packages
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hieroglyphic_app/compenets/cashe_helper.dart';
 import 'package:hieroglyphic_app/compenets/components.dart';
 import 'package:hieroglyphic_app/Screens/loginscreen/cubit/cubit.dart';
 import 'package:hieroglyphic_app/Screens/loginscreen/cubit/state.dart';
 import 'package:hieroglyphic_app/Screens/register_screen/register_screen.dart';
-import 'package:hieroglyphic_app/screens/home_screen/home_screen.dart';
 
 // ignore: must_be_immutable
 class LoginScreen extends StatelessWidget {
@@ -21,20 +19,6 @@ class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    void submit() {
-      CacheHelper.saveData(
-        key: 'Login',
-        value: true,
-      ).then((value) {
-        if (value) {
-          navigateAndFinish(
-            context,
-            LoginScreen(),
-          );
-        }
-      });
-    }
-
     return BlocProvider(
       create: (BuildContext context) => socialloginCubit(),
       child: BlocConsumer<socialloginCubit, SocialLoginState>(
@@ -51,8 +35,8 @@ class LoginScreen extends StatelessWidget {
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
-                // backgroundColor: Colors.transparent,
-                ),
+             // backgroundColor: Colors.transparent,
+            ),
             body: Center(
               child: SingleChildScrollView(
                 child: Padding(
@@ -146,10 +130,8 @@ class LoginScreen extends StatelessWidget {
                             if (formKey.currentState!.validate()) {
                               socialloginCubit.get(context).UserLogin(
                                   email: emailController.text,
-                              password: passwordController.text,);
-                              submit();
-                                    navigateTo(context, HomeScreen());
-
+                                  context: context,
+                                  password: passwordController.text);
                             }
                           },
                           text: 'Login',

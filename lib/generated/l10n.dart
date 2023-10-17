@@ -49,6 +49,46 @@ class S {
   static S? maybeOf(BuildContext context) {
     return Localizations.of<S>(context, S);
   }
+
+  /// `First Page`
+  String get firstTitle {
+    return Intl.message(
+      'First Page',
+      name: 'firstTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Favourite Page`
+  String get favouritTitle {
+    return Intl.message(
+      'Favourite Page',
+      name: 'favouritTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Arabic`
+  String get arabicLanguage {
+    return Intl.message(
+      'Arabic',
+      name: 'arabicLanguage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `English`
+  String get englishLanguage {
+    return Intl.message(
+      'English',
+      name: 'englishLanguage',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
