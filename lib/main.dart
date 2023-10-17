@@ -32,7 +32,7 @@ void main() async {
       widget = LoginScreen();
     }
   } else {
-    widget = OnBoardingScreen();
+    widget = const OnBoardingScreen();
   }
   runApp(MyApp(
     startWidget: widget,

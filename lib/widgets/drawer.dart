@@ -9,8 +9,8 @@ class MainDrawer extends StatelessWidget {
     return Drawer(
       child: Column(
         children: [
-          DrawerHeader(
-            padding:const EdgeInsets.all(20),
+          const DrawerHeader(
+            padding:EdgeInsets.all(20),
             decoration: BoxDecoration(
               color: Colors.blue,
             ),
@@ -22,11 +22,11 @@ class MainDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: Icon(Icons.person_pin,color:Colors.blue,),
+            leading: const Icon(Icons.person_pin,color:Colors.blue,),
             title:  Text("Private information",style: Theme.of(context).textTheme.titleLarge!.copyWith(color:Theme.of(context).colorScheme.primary ),),
           ),
           ListTile(
-            leading: Icon(Icons.settings,color: Colors.blue,),
+            leading: const Icon(Icons.settings,color: Colors.blue,),
             title:  Text("settings",style: Theme.of(context).textTheme.titleLarge!.copyWith(color:Theme.of(context).colorScheme.primary ),),
           ),
 

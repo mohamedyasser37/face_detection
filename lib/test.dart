@@ -67,7 +67,7 @@ class _TestState extends State<Test> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
+        SizedBox(
             width: 500, height: 500, child: CameraPreview(cameraController!)),
         Text(output)
       ],

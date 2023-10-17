@@ -9,6 +9,7 @@ import 'package:hieroglyphic_app/compenets/components.dart';
 import 'package:hieroglyphic_app/Screens/loginscreen/loginscreen.dart';
 import 'package:hieroglyphic_app/Screens/register_screen/cubit/cubit.dart';
 import 'package:hieroglyphic_app/Screens/register_screen/cubit/state.dart';
+import 'package:hieroglyphic_app/screens/home_screen/home_screen.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -189,6 +190,8 @@ class RegisterScreen extends StatelessWidget {
                                         phone: phoneController.text,
                                       );
                                       submit();
+                                                  navigateTo(context, HomeScreen());
+
                                     }
                                   },
                                   text: 'Register',

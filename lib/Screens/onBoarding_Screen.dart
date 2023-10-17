@@ -21,6 +21,8 @@ class BoardingModel {
 }
 
 class OnBoardingScreen extends StatefulWidget {
+  const OnBoardingScreen({super.key});
+
   @override
   State<OnBoardingScreen> createState() => OnBoardingScreenState();
 }
@@ -30,22 +32,22 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
 
   List<BoardingModel> boarding = [
     BoardingModel(
-      image: 'assets/images/back.jpg',
-      text: 'Online Shopping',
-      title: 'Best Way to shop',
-      body: 'And get the best deals',
+      image: 'assets/images/Robot.jpg',
+      text: 'Planning',
+      title: 'lorem ipsum dolor sit amet',
+      body: 'consectetur adipiscing elit',
     ),
     BoardingModel(
-      image: 'assets/images/back.jpg',
-      text: 'Harry Up Right',
-      title: 'Now until it\'s',
-      body: 'Too late',
+      image: 'assets/images/Robot.jpg',
+      text: 'Time TO Work',
+      title: 'lorem ipsum dolor sit amet',
+      body: 'consectetur adipiscing elit',
     ),
     BoardingModel(
-      image: 'assets/images/back.jpg',
-      text: 'Order Online',
-      title: 'Make an order sitting on a sofa',
-      body: 'pay and choose online',
+      image: 'assets/images/Robot.jpg',
+      text: 'DEADlINE',
+      title: 'lorem ipsum dolor sit amet',
+      body: 'consectetur adipiscing elit',
     ),
   ];
   bool isLast = false;
@@ -172,7 +174,7 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 30.0,
           ),
           Column(

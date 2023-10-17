@@ -10,6 +10,7 @@ import 'package:hieroglyphic_app/compenets/components.dart';
 import 'package:hieroglyphic_app/Screens/loginscreen/cubit/cubit.dart';
 import 'package:hieroglyphic_app/Screens/loginscreen/cubit/state.dart';
 import 'package:hieroglyphic_app/Screens/register_screen/register_screen.dart';
+import 'package:hieroglyphic_app/screens/home_screen/home_screen.dart';
 
 // ignore: must_be_immutable
 class LoginScreen extends StatelessWidget {
@@ -145,9 +146,10 @@ class LoginScreen extends StatelessWidget {
                             if (formKey.currentState!.validate()) {
                               socialloginCubit.get(context).UserLogin(
                                   email: emailController.text,
-                                  context: context,
-                                  password: passwordController.text);
+                              password: passwordController.text,);
                               submit();
+                                    navigateTo(context, HomeScreen());
+
                             }
                           },
                           text: 'Login',

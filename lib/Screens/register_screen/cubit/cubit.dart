@@ -34,6 +34,7 @@ class SocialRegisterCubit extends Cubit<SocialRegisterState> {
       //   name: name,
       // );
       print(value);
+
     }).catchError((error) {
       emit(SocialRegisterErrorState(error.toString()));
     });
