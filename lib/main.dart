@@ -1,28 +1,53 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hieroglyphic_app/Screens/register_screen/register_screen.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:hieroglyphic_app/Screens/loginscreen/loginscreen.dart';
+import 'package:hieroglyphic_app/compenets/cashe_helper.dart';
 import 'package:hieroglyphic_app/screens/favorite_screen.dart';
 import 'package:hieroglyphic_app/screens/home_screen/cubit/home_cubit.dart';
 import 'package:hieroglyphic_app/screens/home_screen/home_screen.dart';
 import 'package:hieroglyphic_app/screens/list_screen.dart';
 import 'package:hieroglyphic_app/screens/more_screen.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'Screens/loginscreen/loginscreen.dart';
+import 'package:hieroglyphic_app/screens/onBoarding_Screen.dart';
+
 import 'firebase_options.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+List<CameraDescription>? camera;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  camera = await availableCameras();
+  await CacheHelper.init();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  Widget widget;
+  bool? onBoarding = CacheHelper.getData(key: 'onBoarding');
+  bool? Login = CacheHelper.getData(key: 'Login');
+  print(onBoarding);
+  print(Login);
+
+  if (onBoarding != null) {
+    if (Login != null) {
+      widget = HomeScreen();
+    } else {
+      widget = LoginScreen();
+    }
+  } else {
+    widget = const OnBoardingScreen();
+  }
+  print(widget);
+  runApp(MyApp(
+    startWidget: widget,
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final Widget startWidget;
+  const MyApp({super.key, required this.startWidget});
 
   @override
   Widget build(BuildContext context) {
@@ -33,53 +58,39 @@ class MyApp extends StatelessWidget {
           // TODO: implement listener
         },
         builder: (context, state) {
-          var cubit=HomeCubit.get(context);
+          var cubit = HomeCubit.get(context);
 
           return MaterialApp(
             title: 'Flutter Demo',
-            localizationsDelegates: [
+            localizationsDelegates: const [
               AppLocalizations.delegate, // Add this line
 
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
-            supportedLocales: [
+            supportedLocales: const [
               Locale('en'), // English
               Locale('ar'), // Spanish
             ],
-            locale:cubit.isEnglish?Locale('en'): Locale('ar'),
+            locale: cubit.isEnglish ? Locale('en') : Locale('ar'),
             debugShowCheckedModeBanner: false,
-            themeMode:
-            cubit.isDark ? ThemeMode.dark : ThemeMode.light,
-            theme: ThemeData(
-                appBarTheme: AppBarTheme(
-                    color: Colors.blue
-                )
-            ),
-            darkTheme: ThemeData(
-                appBarTheme: AppBarTheme(
-                    color: Colors.amber
-                )
-            ),
-
-            initialRoute: HomeScreen.routeName,
+            themeMode: cubit.isDark ? ThemeMode.dark : ThemeMode.light,
+            theme:
+                ThemeData(appBarTheme: const AppBarTheme(color: Colors.blue)),
+            darkTheme:
+                ThemeData(appBarTheme: const AppBarTheme(color: Colors.amber)),
             routes: {
               HomeScreen.routeName: (context) => HomeScreen(),
-              FavoriteScreen.routeName: (context) => FavoriteScreen(),
-              ListScreen.routeName: (context) => ListScreen(),
-              MoreScreen.routeName: (context) => MoreScreen(),
+              FavoriteScreen.routeName: (context) => const FavoriteScreen(),
+              ListScreen.routeName: (context) => const ListScreen(),
+              MoreScreen.routeName: (context) => const MoreScreen(),
             },
-            home: HomeScreen(),
+            home: startWidget,
           );
         },
       ),
+      // initialRoute:HomeScreen.routeName ,
     );
   }
-
-
-
-
 }
-
-
