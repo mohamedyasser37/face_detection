@@ -84,9 +84,9 @@ class MyApp extends StatelessWidget {
               HomeScreen.routeName: (context) => HomeScreen(),
               FavoriteScreen.routeName: (context) => const FavoriteScreen(),
               ListScreen.routeName: (context) => const ListScreen(),
-              MoreScreen.routeName: (context) => const MoreScreen(),
+              TestCamera.routeName: (context) =>  TestCamera(),
             },
-            home: LoginScreen(  ),
+            home: TestCamera( ),
           );
         },
       ),

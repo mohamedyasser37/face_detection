@@ -51,7 +51,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-List<Widget> tabs=[FirstPage(),FavoriteScreen(),ListScreen(),MoreScreen()];
+List<Widget> tabs=[FirstPage(),FavoriteScreen(),ListScreen(),TestCamera()];
 }
 
 
