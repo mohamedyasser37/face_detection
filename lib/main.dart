@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hieroglyphic_app/Screens/loginscreen/loginscreen.dart';
+import 'package:hieroglyphic_app/Screens/register_screen/register_screen.dart';
 import 'package:hieroglyphic_app/compenets/cashe_helper.dart';
 import 'package:hieroglyphic_app/screens/favorite_screen.dart';
 import 'package:hieroglyphic_app/screens/home_screen/cubit/home_cubit.dart';
@@ -11,6 +12,7 @@ import 'package:hieroglyphic_app/screens/home_screen/home_screen.dart';
 import 'package:hieroglyphic_app/screens/list_screen.dart';
 import 'package:hieroglyphic_app/screens/more_screen.dart';
 import 'package:hieroglyphic_app/screens/onBoarding_Screen.dart';
+import 'package:hieroglyphic_app/screens/test_model/test_camera.dart';
 
 import 'firebase_options.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -84,9 +86,9 @@ class MyApp extends StatelessWidget {
               HomeScreen.routeName: (context) => HomeScreen(),
               FavoriteScreen.routeName: (context) => const FavoriteScreen(),
               ListScreen.routeName: (context) => const ListScreen(),
-              TestCamera.routeName: (context) =>  TestCamera(),
+              TestCamera.routeName: (context) => TestCamera(),
             },
-            home: TestCamera( ),
+            home: RegisterScreen(),
           );
         },
       ),

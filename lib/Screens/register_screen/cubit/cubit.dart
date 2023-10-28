@@ -27,12 +27,12 @@ class SocialRegisterCubit extends Cubit<SocialRegisterState> {
       password: password,
     )
         .then((value) {
-      // socialusercreate(
-      //   uId: value.user!.uid,
-      //   phone: phone,
-      //   email: email,
-      //   name: name,
-      // );
+      socialusercreate(
+        uId: value.user!.uid,
+        phone: phone,
+        email: email,
+        name: name,
+      );
       print(value);
     }).catchError((error) {
       emit(SocialRegisterErrorState(error.toString()));
@@ -50,13 +50,7 @@ class SocialRegisterCubit extends Cubit<SocialRegisterState> {
       email: email,
       phone: phone,
       uId: uId,
-      isemailverified: false,
-      bio: 'write you bio ...',
-      cover:
-          'https://img.freepik.com/free-photo/dreamy-woman-love-recalls-perfect-date-with-boyfriend-thinks-about-cute-sweet-things-keeps-hands-neck-looks-somewhere-wears-green-sweater_273609-38781.jpg?t=st=1662646188~exp=1662646788~hmac=9bb132e88ca2983a636ac05579df2f29bf2d3289361531ea1804a6a49ccd5206',
-      image:
-          'https://image.freepik.com/free-photo/photo-attractive-bearded-young-man-with-cherful-expression-makes-okay-gesture-with-both-hands-likes-something-dressed-red-casual-t-shirt-poses-against-white-wall-gestures-indoor_273609-16239.jpg',
-      // isEmailVerified: false,
+      isAdmin: false,
     );
 
     FirebaseFirestore.instance
@@ -64,6 +58,14 @@ class SocialRegisterCubit extends Cubit<SocialRegisterState> {
         .doc(uId)
         .set(model.tomap())
         .then((value) {
+
+      FirebaseFirestore.instance
+          .collection('attendance')
+          .doc(uId)
+          .set({"count": 5,
+      "uId":uId})
+          .then((value) {});
+
       emit(SocialusercreateSuccessState());
     }).catchError((error) {
       print(error.toString());

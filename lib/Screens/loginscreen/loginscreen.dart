@@ -6,6 +6,7 @@ import 'package:flutter_svg/svg.dart';
 // ignore: depend_on_referenced_packages
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hieroglyphic_app/Screens/home_screen/home_screen.dart';
+import 'package:hieroglyphic_app/Screens/list_screen.dart';
 import 'package:hieroglyphic_app/compenets/components.dart';
 import 'package:hieroglyphic_app/Screens/loginscreen/cubit/cubit.dart';
 import 'package:hieroglyphic_app/Screens/loginscreen/cubit/state.dart';
@@ -28,7 +29,12 @@ class LoginScreen extends StatelessWidget {
         listener: (context, state) {
           if(state is LoginLoading){
             isLoading=true;
-          }else if(state is LoginSuccess){
+          }else if(state is IsAdmin){
+            Navigator.pushNamed(
+                context, ListScreen.routeName, arguments: emailController.text);
+            isLoading=false;
+          }
+          else if(state is LoginSuccess){
             Navigator.pushNamed(
                 context, HomeScreen.routeName, arguments: emailController.text);
             isLoading=false;
@@ -136,7 +142,8 @@ class LoginScreen extends StatelessWidget {
                           defaultMaterialButton(
                             function: () {
                               if (formKey.currentState!.validate()) {
-                                BlocProvider.of<socialloginCubit>(context).LoginUser(email: emailController.text!, password: passwordController.text!);
+                                BlocProvider.of<socialloginCubit>(context).
+                                LoginUser(email: emailController.text!, password: passwordController.text!,context: context);
 
                               }else{
 
