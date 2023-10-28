@@ -1,4 +1,3 @@
-// ignore_for_file: unnecessary_import, camel_case_types, non_constant_identifier_names, duplicate_ignore
 
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
