@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
         numResults: 2,
         threshold: 0.6,
         imageMean: 127.5,
-        imageStd: 127.5);
+        imageStd: 127.5,asynch: true);
 
     setState(() {
       _output = prediction!;
@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
 
   loadmodel() async {
     await Tflite.loadModel(
-        model: 'assets/models/model1.tflite', labels: 'assets/models/labels1.txt');
+        model: 'assets/models/model3.tflite', labels: 'assets/models/labels1.txt');
   }
 
   @override
@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   pickimage_gallery() async {
-    var image = await imagepicker.pickImage(source: ImageSource.gallery);
+    var image = await imagepicker.pickImage(source: ImageSource.gallery,maxHeight: 224,maxWidth: 224, );
     if (image == null) {
       return null;
     } else {

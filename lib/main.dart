@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hieroglyphic_app/Screens/loginscreen/loginscreen.dart';
+import 'package:hieroglyphic_app/Screens/register_screen/register_screen.dart';
 import 'package:hieroglyphic_app/compenets/cashe_helper.dart';
 import 'package:hieroglyphic_app/screens/favorite_screen.dart';
 import 'package:hieroglyphic_app/screens/home_screen/cubit/home_cubit.dart';
@@ -87,7 +88,7 @@ class MyApp extends StatelessWidget {
               ListScreen.routeName: (context) => const ListScreen(),
               TestCamera.routeName: (context) => TestCamera(),
             },
-            home: HomePage(),
+            home: RegisterScreen(),
           );
         },
       ),
