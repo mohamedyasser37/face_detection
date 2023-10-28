@@ -39,6 +39,18 @@ class socialloginCubit extends Cubit<LoginState> {
             if (element.get('isAdmin') == true) {
               emit(IsAdmin());
             } else {
+              CollectionReference attend =
+              FirebaseFirestore.instance.collection('attendance');
+              attend.where("uId", isEqualTo: uid).get().then((value) {
+                value.docs.forEach((element) {
+              var x=    element.get("count");
+              x++;
+              print('#######################');
+              print(x);
+              print('#######################');
+attend.doc(uid).update({"count":x});
+                });
+              });
               emit(LoginSuccess());
             }
           });
