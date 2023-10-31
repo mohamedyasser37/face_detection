@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hieroglyphic_app/compenets/constant/colors.dart';
 
 Widget socialloginscreen({
   double width = double.infinity,
@@ -40,9 +41,9 @@ class DefalutTextFormField extends StatelessWidget {
       required this.prefix,
       required this.type,
       required String? Function(String? value) validate,
-       this.suffix,
-       this.isPassword=false,
-       this.suffixPressed});
+      this.suffix,
+      this.isPassword = false,
+      this.suffixPressed});
   TextEditingController controller;
   TextInputType type;
   Function? onSubmit;
@@ -154,7 +155,7 @@ Widget textButton(
         required Function function,
         double width = 200}) =>
     TextButton(
-        style: const ButtonStyle(),
+        style: ButtonStyle(),
         onPressed: () {
           return function();
         },
@@ -175,7 +176,7 @@ Widget defaultMaterialButton({
         borderRadius: BorderRadius.circular(
           radius,
         ),
-        color: Colors.blue,
+        color: AppColor.primaryColor,
         //  color: background,
       ),
       child: MaterialButton(

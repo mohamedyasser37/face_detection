@@ -8,6 +8,7 @@ import 'package:hieroglyphic_app/compenets/components.dart';
 import 'package:hieroglyphic_app/Screens/loginscreen/loginscreen.dart';
 import 'package:hieroglyphic_app/Screens/register_screen/cubit/cubit.dart';
 import 'package:hieroglyphic_app/Screens/register_screen/cubit/state.dart';
+import 'package:hieroglyphic_app/compenets/constant/colors.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -47,26 +48,39 @@ class RegisterScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Center(
-                            child: SvgPicture.asset(
-                              'assets/svg/logo.svg',
+                            child: Image.asset(
+                              'assets/images/logo.png',
                               height: 100.0,
                               width: 100.0,
-                              allowDrawingOutsideViewBox: true,
                             ),
                           ),
                           const SizedBox(
                             height: 20,
                           ),
-                          Text(
-                            'Register Now',
-                            style: GoogleFonts.lobster(
-                              fontSize: 30.0,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w600,
+                          const Center(
+                            child: Text(
+                              "Welcome Back",
+                              style: TextStyle(
+                                  fontSize: 30,
+                                  color: AppColor.primaryColor,
+                                  fontWeight: FontWeight.bold),
                             ),
                           ),
                           const SizedBox(
-                            height: 30,
+                            height: 20,
+                          ),
+                          const Center(
+                            child: Text(
+                              "Rgister Now",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  color: AppColor.primaryColor,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 15,
                           ),
                           TextFormField(
                             controller: nameController,

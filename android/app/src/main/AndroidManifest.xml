@@ -2,7 +2,7 @@
     package="com.example.hieroglyphic_app">
    <application
         android:label="hieroglyphic_app"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/logo">
         <activity
             android:name=".MainActivity"
             android:exported="true"

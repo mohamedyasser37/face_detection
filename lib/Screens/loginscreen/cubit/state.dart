@@ -8,3 +8,4 @@ class LoginFailure extends LoginState {
   String errorMessage;
   LoginFailure({required this.errorMessage});
 }
+

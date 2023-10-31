@@ -4,11 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hieroglyphic_app/Screens/home_screen/home_screen.dart';
-import 'package:hieroglyphic_app/Screens/list_screen.dart';
-import 'package:hieroglyphic_app/Screens/loginscreen/cubit/state.dart';
-import 'package:hieroglyphic_app/compenets/components.dart';
-import 'package:hieroglyphic_app/models/login/login_model.dart';
+import 'package:hieroglyphic_app/screens/loginscreen/cubit/state.dart';
 
 import '../../../compenets/constants.dart';
 import '../../register_screen/register_screen.dart';

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hieroglyphic_app/Screens/loginscreen/loginscreen.dart';
 import 'package:hieroglyphic_app/compenets/cashe_helper.dart';
 import 'package:hieroglyphic_app/compenets/components.dart';
+import 'package:hieroglyphic_app/compenets/constant/colors.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class BoardingModel {
@@ -32,22 +34,24 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
 
   List<BoardingModel> boarding = [
     BoardingModel(
-      image: 'assets/images/Robot.jpg',
-      text: 'Planning',
-      title: 'lorem ipsum dolor sit amet',
-      body: 'consectetur adipiscing elit',
+      image: 'assets/svg/onboardingImage1.svg',
+      text: 'Welcome to DWD',
+      title: 'Welcome to DWD',
+      body: 'Welcome as you learn a world changing skill to get a better job.',
     ),
     BoardingModel(
-      image: 'assets/images/Robot.jpg',
-      text: 'Time TO Work',
-      title: 'lorem ipsum dolor sit amet',
-      body: 'consectetur adipiscing elit',
+      image: 'assets/svg/onboardingImage2.svg',
+      text: "Choose Your Course",
+      title: "Choose Your Course",
+      body:
+          "Choose the course of your choice and gain industry knowledge and experience in it.",
     ),
     BoardingModel(
-      image: 'assets/images/Robot.jpg',
-      text: 'DEADlINE',
-      title: 'lorem ipsum dolor sit amet',
-      body: 'consectetur adipiscing elit',
+      image: 'assets/svg/onboardingImage3.svg',
+      text: "Get Certified",
+      title: "Get Certified",
+      body:
+          "Start learning and get certified after your training to get a lucrative job",
     ),
   ];
   bool isLast = false;
@@ -78,10 +82,14 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
         ),
         backgroundColor: Colors.white,
         actions: [
-          defaultTextButton(
-            function: submit,
-            text: 'Skip',
-          ),
+          TextButton(
+              onPressed: submit,
+              child: const Text(
+                "Skip",
+                style: TextStyle(
+                  color: AppColor.primaryColor,
+                ),
+              ))
         ],
       ),
       body: Padding(
@@ -121,7 +129,7 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
                     dotWidth: 10.0,
                     dotHeight: 10.0,
                     dotColor: Colors.grey,
-                    activeDotColor: Colors.blue,
+                    activeDotColor: AppColor.primaryColor,
                     radius: 20.0,
                     spacing: 6,
                     expansionFactor: 4.0,
@@ -132,6 +140,7 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
                   child: const Icon(
                     Icons.play_arrow_outlined,
                     size: 35.0,
+                    color: AppColor.primaryColor,
                   ),
                   onPressed: () {
                     if (isLast) {
@@ -155,46 +164,41 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
   }
 
   Widget buildBoardingItem(BoardingModel model) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Expanded(
-            child: Image(
-              image: AssetImage(
-                model.image,
-              ),
-            ),
-          ),
-          Center(
-            child: Text(
-              model.text,
-              style: GoogleFonts.lobster(
-                fontSize: 40.0,
-                fontWeight: FontWeight.w900,
-                color: Colors.blue,
-              ),
-            ),
-          ),
           const SizedBox(
-            height: 30.0,
+            height: 20,
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                model.title,
-                style: GoogleFonts.lobster(
-                  fontSize: 30.0,
-                  color: Colors.black,
+          SizedBox(
+              height: 200,
+              child: SvgPicture.asset(
+                model.image,
+                fit: BoxFit.contain,
+              )),
+          const SizedBox(
+            height: 60,
+          ),
+          Expanded(
+            child: Column(
+              children: [
+                Text(
+                  model.title,
+                  style: const TextStyle(
+                      color: AppColor.primaryColor,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
                 ),
-              ),
-              Text(
-                model.body,
-                style: GoogleFonts.lobster(
-                  fontSize: 30.0,
-                  color: Colors.black,
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 40.0, vertical: 10),
+                  child: Text(
+                    model.body,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(color: Colors.black, fontSize: 25),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       );
