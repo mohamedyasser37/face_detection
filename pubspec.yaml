@@ -33,6 +33,10 @@ dependencies:
   firebase_core: ^2.17.0
   firebase_auth: ^4.10.1
   tflite: ^1.1.2
+  file_picker: ^6.0.0
+  flutter_pdfview: ^1.0.0+10
+  path_provider: ^2.1.1
+  syncfusion_flutter_pdfviewer: ^23.1.43
 
   flutter:
     sdk: flutter

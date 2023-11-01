@@ -6,12 +6,18 @@ import 'package:flutter_svg/svg.dart';
 // ignore: depend_on_referenced_packages
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hieroglyphic_app/Screens/home_screen/home_screen.dart';
-import 'package:hieroglyphic_app/Screens/list_screen.dart';
+import 'package:hieroglyphic_app/Screens/test_real.dart';
 import 'package:hieroglyphic_app/compenets/components.dart';
 import 'package:hieroglyphic_app/Screens/loginscreen/cubit/cubit.dart';
 import 'package:hieroglyphic_app/Screens/loginscreen/cubit/state.dart';
 import 'package:hieroglyphic_app/Screens/register_screen/register_screen.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+
+import '../test_real.dart';
+import '../test_real.dart';
+import '../test_real.dart';
+import '../test_real.dart';
+import '../test_real.dart';
 
 // ignore: must_be_immutable
 class LoginScreen extends StatelessWidget {
@@ -31,7 +37,7 @@ class LoginScreen extends StatelessWidget {
             isLoading=true;
           }else if(state is IsAdmin){
             Navigator.pushNamed(
-                context, ListScreen.routeName, arguments: emailController.text);
+                context, TestReal.routeName, arguments: emailController.text);
             isLoading=false;
           }
           else if(state is LoginSuccess){

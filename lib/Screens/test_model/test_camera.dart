@@ -5,12 +5,13 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tflite/tflite.dart';
 
-class HomePage extends StatefulWidget {
+class TestCamera extends StatefulWidget {
+  static const String routeName='test image';
   @override
-  _HomePageState createState() => _HomePageState();
+  _TestCameraState createState() => _TestCameraState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _TestCameraState extends State<TestCamera> {
   bool loading = true;
   late File _image;
   late List _output;
