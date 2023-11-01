@@ -1,10 +1,9 @@
-
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hieroglyphic_app/screens/loginscreen/cubit/state.dart';
+import 'package:hieroglyphic_app/Screens/loginscreen/cubit/state.dart';
 
 import '../../../compenets/constants.dart';
 import '../../register_screen/register_screen.dart';
@@ -36,15 +35,13 @@ class socialloginCubit extends Cubit<LoginState> {
               emit(IsAdmin());
             } else {
               CollectionReference attend =
-              FirebaseFirestore.instance.collection('attendance');
+                  FirebaseFirestore.instance.collection('attendance');
               attend.where("uId", isEqualTo: uid).get().then((value) {
                 value.docs.forEach((element) {
-              var x=    element.get("count");
-              x++;
-              print('#######################');
-              print(x);
-              print('#######################');
-attend.doc(uid).update({"count":x});
+                  var x = element.get("count");
+                  x++;
+
+                  attend.doc(uid).update({"count": x});
                 });
               });
               emit(LoginSuccess());
