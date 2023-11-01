@@ -13,6 +13,7 @@ import 'package:hieroglyphic_app/screens/list_screen.dart';
 import 'package:hieroglyphic_app/screens/more_screen.dart';
 import 'package:hieroglyphic_app/screens/onBoarding_Screen.dart';
 import 'package:hieroglyphic_app/screens/test_model/test_camera.dart';
+import 'package:hieroglyphic_app/test.dart';
 
 import 'firebase_options.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -90,7 +91,7 @@ class MyApp extends StatelessWidget {
                 ListScreen.routeName: (context) => const ListScreen(),
                 TestCamera.routeName: (context) => TestCamera(),
               },
-              home: HomePage());
+              home: startWidget);
         },
       ),
       // initialRoute:HomeScreen.routeName ,
