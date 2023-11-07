@@ -79,7 +79,7 @@ class _TestRealState extends State<TestReal> {
               padding: const EdgeInsets.all(20),
               child: Container(
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * .7,
+                height: MediaQuery.of(context).size.height * .6,
                 child: !cameraController!.value.isInitialized
                     ? Container()
                     : AspectRatio(

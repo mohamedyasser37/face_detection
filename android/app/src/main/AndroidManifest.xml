@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.hieroglyphic_app">
    <application
-        android:label="hieroglyphic_app"
+        android:label="Emotion Detection"
         android:icon="@mipmap/logo">
         <activity
             android:name=".MainActivity"

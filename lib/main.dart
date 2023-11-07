@@ -89,7 +89,7 @@ class MyApp extends StatelessWidget {
               FavoriteScreen.routeName: (context) =>  FavoriteScreen(),
               Pdf.routeName: (context) => Pdf(),
             },
-            home: PdfViewer(),
+            home: LoginScreen(),
           );
         },
       ),
