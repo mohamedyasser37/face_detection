@@ -1,14 +1,11 @@
-
-
-
-
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:hieroglyphic_app/main.dart';
 import 'package:tflite/tflite.dart';
 
 class TestReal extends StatefulWidget {
-static const String routeName='realtime';
+  static const String routeName = 'realtime';
+
   @override
   State<TestReal> createState() => _TestRealState();
 }
@@ -17,6 +14,8 @@ class _TestRealState extends State<TestReal> {
   CameraImage? cameraImage;
   CameraController? cameraController;
   String output = '';
+  String name = '';
+
   @override
   void initState() {
     super.initState();
@@ -24,8 +23,15 @@ class _TestRealState extends State<TestReal> {
     loadModel();
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+    loadCamera().dispose();
+    loadModel().dispose();
+  }
+
   loadCamera() {
-    cameraController = CameraController(camera![0], ResolutionPreset.medium);
+    cameraController = CameraController(camera![0], ResolutionPreset.ultraHigh);
     cameraController!.initialize().then((value) {
       if (!mounted) {
         return;
@@ -55,6 +61,8 @@ class _TestRealState extends State<TestReal> {
           threshold: .1,
           asynch: true);
       predictions!.forEach((element) {
+        output = element['label'];
+
         setState(() {
           output = element['label'];
           print(output);
@@ -72,64 +80,27 @@ class _TestRealState extends State<TestReal> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('test real'),),
-      body: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * .6,
-                child: !cameraController!.value.isInitialized
-                    ? Container()
-                    : AspectRatio(
+      appBar: AppBar(
+        title: Text('test real'),
+      ),
+      body: Column(children: [
+        Padding(
+          padding: const EdgeInsets.all(20),
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height * .6,
+            child: !cameraController!.value.isInitialized
+                ? Container()
+                : AspectRatio(
                     aspectRatio: cameraController!.value.aspectRatio,
                     child: CameraPreview(cameraController!)),
-              ),
-            ),
-            Text(
-              output,
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            )
-          ]),
+          ),
+        ),
+        Text(
+          output,
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+      ]),
     );
-  }}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import 'package:flutter/material.dart';
-//
-// class ListScreen extends StatelessWidget {
-//   static const String routeName='list';
-//
-//   const ListScreen({super.key});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: Colors.green,
-//       appBar: AppBar(backgroundColor: Colors.blue,title: Text("ListScreen")),
-//     );
-//   }
-// }
+  }
+}

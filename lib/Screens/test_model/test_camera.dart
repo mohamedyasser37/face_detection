@@ -26,10 +26,11 @@ class _TestCameraState extends State<TestCamera> {
   }
 
   detectimage(File image) async {
+
     var prediction = await Tflite.runModelOnImage(
         path: image.path,
         numResults: 2,
-        threshold: 0.6,
+        threshold: 0.1,
         imageMean: 127.5,
         imageStd: 127.5,asynch: true);
 
@@ -41,7 +42,7 @@ class _TestCameraState extends State<TestCamera> {
 
   loadmodel() async {
     await Tflite.loadModel(
-        model: 'assets/models/model3.tflite', labels: 'assets/models/labels1.txt');
+        model: 'assets/models/model3.tflite', labels: 'assets/models/labels2.txt');
   }
 
   @override

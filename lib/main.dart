@@ -5,15 +5,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hieroglyphic_app/Screens/loginscreen/loginscreen.dart';
 import 'package:hieroglyphic_app/Screens/pdf/pdf.dart';
-import 'package:hieroglyphic_app/Screens/pdf/pdf_view.dart';
 import 'package:hieroglyphic_app/compenets/cashe_helper.dart';
-import 'package:hieroglyphic_app/compenets/constant/colors.dart';
 import 'package:hieroglyphic_app/screens/favorite_screen.dart';
 import 'package:hieroglyphic_app/screens/home_screen/cubit/home_cubit.dart';
 import 'package:hieroglyphic_app/screens/home_screen/home_screen.dart';
 import 'package:hieroglyphic_app/screens/onBoarding_Screen.dart';
-import 'package:hieroglyphic_app/screens/test_model/test_camera.dart';
-import 'package:hieroglyphic_app/test.dart';
 
 import 'firebase_options.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
