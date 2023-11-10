@@ -28,7 +28,7 @@ class LoginScreen extends StatelessWidget {
             isLoading=true;
           }else if(state is IsAdmin){
             Navigator.pushNamed(
-                context, TestReal.routeName, arguments: emailController.text);
+                context, HomeScreen.routeName, arguments: emailController.text);
             isLoading=false;
           }
           else if(state is LoginSuccess){
@@ -97,10 +97,14 @@ class LoginScreen extends StatelessWidget {
                             keyboardType: TextInputType.emailAddress,
                             obscureText: false,
                             enabled: true,
-                            validator: (String? value) {
+                            validator: (value) {
+
                               if (value!.isEmpty) {
                                 return 'Please enter Email';
                               }
+
+
+
                             },
                             decoration: const InputDecoration(
                               labelText: 'Email',

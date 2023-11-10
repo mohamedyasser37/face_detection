@@ -17,6 +17,9 @@ class SocialChangePasswordRegisterState extends SocialRegisterState {}
 class SocialusercreateLoadingState extends SocialRegisterState {}
 
 class SocialusercreateSuccessState extends SocialRegisterState {}
+class SocialusercreateSuccessIfAdmin extends SocialRegisterState {}
+class SocialusercreateSuccessIfUser extends SocialRegisterState {}
+class SocialusercreateSuccessGrade extends SocialRegisterState {}
 
 class SocialusercreateErrorState extends SocialRegisterState {
   final String error;
