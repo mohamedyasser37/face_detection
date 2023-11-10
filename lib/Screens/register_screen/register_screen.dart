@@ -1,9 +1,7 @@
 import 'dart:io';
-
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:hieroglyphic_app/compenets/components.dart';
 import 'package:hieroglyphic_app/Screens/loginscreen/loginscreen.dart';
 import 'package:hieroglyphic_app/Screens/register_screen/cubit/cubit.dart';
@@ -12,6 +10,7 @@ import 'package:hieroglyphic_app/compenets/constant/colors.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+
 // ignore: must_be_immutable
 class RegisterScreen extends StatelessWidget {
   var formKey = GlobalKey<FormState>();
@@ -19,8 +18,12 @@ class RegisterScreen extends StatelessWidget {
   var passwordController = TextEditingController();
   var nameController = TextEditingController();
   var phoneController = TextEditingController();
+  var adminController = TextEditingController();
+  String? grade ;
+  String? selectedGrade='Select your grade' ;
   File? profileImage;
   var pickerController = ImagePicker();
+bool isAdmin=false;
 
   RegisterScreen({super.key});
 
@@ -55,7 +58,7 @@ class RegisterScreen extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(
-                            height: 20,
+                            height: 10,
                           ),
                           const Center(
                             child: Text(
@@ -67,7 +70,7 @@ class RegisterScreen extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(
-                            height: 20,
+                            height: 10,
                           ),
                           const Center(
                             child: Text(
@@ -79,9 +82,9 @@ class RegisterScreen extends StatelessWidget {
                                   fontWeight: FontWeight.w400),
                             ),
                           ),
-                          const SizedBox(
-                            height: 15,
-                          ),
+                    const SizedBox(
+                      height: 10,
+                    ),
                           TextFormField(
                             controller: nameController,
                             keyboardType: TextInputType.name,
@@ -101,16 +104,26 @@ class RegisterScreen extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(
-                            height: 20,
+                            height: 10,
                           ),
                           TextFormField(
                             controller: emailController,
                             keyboardType: TextInputType.emailAddress,
                             obscureText: false,
                             enabled: true,
-                            validator: (String? value) {
-                              if (value!.isEmpty) {
-                                return 'Please enter phone';
+                            validator: ( value) {
+                              if (value!.trim() == "") {
+                                return "Please Enter Email";
+                              }
+                              final bool emailValid = RegExp(
+                                  r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                  .hasMatch(value);
+                              if (!emailValid) {
+                                return "Please Enter valid Email";
+                              }
+
+                              if (value.isEmpty) {
+                                return 'Please enter Email';
                               }
                             },
                             decoration: const InputDecoration(
@@ -122,28 +135,7 @@ class RegisterScreen extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(
-                            height: 20,
-                          ),
-                          TextFormField(
-                            controller: phoneController,
-                            keyboardType: TextInputType.phone,
-                            obscureText: false,
-                            enabled: true,
-                            validator: (String? value) {
-                              if (value!.isEmpty) {
-                                return 'Please enter phone';
-                              }
-                            },
-                            decoration: const InputDecoration(
-                              labelText: 'Phone',
-                              prefixIcon: Icon(
-                                Icons.phone,
-                              ),
-                              border: OutlineInputBorder(),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 20,
+                            height: 10,
                           ),
                           TextFormField(
                             controller: passwordController,
@@ -172,8 +164,109 @@ class RegisterScreen extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(
-                            height: 20,
+                            height: 10,
                           ),
+
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                       isAdmin=   SocialRegisterCubit.get(context).CheckIfUser(isAdmin);
+                        },
+                        child: Container(
+                          width: 150,
+                          height: 50,
+                          child: Center(child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+
+                              Text('User ',style: TextStyle(fontSize: 20,color: isAdmin?AppColor.primaryColor  :Colors.white),),
+                              Icon(Icons.account_circle_rounded,color: isAdmin?AppColor.primaryColor  :Colors.white ,),
+
+                            ],
+                          )),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              color:isAdmin?  Colors.white : AppColor.primaryColor
+                          ),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                       isAdmin=   SocialRegisterCubit.get(context).CheckIfAdmin(isAdmin);
+
+                        },
+                        child: Container(
+                          width: 150,
+                          height: 50,
+                          child: Center(child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text('Admin ',style: TextStyle(fontSize: 20,color: isAdmin?  Colors.white : AppColor.primaryColor),),
+                              Icon(Icons.lock_person,color: isAdmin?  Colors.white : AppColor.primaryColor,),
+
+                            ],
+                          )),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+
+                              color:isAdmin?AppColor.primaryColor  :Colors.white
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+
+
+                          isAdmin? TextFormField(
+                            controller: adminController,
+                            keyboardType: TextInputType.number,
+                            obscureText: false,
+                            enabled: true,
+                            validator: (value) {
+                              if (value!='123') {
+                                return 'Please enter Admin code';
+                              }
+                            },
+                            decoration: const InputDecoration(
+                              labelText: 'Admin Code',
+                              prefixIcon: Icon(
+                                Icons.lock_person,
+                              ),
+                              border: OutlineInputBorder(),
+                            ),
+                          ):
+                          Center(
+                            child: DropdownButton<String>(
+                              hint:Text(selectedGrade!) ,
+                              value: grade,
+                              onChanged: (String? value) {
+                               grade=value;
+                               selectedGrade=
+                               SocialRegisterCubit.get(context).CheckGrade(grade!);
+                              },
+                              items: <String>['one', 'two', 'three', 'four'].map((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                            ),
+                          ),
+
+
+
+                          const SizedBox(
+                            height: 10,
+                          ),
+
+
+
                           ConditionalBuilder(
                             condition: state is! SocialRegisterLoadingState,
                             builder: (context) => Center(
@@ -185,7 +278,8 @@ class RegisterScreen extends StatelessWidget {
                                         email: emailController.text,
                                         password: passwordController.text,
                                         name: nameController.text,
-                                        phone: phoneController.text,
+                                        isAdmin: isAdmin
+
                                       );
                                       navigateTo(context, LoginScreen());
                                     }
@@ -197,7 +291,7 @@ class RegisterScreen extends StatelessWidget {
                                 child: CircularProgressIndicator()),
                           ),
                           const SizedBox(
-                            height: 20,
+                            height: 10,
                           ),
                           Row(
                             children: [
@@ -234,3 +328,5 @@ class RegisterScreen extends StatelessWidget {
     );
   }
 }
+
+

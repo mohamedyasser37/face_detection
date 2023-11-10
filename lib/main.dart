@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hieroglyphic_app/Screens/loginscreen/loginscreen.dart';
 import 'package:hieroglyphic_app/Screens/pdf/pdf.dart';
+import 'package:hieroglyphic_app/Screens/register_screen/register_screen.dart';
 import 'package:hieroglyphic_app/compenets/cashe_helper.dart';
 import 'package:hieroglyphic_app/screens/favorite_screen.dart';
 import 'package:hieroglyphic_app/screens/home_screen/cubit/home_cubit.dart';
@@ -27,8 +28,6 @@ void main() async {
   bool? onBoarding = CacheHelper.getData(key: 'onBoarding');
   bool? Login = CacheHelper.getData(key: 'Login');
   print(onBoarding);
-  print(Login);
-  print(Login);
   print(Login);
 
   if (onBoarding != null) {
@@ -56,7 +55,6 @@ class MyApp extends StatelessWidget {
       create: (context) => HomeCubit(),
       child: BlocConsumer<HomeCubit, HomeState>(
         listener: (context, state) {
-          // TODO: implement listener
         },
         builder: (context, state) {
           var cubit = HomeCubit.get(context);
@@ -86,7 +84,7 @@ class MyApp extends StatelessWidget {
               FavoriteScreen.routeName: (context) =>  FavoriteScreen(),
               Pdf.routeName: (context) => Pdf(),
             },
-            home: LoginScreen(),
+            home: RegisterScreen(),
           );
         },
       ),

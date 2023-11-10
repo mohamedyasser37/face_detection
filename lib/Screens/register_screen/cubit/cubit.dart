@@ -17,7 +17,7 @@ class SocialRegisterCubit extends Cubit<SocialRegisterState> {
     required String name,
     required String email,
     required String password,
-    required String phone,
+    required bool isAdmin,
   }) {
     emit(SocialRegisterLoadingState());
 
@@ -29,9 +29,9 @@ class SocialRegisterCubit extends Cubit<SocialRegisterState> {
         .then((value) {
       socialusercreate(
         uId: value.user!.uid,
-        phone: phone,
         email: email,
         name: name,
+        ifAdmin:  isAdmin
       );
       print(value);
     }).catchError((error) {
@@ -42,15 +42,14 @@ class SocialRegisterCubit extends Cubit<SocialRegisterState> {
   void socialusercreate({
     required String name,
     required String email,
-    required String phone,
     required String uId,
+    required bool ifAdmin,
   }) {
     SocialUserModel model = SocialUserModel(
       name: name,
       email: email,
-      phone: phone,
       uId: uId,
-      isAdmin: false,
+      isAdmin: ifAdmin ,
     );
 
     FirebaseFirestore.instance
@@ -83,4 +82,29 @@ class SocialRegisterCubit extends Cubit<SocialRegisterState> {
 
     emit(SocialChangePasswordRegisterState());
   }
+
+  bool CheckIfAdmin(bool isAdmin) {
+    isAdmin = true;
+
+
+    emit(SocialusercreateSuccessIfAdmin());
+    return isAdmin;
+    }
+
+
+  bool CheckIfUser(bool isAdmin) {
+    isAdmin = false;
+
+
+    emit(SocialusercreateSuccessIfUser());
+    return isAdmin;
+    }
+
+
+  String CheckGrade(String grade) {
+
+    emit(SocialusercreateSuccessGrade());
+    return grade;
+    }
+
 }
