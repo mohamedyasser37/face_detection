@@ -6,12 +6,15 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hieroglyphic_app/Screens/loginscreen/loginscreen.dart';
 import 'package:hieroglyphic_app/Screens/pdf/pdf.dart';
 import 'package:hieroglyphic_app/Screens/register_screen/register_screen.dart';
+import 'package:hieroglyphic_app/Screens/zoom/join_with_code.dart';
 import 'package:hieroglyphic_app/compenets/cashe_helper.dart';
 import 'package:hieroglyphic_app/screens/favorite_screen.dart';
 import 'package:hieroglyphic_app/screens/home_screen/cubit/home_cubit.dart';
 import 'package:hieroglyphic_app/screens/home_screen/home_screen.dart';
 import 'package:hieroglyphic_app/screens/onBoarding_Screen.dart';
 
+import 'Screens/zoom/home_zoom.dart';
+import 'Screens/zoom/new_meeting.dart';
 import 'firebase_options.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -83,8 +86,10 @@ class MyApp extends StatelessWidget {
               HomeScreen.routeName: (context) => HomeScreen(),
               FavoriteScreen.routeName: (context) =>  FavoriteScreen(),
               Pdf.routeName: (context) => Pdf(),
+              JoinWithCode.routeName: (context) => JoinWithCode(),
+              NewMeeting.routeName: (context) => NewMeeting(),
             },
-            home: RegisterScreen(),
+            home: HomeZoom(),
           );
         },
       ),
