@@ -7,6 +7,7 @@ import 'package:hieroglyphic_app/Screens/loginscreen/loginscreen.dart';
 import 'package:hieroglyphic_app/Screens/pdf/pdf.dart';
 import 'package:hieroglyphic_app/Screens/register_screen/register_screen.dart';
 import 'package:hieroglyphic_app/Screens/zoom/join_with_code.dart';
+import 'package:hieroglyphic_app/Screens/zoom/video_call.dart';
 import 'package:hieroglyphic_app/compenets/cashe_helper.dart';
 import 'package:hieroglyphic_app/screens/favorite_screen.dart';
 import 'package:hieroglyphic_app/screens/home_screen/cubit/home_cubit.dart';
@@ -88,6 +89,7 @@ class MyApp extends StatelessWidget {
               Pdf.routeName: (context) => Pdf(),
               JoinWithCode.routeName: (context) => JoinWithCode(),
               NewMeeting.routeName: (context) => NewMeeting(),
+              VideoCall.routeName: (context) => VideoCall(),
             },
             home: HomeZoom(),
           );

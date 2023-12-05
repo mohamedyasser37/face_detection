@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hieroglyphic_app/Screens/zoom/video_call.dart';
 // import 'package:get/get.dart';
 // import 'package:video_conference/video_call.dart';
 
@@ -53,6 +54,7 @@ class JoinWithCode extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                // Get.to(VideoCall(channelName: _controller.text.trim()));
+                Navigator.pushNamed(context, VideoCall.routeName);
               },
               child: Text("Join"),
               style: ElevatedButton.styleFrom(
