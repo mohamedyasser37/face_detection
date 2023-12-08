@@ -2,27 +2,33 @@ import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hieroglyphic_app/Screens/loginscreen/loginscreen.dart';
 import 'package:hieroglyphic_app/Screens/pdf/pdf.dart';
-import 'package:hieroglyphic_app/Screens/register_screen/register_screen.dart';
+import 'package:hieroglyphic_app/Screens/zoom/join_with_code.dart';
 import 'package:hieroglyphic_app/compenets/cashe_helper.dart';
 import 'package:hieroglyphic_app/screens/favorite_screen.dart';
 import 'package:hieroglyphic_app/screens/home_screen/cubit/home_cubit.dart';
 import 'package:hieroglyphic_app/screens/home_screen/home_screen.dart';
 import 'package:hieroglyphic_app/screens/onBoarding_Screen.dart';
-
+import 'Screens/zoom/new_meeting.dart';
 import 'firebase_options.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 List<CameraDescription>? camera;
 void main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: '.env');
+
   camera = await availableCameras();
   await CacheHelper.init();
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
+
+
   );
   Widget widget;
   bool? onBoarding = CacheHelper.getData(key: 'onBoarding');
@@ -83,8 +89,11 @@ class MyApp extends StatelessWidget {
               HomeScreen.routeName: (context) => HomeScreen(),
               FavoriteScreen.routeName: (context) =>  FavoriteScreen(),
               Pdf.routeName: (context) => Pdf(),
+              JoinWithCode.routeName: (context) => JoinWithCode(),
+              NewMeeting.routeName: (context) => NewMeeting(),
+
             },
-            home: RegisterScreen(),
+            home: HomeScreen(),
           );
         },
       ),
