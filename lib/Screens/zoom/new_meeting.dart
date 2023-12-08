@@ -1,9 +1,14 @@
-import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
-// import 'package:share/share.dart';
-// import 'package:uuid/uuid.dart';
-// import 'package:video_conference/video_call.dart';
+import 'dart:math';
 
+import 'package:flutter/material.dart';
+
+import '../video_call.dart';
+
+final String userId = Random().nextInt(900000 + 100000).toString();
+final String randomConferenceId = Random()
+    .nextInt(100000000 * 10 + Random().nextInt(10))
+    .toString()
+    .padLeft(10, '0');
 class NewMeeting extends StatefulWidget {
   static const String routeName = 'NewMeeting';
 
@@ -14,12 +19,16 @@ class NewMeeting extends StatefulWidget {
 }
 
 class _NewMeetingState extends State<NewMeeting> {
-  String _meetingCode = "abcdfgqw";
+  jumpToMeetingPage(BuildContext context, {required String conferenceId}) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => VideoCall(
+        conferenceId:conferenceId
+    )));
+  }
 
   @override
   void initState() {
-  //  var uuid = Uuid();
-   // _meetingCode = uuid.v1().substring(0, 8);
+
     super.initState();
   }
 
@@ -39,8 +48,8 @@ class _NewMeetingState extends State<NewMeeting> {
               ),
             ),
             SizedBox(height: 50),
-            Image.network(
-              "https://user-images.githubusercontent.com/67534990/127776392-8ef4de2d-2fd8-4b5a-b98b-ea343b19c03e.png",
+            Image.asset(
+              "assets/images/zoom2.png",
               fit: BoxFit.cover,
               height: 100,
             ),
@@ -59,7 +68,7 @@ class _NewMeetingState extends State<NewMeeting> {
                   child: ListTile(
                     leading: Icon(Icons.link),
                     title: SelectableText(
-                      _meetingCode,
+                      randomConferenceId,
                       style: TextStyle(fontWeight: FontWeight.w300),
                     ),
                     trailing: Icon(Icons.copy),
@@ -81,19 +90,20 @@ class _NewMeetingState extends State<NewMeeting> {
             ),
             SizedBox(height: 20),
             OutlinedButton.icon(
-              onPressed: () {
-               // Get.to(VideoCall(channelName: _meetingCode.trim()));
-              },
-              icon: Icon(Icons.video_call),
-              label: Text("start call"),
-              style: OutlinedButton.styleFrom(
+              onPressed:() => jumpToMeetingPage(context,
+                conferenceId: randomConferenceId) ,
+
+               icon: Icon(Icons.video_call),
+               label: Text("start call"),
+               style: OutlinedButton.styleFrom(
                 primary: Colors.indigo,
                 side: BorderSide(color: Colors.indigo),
                 fixedSize: Size(350, 30),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25)),
-              ),
-            ),
+              ), ),
+
+
           ],
         ),
       ),

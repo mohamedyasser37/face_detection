@@ -1,11 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hieroglyphic_app/screens/favorite_screen.dart';
-import 'package:hieroglyphic_app/screens/home_screen/home_screen.dart';
-import 'package:hieroglyphic_app/screens/test_real.dart';
-import 'package:hieroglyphic_app/screens/test_image.dart';
+
 import 'package:meta/meta.dart';
 
 part 'home_state.dart';
@@ -50,6 +46,12 @@ List<Widget> bottomWidget=[
     children: [
       Icon(Icons.bookmark_add,),
       Text('Pdf'),
+    ],
+  ),
+  Column(
+    children: [
+      Icon(Icons.videocam,),
+      Text('Zoom'),
     ],
   ),
 ];

@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:hieroglyphic_app/Screens/zoom/video_call.dart';
-// import 'package:get/get.dart';
-// import 'package:video_conference/video_call.dart';
+
+import '../video_call.dart';
 
 class JoinWithCode extends StatelessWidget {
   static const String routeName = 'joinWithCode';
+  final conferenceController = TextEditingController();
 
-  TextEditingController _controller = TextEditingController();
+  jumpToMeetingPage(BuildContext context, {required String conferenceId}) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => VideoCall(
+        conferenceId:conferenceId
+    )));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +26,6 @@ class JoinWithCode extends StatelessWidget {
                 onTap: () {
                   Navigator.pop(context);
                 },
-
               ),
             ),
             SizedBox(height: 50),
@@ -43,7 +47,7 @@ class JoinWithCode extends StatelessWidget {
                   borderRadius: BorderRadius.circular(25),
                 ),
                 child: TextField(
-                  controller: _controller,
+                  controller: conferenceController,
                   textAlign: TextAlign.center,
                   decoration: InputDecoration(
                       border: InputBorder.none,
@@ -52,10 +56,9 @@ class JoinWithCode extends StatelessWidget {
               ),
             ),
             ElevatedButton(
-              onPressed: () {
-               // Get.to(VideoCall(channelName: _controller.text.trim()));
-                Navigator.pushNamed(context, VideoCall.routeName);
-              },
+          onPressed: () => jumpToMeetingPage(context,
+        conferenceId: conferenceController.text),
+
               child: Text("Join"),
               style: ElevatedButton.styleFrom(
                 fixedSize: Size(50, 30),
