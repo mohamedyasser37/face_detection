@@ -11,19 +11,19 @@ class HomeCubit extends Cubit<HomeState> {
 static HomeCubit get(context)=>BlocProvider.of(context);
 int currentIndex=0;
 List<BottomNavigationBarItem> bottomItem=[
-  BottomNavigationBarItem(icon: Icon(Icons.home,),label: "Home"),
+  //BottomNavigationBarItem(icon: Icon(Icons.home,),label: "Home"),
   BottomNavigationBarItem(icon: Icon(Icons.favorite,),label: "Favorite"),
   BottomNavigationBarItem(icon: Icon(Icons.list,),label: "List"),
   BottomNavigationBarItem(icon: Icon(Icons.more_vert,),label: "More"),
   BottomNavigationBarItem(icon: Icon(Icons.bookmark_add,),label: "PDF"),
 ];
 List<Widget> bottomWidget=[
-  Column(
-    children: [
-      Icon(Icons.home,),
-      Text('Home'),
-    ],
-  ),
+  // Column(
+  //   children: [
+  //     Icon(Icons.home,),
+  //     Text('Home'),
+  //   ],
+  // ),
   Column(
     children: [
       Icon(Icons.favorite,),

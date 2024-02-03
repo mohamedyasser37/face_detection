@@ -4,11 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hieroglyphic_app/Screens/pdf/pdf.dart';
 import 'package:hieroglyphic_app/Screens/zoom/home_zoom.dart';
 import 'package:hieroglyphic_app/screens/favorite_screen.dart';
-import 'package:hieroglyphic_app/screens/first_page.dart';
 import 'package:hieroglyphic_app/screens/home_screen/cubit/home_cubit.dart';
 import 'package:hieroglyphic_app/screens/test_image.dart';
 
 import '../../widgets/drawer.dart';
+import '../first_page.dart';
+
 import '../test_model/test_camera.dart';
 import '../test_real.dart';
 
@@ -54,7 +55,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-List<Widget> tabs=[FirstPage(),FavoriteScreen(),TestReal(),TestCamera(),Pdf(),HomeZoom()];
+List<Widget> tabs=[FavoriteScreen(),TestReal(),TestCamera(),Pdf(),HomeZoom()];
 }
 
 

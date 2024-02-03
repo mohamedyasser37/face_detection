@@ -1,7 +1,12 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:hieroglyphic_app/Screens/first_page.dart';
+import 'package:hieroglyphic_app/Screens/home_screen/home_screen.dart';
 import 'package:hieroglyphic_app/main.dart';
+import 'package:hieroglyphic_app/screens/test_real.dart';
 import 'package:tflite/tflite.dart';
+
+import '../compenets/constants.dart';
 
 class TestReal extends StatefulWidget {
   static const String routeName = 'realtime';
@@ -28,6 +33,9 @@ class _TestRealState extends State<TestReal> {
     super.dispose();
     loadCamera().dispose();
     loadModel().dispose();
+  //  runModel().dispose();
+
+
   }
 
   loadCamera() {
@@ -66,6 +74,8 @@ class _TestRealState extends State<TestReal> {
         setState(() {
           output = element['label'];
           print(output);
+          resultsCounter(output);
+
         });
       });
     }
@@ -83,24 +93,74 @@ class _TestRealState extends State<TestReal> {
       appBar: AppBar(
         title: Text('test real'),
       ),
-      body: Column(children: [
-        Padding(
-          padding: const EdgeInsets.all(20),
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height * .6,
-            child: !cameraController!.value.isInitialized
-                ? Container()
-                : AspectRatio(
-                    aspectRatio: cameraController!.value.aspectRatio,
-                    child: CameraPreview(cameraController!)),
+      body: SingleChildScrollView(
+        child: Column(children: [
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * .6,
+              child: !cameraController!.value.isInitialized
+                  ? Container()
+                  : AspectRatio(
+                      aspectRatio: cameraController!.value.aspectRatio,
+                      child: CameraPreview(cameraController!)),
+            ),
           ),
-        ),
-        Text(
-          output,
-          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-        ),
-      ]),
+          Text(
+            output,
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+          ElevatedButton(onPressed: (){
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => FirstPage(),));
+          }, child: Text('Exit'))
+        ]),
+      ),
     );
+  }
+
+  void resultsCounter(String output) {
+
+
+    switch (output) {
+      case "0 angry":
+        angry++;
+        break;
+
+      case "1 disgust":
+        disgust++;
+
+        break;
+
+      case "2 fear":
+        fear++;
+
+        break;
+
+      case "3 happy":
+        happy++;
+
+        break;
+
+      case "4 neutral":
+        neutral++;
+        break;
+      case "5 sad":
+        sad++;
+
+
+        break;
+      case "6 surprise":
+        surprise++;
+        break;
+
+      default:
+
+        break;
+    }
+
+    sumOfResults = angry + disgust + fear + happy + neutral + sad + surprise;
+
   }
 }
