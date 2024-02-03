@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hieroglyphic_app/Screens/zoom/new_meeting.dart';
 
 import 'join_with_code.dart';
-// import 'package:get/get.dart';
-// import 'package:video_conference/pages/joinWithCode.dart';
-// import 'package:video_conference/pages/new_meeting.dart';
 
 class HomeZoom extends StatelessWidget {
   const HomeZoom({Key? key}) : super(key: key);
