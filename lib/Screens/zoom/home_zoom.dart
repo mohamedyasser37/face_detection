@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hieroglyphic_app/Screens/zoom/new_meeting.dart';
 
+import '../../compenets/constant/colors.dart';
 import 'join_with_code.dart';
 
 class HomeZoom extends StatelessWidget {
@@ -9,11 +10,7 @@ class HomeZoom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
 
-        title: Text("Video Conference"),
-        centerTitle: true,
-      ),
       body: Column(children: [
         Padding(
           padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
@@ -25,7 +22,7 @@ class HomeZoom extends StatelessWidget {
             label: Text("New Meeting"),
             style: ElevatedButton.styleFrom(
               fixedSize: Size(350, 30),
-              primary: Colors.indigo,
+              primary: AppColor.primaryColor,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25)),
             ),
@@ -47,7 +44,7 @@ class HomeZoom extends StatelessWidget {
             icon: Icon(Icons.margin),
             label: Text("Join with a code"),
             style: OutlinedButton.styleFrom(
-              primary: Colors.indigo,
+              primary: AppColor.primaryColor,
               side: BorderSide(color: Colors.indigo),
               fixedSize: Size(350, 30),
               shape: RoundedRectangleBorder(

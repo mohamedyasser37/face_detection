@@ -155,11 +155,14 @@ Widget textButton(
         required Function function,
         double width = 200}) =>
     TextButton(
-        style: ButtonStyle(),
+        style: ButtonStyle(
+
+
+        ),
         onPressed: () {
           return function();
         },
-        child: Text(text));
+        child: Text(text,style: TextStyle(color: AppColor.primaryColor),));
 Widget defaultMaterialButton({
   required Function function,
   required String text,

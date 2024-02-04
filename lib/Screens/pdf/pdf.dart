@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:hieroglyphic_app/compenets/constant/colors.dart';
 
 class Pdf extends StatefulWidget {
   static const String routeName='pdf';
@@ -37,27 +38,53 @@ class _PdfState extends State<Pdf> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Test Two'),
-        ),
-        body: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              if (PickedFile != null)
-                Expanded(
-                    child: Container(
-                      color: Colors.blue,
-                      child: Center(
-                        child: Text(PickedFile!.name),
-                      ),
-                    )),
-              SizedBox(
-                height: 30,
+
+        body: Center(
+
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                if (PickedFile != null)
+                  Expanded(
+                      child: Container(
+                        color: Colors.blue,
+                        child: Center(
+                          child: Text(PickedFile!.name),
+                        ),
+                      )),
+                SizedBox(
+                  height: 30,
+                ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.7,
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(AppColor.primaryColor)
+                    ),
+
+                      onPressed: SelectFile, child: Text("Select",
+                    style: TextStyle(
+                      fontSize: 20
+                    ),
+                  )),
+                ),
+                SizedBox(height: 12,),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.7,
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(AppColor.primaryColor)
+                    ),
+
+                      onPressed: uploadFile, child: Text("Upload",
+                    style: TextStyle(
+                      fontSize: 20
+                    ),
+                  )),
+                ),
+              ],
               ),
-              ElevatedButton(onPressed: SelectFile, child: Text("Select")),
-              ElevatedButton(onPressed: uploadFile, child: Text("Upload")),
-            ],
-            ));
+        ));
     }
 }

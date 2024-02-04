@@ -5,10 +5,10 @@ import 'package:hieroglyphic_app/Screens/pdf/pdf.dart';
 import 'package:hieroglyphic_app/Screens/zoom/home_zoom.dart';
 import 'package:hieroglyphic_app/screens/favorite_screen.dart';
 import 'package:hieroglyphic_app/screens/home_screen/cubit/home_cubit.dart';
-import 'package:hieroglyphic_app/screens/test_image.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../compenets/constant/colors.dart';
 import '../../widgets/drawer.dart';
-import '../first_page.dart';
 
 import '../test_model/test_camera.dart';
 import '../test_real.dart';
@@ -21,6 +21,15 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<String> screensName=[
+       AppLocalizations.of(context)!.homeTitle,
+       AppLocalizations.of(context)!.testReal,
+       AppLocalizations.of(context)!.testCamera,
+       AppLocalizations.of(context)!.pdf,
+       AppLocalizations.of(context)!.zoom,
+
+    ];
+
     return BlocConsumer<HomeCubit, HomeState>(
       listener: (context, state) {
       },
@@ -28,22 +37,26 @@ class HomeScreen extends StatelessWidget {
         var cubit=HomeCubit.get(context);
         return Scaffold(
           appBar: AppBar(
-            title: const Text(" Home ")
-            ,
-            //backgroundColor: Colors.blue
+            title:  Text(screensName[cubit.currentIndex]),
+
+            backgroundColor: AppColor.primaryColor,
             ),
 
-          drawer: MainDrawer(),
+          drawer: MainDrawer(
+
+          ),
 
           bottomNavigationBar:
-          CurvedNavigationBar(height: 60,
+          CurvedNavigationBar(
 
-            backgroundColor: Colors.blue.withOpacity(.8),
+           // buttonBackgroundColor:  Colors.white ,
+            color:AppColor.primaryColor ,
+            height: 50,
+
+            backgroundColor: Colors.white.withOpacity(.8),
             items:cubit.bottomWidget,
             index: cubit.currentIndex,
-
             onTap: (index) {
-
             cubit.changeBottomNavBar(index,context);
             },
           ),

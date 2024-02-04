@@ -9,6 +9,7 @@ import 'package:hieroglyphic_app/Screens/register_screen/cubit/state.dart';
 import 'package:hieroglyphic_app/compenets/constant/colors.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 
 // ignore: must_be_immutable
@@ -38,7 +39,8 @@ bool isAdmin=false;
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
-              title: const Text('Register'),
+              backgroundColor: AppColor.primaryColor,
+              title:  Text(AppLocalizations.of(context)!.registerAppBar),
               centerTitle: true,
             ),
             body: Center(
@@ -311,7 +313,7 @@ bool isAdmin=false;
                                     'Login',
                                     style: GoogleFonts.lobster(
                                       fontSize: 20.0,
-                                      color: Colors.blue,
+                                      color: AppColor.primaryColor,
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ))

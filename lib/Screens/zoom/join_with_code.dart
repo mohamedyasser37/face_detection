@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hieroglyphic_app/compenets/constant/colors.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../video_call.dart';
 
@@ -16,18 +18,21 @@ class JoinWithCode extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        leading: InkWell(
+          child: Icon(Icons.arrow_back_ios_new_sharp, size: 35),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
+        backgroundColor: AppColor.primaryColor,
+        title: Text(AppLocalizations.of(context)!.join),
+      ),
       body: SafeArea(
         child: Column(
           children: [
-            Align(
-              alignment: Alignment.topLeft,
-              child: InkWell(
-                child: Icon(Icons.arrow_back_ios_new_sharp, size: 35),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ),
+
             SizedBox(height: 50),
             Image.network(
               "https://user-images.githubusercontent.com/67534990/127776450-6c7a9470-d4e2-4780-ab10-143f5f86a26e.png",
@@ -36,8 +41,9 @@ class JoinWithCode extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Text(
-              "Enter meeting code below",
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+              AppLocalizations.of(context)!.meetingCode,
+              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold,
+              color: AppColor.primaryColor),
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(15, 20, 15, 20),
@@ -51,7 +57,7 @@ class JoinWithCode extends StatelessWidget {
                   textAlign: TextAlign.center,
                   decoration: InputDecoration(
                       border: InputBorder.none,
-                      hintText: "Example : abc-efg-dhi"),
+                      hintText: AppLocalizations.of(context)!.exampleCode),
                 ),
               ),
             ),
@@ -59,10 +65,10 @@ class JoinWithCode extends StatelessWidget {
           onPressed: () => jumpToMeetingPage(context,
         conferenceId: conferenceController.text),
 
-              child: Text("Join"),
+              child: Text(AppLocalizations.of(context)!.join),
               style: ElevatedButton.styleFrom(
                 fixedSize: Size(50, 30),
-                primary: Colors.indigo,
+                primary: AppColor.primaryColor,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25)),
               ),

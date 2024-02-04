@@ -66,6 +66,7 @@ class MyApp extends StatelessWidget {
           var cubit = HomeCubit.get(context);
 
           return MaterialApp(
+
               title: 'Flutter Demo',
               localizationsDelegates: const [
                 AppLocalizations.delegate, // Add this line

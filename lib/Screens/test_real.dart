@@ -160,6 +160,21 @@ class _TestRealState extends State<TestReal> {
         break;
     }
 
+    print('----------------------------------------------------');
+    print('----------------------------------------------------');
+    print('----------------------------------------------------');
+    print("angry $angry");
+    print("disgust $disgust");
+    print("fear $fear");
+    print("happy $happy");
+    print("neutral $neutral");
+    print("sad $sad");
+    print("surprise $surprise");
+    print("sumOfResults $sumOfResults");
+    print('----------------------------------------------------');
+    print('----------------------------------------------------');
+    print('----------------------------------------------------');
+
     sumOfResults = angry + disgust + fear + happy + neutral + sad + surprise;
 
   }

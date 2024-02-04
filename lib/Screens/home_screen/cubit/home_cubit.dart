@@ -10,48 +10,38 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(HomeInitial());
 static HomeCubit get(context)=>BlocProvider.of(context);
 int currentIndex=0;
-List<BottomNavigationBarItem> bottomItem=[
-  //BottomNavigationBarItem(icon: Icon(Icons.home,),label: "Home"),
-  BottomNavigationBarItem(icon: Icon(Icons.favorite,),label: "Favorite"),
-  BottomNavigationBarItem(icon: Icon(Icons.list,),label: "List"),
-  BottomNavigationBarItem(icon: Icon(Icons.more_vert,),label: "More"),
-  BottomNavigationBarItem(icon: Icon(Icons.bookmark_add,),label: "PDF"),
-];
+
 List<Widget> bottomWidget=[
-  // Column(
-  //   children: [
-  //     Icon(Icons.home,),
-  //     Text('Home'),
-  //   ],
-  // ),
+
   Column(
+
     children: [
-      Icon(Icons.favorite,),
-      Text('Favorite'),
+      Icon(Icons.favorite,color: Colors.white,),
+      Text('Favorite',style: TextStyle(color: Colors.white),),
     ],
   ),
   Column(
     children: [
-      Icon(Icons.list,),
-      Text('List'),
+      Icon(Icons.list,color: Colors.white,),
+      Text('List',style: TextStyle(color: Colors.white),),
     ],
   ),
   Column(
     children: [
-      Icon(Icons.more_vert,),
-      Text('Test Camera'),
+      Icon(Icons.more_vert,color: Colors.white,),
+      Text('Test Camera',style: TextStyle(color: Colors.white),),
     ],
   ),
   Column(
     children: [
-      Icon(Icons.bookmark_add,),
-      Text('Pdf'),
+      Icon(Icons.bookmark_add,color: Colors.white,),
+      Text('Pdf',style: TextStyle(color: Colors.white),),
     ],
   ),
   Column(
     children: [
-      Icon(Icons.videocam,),
-      Text('Zoom'),
+      Icon(Icons.videocam,color: Colors.white,),
+      Text('Zoom',style: TextStyle(color: Colors.white),),
     ],
   ),
 ];
