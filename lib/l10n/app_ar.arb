@@ -1,6 +1,16 @@
 {
-    "firstTitle": "الصفحه الرءيسيه",
+    "reslutPage": "النتائج",
     "favouritTitle": "Favourite Page",
     "arabicLanguage": "Arabic",
-    "englishLanguage": "English"
+    "englishLanguage": "English",
+    "loginAppBar": "تسجيل الدخول",
+    "registerAppBar": "التسجيل",
+    "homeTitle":"الصفحه الرئيسيه",
+    "testReal":"ريل موديل",
+    "testCamera":"موديل",
+    "pdf":"المحاضرات",
+    "zoom":"زوم",
+    "join":"انضم",
+    "meetingCode":"رقم الانضمام",
+    "exampleCode":"مثال للرمز : 123-456"
 }

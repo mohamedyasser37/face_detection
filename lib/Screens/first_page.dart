@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hieroglyphic_app/Screens/home_screen/home_screen.dart';
 import 'package:hieroglyphic_app/compenets/constants.dart';
 
+import '../compenets/constant/colors.dart';
 import '../widgets/app_color.dart';
 import '../widgets/indicator.dart';
 
@@ -20,8 +21,10 @@ class PieChart2State extends State {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+     
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.firstTitle),
+        backgroundColor: AppColor.primaryColor,
+        title: Text(AppLocalizations.of(context)!.reslutPage),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
@@ -98,7 +101,7 @@ class PieChart2State extends State {
                   height: 4,
                 ),
                 Indicator(
-                  color: AppColors.contentColorGreen,
+                  color: Colors.red,
                   text: 'Angry',
                   isSquare: true,
                 ),
@@ -114,7 +117,7 @@ class PieChart2State extends State {
                   height: 4,
                 ),
                 Indicator(
-                  color: Colors.teal,
+                  color: Colors.greenAccent,
                   text: 'Natural',
                   isSquare: true,
                 ),
@@ -141,7 +144,7 @@ class PieChart2State extends State {
   }
 
   List<PieChartSectionData> showingSections() {
-    return List.generate(4, (i) {
+    return List.generate(7, (i) {
       final isTouched = i == touchedIndex;
       final fontSize = isTouched ? 25.0 : 16.0;
       final radius = isTouched ? 60.0 : 50.0;
@@ -188,7 +191,7 @@ class PieChart2State extends State {
           );
         case 3:
           return PieChartSectionData(
-            color: AppColors.contentColorGreen,
+            color: Colors.red,
             value: ((angry / sumOfResults) * 100).truncate().toDouble(),
             title: '${((angry / sumOfResults) * 100).truncate()}%',
             radius: radius,
@@ -214,7 +217,7 @@ class PieChart2State extends State {
           );
         case 5:
           return PieChartSectionData(
-            color: Colors.teal,
+            color: Colors.greenAccent,
             value: ((neutral / sumOfResults) * 100).truncate().toDouble(),
             title: '${((neutral / sumOfResults) * 100).truncate()}%',
             radius: radius,

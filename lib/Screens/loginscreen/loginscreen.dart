@@ -8,6 +8,7 @@ import 'package:hieroglyphic_app/Screens/register_screen/register_screen.dart';
 import 'package:hieroglyphic_app/compenets/constant/colors.dart';
 import 'package:hieroglyphic_app/screens/loginscreen/cubit/cubit.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 
 // ignore: must_be_immutable
@@ -45,9 +46,11 @@ class LoginScreen extends StatelessWidget {
           return ModalProgressHUD(
             inAsyncCall: isLoading,
             child: Scaffold(
-              // appBar: AppBar(
-              //     // backgroundColor: Colors.transparent,
-              //     ),
+              appBar: AppBar(
+                backgroundColor: AppColor.primaryColor,
+                title:  Text(AppLocalizations.of(context)!.loginAppBar),
+                centerTitle: true,
+              ),
               body: Center(
                 child: SingleChildScrollView(
                   child: Padding(
@@ -180,9 +183,11 @@ class LoginScreen extends StatelessWidget {
                                 width: 10,
                               ),
                               textButton(
+
                                 function: () {
                                   navigateTo(context, RegisterScreen());
                                 },
+
                                 text: 'Register Now!',
                               ),
                             ],

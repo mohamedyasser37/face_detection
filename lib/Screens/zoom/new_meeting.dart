@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:tflite/tflite.dart';
 
 import '../../compenets/constants.dart';
 import '../../main.dart';
@@ -40,52 +39,7 @@ class _NewMeetingState extends State<NewMeeting> {
     super.initState();
 
   }
-  // runModel() async {
-  //   if (cameraImage != null) {
-  //     var predictions = await Tflite.runModelOnFrame(
-  //         bytesList: cameraImage!.planes.map((plan) {
-  //           return plan.bytes;
-  //         }).toList(),
-  //         imageHeight: cameraImage!.height,
-  //         imageWidth: cameraImage!.width,
-  //         imageMean: 127.5,
-  //         imageStd: 127.5,
-  //         rotation: 90,
-  //         numResults: 2,
-  //         threshold: .1,
-  //         asynch: true);
-  //     predictions!.forEach((element) {
-  //       output = element['label'];
-  //
-  //       setState(() {
-  //         output = element['label'];
-  //         print(output);
-  //         resultsCounter(output);
-  //
-  //       });
-  //     });
-  //   }
-  // }
-  // loadCamera() {
-  //   cameraController = CameraController(camera![0], ResolutionPreset.ultraHigh);
-  //   cameraController!.initialize().then((value) {
-  //     if (!mounted) {
-  //       return;
-  //     } else {
-  //       setState(() {
-  //         cameraController!.startImageStream((imageStream) {
-  //           cameraImage = imageStream;
-  //           runModel(); // runModel();
-  //         });
-  //       });
-  //     }
-  //   });
-  // }
-  // loadModel() async {
-  //   await Tflite.loadModel(
-  //       model: 'assets/models/model3.tflite',
-  //       labels: 'assets/models/labels2.txt');
-  // }
+
 
   @override
   Widget build(BuildContext context) {
@@ -148,8 +102,6 @@ class _NewMeetingState extends State<NewMeeting> {
               onPressed:() {
                 jumpToMeetingPage(context,
                     conferenceId: randomConferenceId) ;
-               // loadCamera();
-                //loadModel();
 
 
 
@@ -210,6 +162,20 @@ class _NewMeetingState extends State<NewMeeting> {
 
         break;
     }
+    print('----------------------------------------------------');
+    print('----------------------------------------------------');
+    print('----------------------------------------------------');
+    print("angry $angry");
+    print("disgust $disgust");
+    print("fear $fear");
+    print("happy $happy");
+    print("neutral $neutral");
+    print("sad $sad");
+    print("surprise $surprise");
+    print("sumOfResults $sumOfResults");
+    print('----------------------------------------------------');
+    print('----------------------------------------------------');
+    print('----------------------------------------------------');
 
     sumOfResults = angry + disgust + fear + happy + neutral + sad + surprise;
 

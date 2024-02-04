@@ -1,6 +1,16 @@
 {
-    "firstTitle": "First Page",
+    "reslutPage": "Results",
     "favouritTitle": "Favourite Page",
     "arabicLanguage": "Arabic",
-    "englishLanguage": "English"
+    "englishLanguage": "English",
+    "loginAppBar": "Login",
+    "registerAppBar": "Register",
+    "homeTitle":"Home Page",
+    "testReal":"Real Model",
+    "testCamera":"Test Camera",
+    "pdf":"Materiales",
+    "zoom":"Zoom",
+    "join":"Join",
+    "meetingCode":"Meeting Code",
+    "exampleCode":"Example : 123-456"
 }
