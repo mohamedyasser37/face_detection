@@ -11,7 +11,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-
 // ignore: must_be_immutable
 class RegisterScreen extends StatelessWidget {
   var formKey = GlobalKey<FormState>();
@@ -20,11 +19,13 @@ class RegisterScreen extends StatelessWidget {
   var nameController = TextEditingController();
   var phoneController = TextEditingController();
   var adminController = TextEditingController();
-  String? grade ;
-  String? selectedGrade='Select your grade' ;
+  String? grade;
+
+  String? selectedGrade = 'Select your grade';
+
   File? profileImage;
   var pickerController = ImagePicker();
-bool isAdmin=false;
+  bool isAdmin = false;
 
   RegisterScreen({super.key});
 
@@ -40,7 +41,7 @@ bool isAdmin=false;
           return Scaffold(
             appBar: AppBar(
               backgroundColor: AppColor.primaryColor,
-              title:  Text(AppLocalizations.of(context)!.registerAppBar),
+              title: Text(AppLocalizations.of(context)!.registerAppBar),
               centerTitle: true,
             ),
             body: Center(
@@ -64,7 +65,7 @@ bool isAdmin=false;
                           ),
                           const Center(
                             child: Text(
-                              "Welcome Back",
+                              " Welcome ",
                               style: TextStyle(
                                   fontSize: 30,
                                   color: AppColor.primaryColor,
@@ -84,9 +85,9 @@ bool isAdmin=false;
                                   fontWeight: FontWeight.w400),
                             ),
                           ),
-                    const SizedBox(
-                      height: 10,
-                    ),
+                          const SizedBox(
+                            height: 10,
+                          ),
                           TextFormField(
                             controller: nameController,
                             keyboardType: TextInputType.name,
@@ -113,12 +114,12 @@ bool isAdmin=false;
                             keyboardType: TextInputType.emailAddress,
                             obscureText: false,
                             enabled: true,
-                            validator: ( value) {
+                            validator: (value) {
                               if (value!.trim() == "") {
                                 return "Please Enter Email";
                               }
                               final bool emailValid = RegExp(
-                                  r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                   .hasMatch(value);
                               if (!emailValid) {
                                 return "Please Enter valid Email";
@@ -168,107 +169,129 @@ bool isAdmin=false;
                           const SizedBox(
                             height: 10,
                           ),
-
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                       isAdmin=   SocialRegisterCubit.get(context).CheckIfUser(isAdmin);
-                        },
-                        child: Container(
-                          width: 150,
-                          height: 50,
-                          child: Center(child: Row(
+                          Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-
-                              Text('User ',style: TextStyle(fontSize: 20,color: isAdmin?AppColor.primaryColor  :Colors.white),),
-                              Icon(Icons.account_circle_rounded,color: isAdmin?AppColor.primaryColor  :Colors.white ,),
-
-                            ],
-                          )),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12),
-                              color:isAdmin?  Colors.white : AppColor.primaryColor
-                          ),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                       isAdmin=   SocialRegisterCubit.get(context).CheckIfAdmin(isAdmin);
-
-                        },
-                        child: Container(
-                          width: 150,
-                          height: 50,
-                          child: Center(child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text('Admin ',style: TextStyle(fontSize: 20,color: isAdmin?  Colors.white : AppColor.primaryColor),),
-                              Icon(Icons.lock_person,color: isAdmin?  Colors.white : AppColor.primaryColor,),
-
-                            ],
-                          )),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12),
-
-                              color:isAdmin?AppColor.primaryColor  :Colors.white
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-
-
-                          isAdmin? TextFormField(
-                            controller: adminController,
-                            keyboardType: TextInputType.number,
-                            obscureText: false,
-                            enabled: true,
-                            validator: (value) {
-                              if (value!='123') {
-                                return 'Please enter Admin code';
-                              }
-                            },
-                            decoration: const InputDecoration(
-                              labelText: 'Admin Code',
-                              prefixIcon: Icon(
-                                Icons.lock_person,
+                              InkWell(
+                                onTap: () {
+                                  isAdmin = SocialRegisterCubit.get(context)
+                                      .CheckIfUser(isAdmin);
+                                },
+                                child: Container(
+                                  width: 150,
+                                  height: 50,
+                                  child: Center(
+                                      child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'User ',
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            color: isAdmin
+                                                ? AppColor.primaryColor
+                                                : Colors.white),
+                                      ),
+                                      Icon(
+                                        Icons.account_circle_rounded,
+                                        color: isAdmin
+                                            ? AppColor.primaryColor
+                                            : Colors.white,
+                                      ),
+                                    ],
+                                  )),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12),
+                                      color: isAdmin
+                                          ? Colors.white
+                                          : AppColor.primaryColor),
+                                ),
                               ),
-                              border: OutlineInputBorder(),
-                            ),
-                          ):
-                          Center(
-                            child: DropdownButton<String>(
-                              hint:Text(selectedGrade!) ,
-                              value: grade,
-                              onChanged: (String? value) {
-                               grade=value;
-                               selectedGrade=
-                               SocialRegisterCubit.get(context).CheckGrade(grade!);
-                              },
-                              items: <String>['one', 'two', 'three', 'four'].map((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value),
-                                );
-                              }).toList(),
-                            ),
+                              InkWell(
+                                onTap: () {
+                                  isAdmin = SocialRegisterCubit.get(context)
+                                      .CheckIfAdmin(isAdmin);
+                                },
+                                child: Container(
+                                  width: 150,
+                                  height: 50,
+                                  child: Center(
+                                      child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Admin ',
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            color: isAdmin
+                                                ? Colors.white
+                                                : AppColor.primaryColor),
+                                      ),
+                                      Icon(
+                                        Icons.lock_person,
+                                        color: isAdmin
+                                            ? Colors.white
+                                            : AppColor.primaryColor,
+                                      ),
+                                    ],
+                                  )),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12),
+                                      color: isAdmin
+                                          ? AppColor.primaryColor
+                                          : Colors.white),
+                                ),
+                              ),
+                            ],
                           ),
-
-
-
                           const SizedBox(
                             height: 10,
                           ),
-
-
-
+                          isAdmin
+                              ? TextFormField(
+                                  controller: adminController,
+                                  keyboardType: TextInputType.number,
+                                  obscureText: false,
+                                  enabled: true,
+                                  validator: (value) {
+                                    if (value != '123') {
+                                      return 'Please enter Admin code';
+                                    }
+                                  },
+                                  decoration: const InputDecoration(
+                                    labelText: 'Admin Code',
+                                    prefixIcon: Icon(
+                                      Icons.lock_person,
+                                    ),
+                                    border: OutlineInputBorder(),
+                                  ),
+                                )
+                              : Center(
+                                  child: DropdownButton<String>(
+                                    hint: Text(selectedGrade!),
+                                    value: grade,
+                                    onChanged: (String? value) {
+                                      grade = value;
+                                      selectedGrade =
+                                          SocialRegisterCubit.get(context)
+                                              .CheckGrade(grade!);
+                                    },
+                                    items: <String>[
+                                      'one',
+                                      'two',
+                                      'three',
+                                      'four'
+                                    ].map((String value) {
+                                      return DropdownMenuItem<String>(
+                                        value: value,
+                                        child: Text(value),
+                                      );
+                                    }).toList(),
+                                  ),
+                                ),
+                          const SizedBox(
+                            height: 10,
+                          ),
                           ConditionalBuilder(
                             condition: state is! SocialRegisterLoadingState,
                             builder: (context) => Center(
@@ -277,12 +300,10 @@ bool isAdmin=false;
                                     if (formKey.currentState!.validate()) {
                                       SocialRegisterCubit.get(context)
                                           .UserRegister(
-                                        email: emailController.text,
-                                        password: passwordController.text,
-                                        name: nameController.text,
-                                        isAdmin: isAdmin
-
-                                      );
+                                              email: emailController.text,
+                                              password: passwordController.text,
+                                              name: nameController.text,
+                                              isAdmin: isAdmin);
                                       navigateTo(context, LoginScreen());
                                     }
                                   },
@@ -330,5 +351,3 @@ bool isAdmin=false;
     );
   }
 }
-
-

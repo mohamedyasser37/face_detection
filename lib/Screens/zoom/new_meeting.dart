@@ -1,10 +1,14 @@
 import 'dart:math';
+import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hieroglyphic_app/compenets/constant/colors.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../compenets/constants.dart';
-import '../../main.dart';
 import '../video_call.dart';
 
 final String userId = Random().nextInt(900000 + 100000).toString();
@@ -12,10 +16,15 @@ final String randomConferenceId = Random()
     .nextInt(100000000 * 10 + Random().nextInt(10))
     .toString()
     .padLeft(10, '0');
+
+void copyNumberToClipboard(String number) {
+  Clipboard.setData(ClipboardData(text: number));
+}
+
 class NewMeeting extends StatefulWidget {
   static const String routeName = 'NewMeeting';
 
-  NewMeeting({Key? key}) : super(key: key);
+  const NewMeeting({Key? key}) : super(key: key);
 
   @override
   _NewMeetingState createState() => _NewMeetingState();
@@ -26,47 +35,43 @@ class _NewMeetingState extends State<NewMeeting> {
   CameraController? cameraController;
   String output = '';
   String name = '';
+
   jumpToMeetingPage(BuildContext context, {required String conferenceId}) {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => VideoCall(
-        conferenceId:conferenceId
-    )));
+        context,
+        MaterialPageRoute(
+            builder: (context) => VideoCall(conferenceId: conferenceId)));
   }
 
   @override
   void initState() {
-
     super.initState();
-
   }
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        leading: InkWell(
+          child: const Icon(Icons.arrow_back_ios_new_sharp, size: 35),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
+        backgroundColor: AppColor.primaryColor,
+        title: Text(AppLocalizations.of(context)!.startMeeting),
+      ),
       body: SafeArea(
         child: Column(
           children: [
-            Align(
-              alignment: Alignment.topLeft,
-              child: InkWell(
-                child: Icon(Icons.arrow_back_ios_new_sharp, size: 35),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ),
-            SizedBox(height: 50),
+            const SizedBox(height: 50),
             Image.asset(
               "assets/images/zoom2.png",
               fit: BoxFit.cover,
               height: 100,
             ),
-            SizedBox(height: 20),
-            Text(
-              "Enter meeting code below",
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-            ),
+            const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.fromLTRB(15, 20, 15, 0),
               child: Card(
@@ -75,57 +80,64 @@ class _NewMeetingState extends State<NewMeeting> {
                     borderRadius: BorderRadius.circular(25),
                   ),
                   child: ListTile(
-                    leading: Icon(Icons.link),
+                    leading: const Icon(Icons.link),
                     title: SelectableText(
                       randomConferenceId,
                       style: TextStyle(fontWeight: FontWeight.w300),
                     ),
-                    trailing: Icon(Icons.copy),
+                    trailing: IconButton(
+                      icon: const Icon(Icons.copy),
+                      onPressed: () {
+                        copyNumberToClipboard(randomConferenceId);
+                        Fluttertoast.showToast(
+                          msg: 'Copied',
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.BOTTOM,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: AppColor.primaryColor,
+                          textColor: Colors.white,
+                          fontSize: 16.0,
+                        );
+                      },
+                    ),
                   )),
             ),
-            Divider(thickness: 1, height: 40, indent: 20, endIndent: 20),
+            const Divider(thickness: 1, height: 40, indent: 20, endIndent: 20),
             ElevatedButton.icon(
               onPressed: () {
-               // Share.share("Meeting Code : $_meetingCode");
+                Share.share("Meeting Code : $randomConferenceId");
               },
-              icon: Icon(Icons.arrow_drop_down),
-              label: Text("Share invite"),
+              icon: const Icon(Icons.arrow_drop_down),
+              label: Text(AppLocalizations.of(context)!.shareInvite),
               style: ElevatedButton.styleFrom(
-                fixedSize: Size(350, 30),
-                primary: Colors.indigo,
+                fixedSize: const Size(350, 30),
+                primary: AppColor.primaryColor,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25)),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             OutlinedButton.icon(
-              onPressed:() {
-                jumpToMeetingPage(context,
-                    conferenceId: randomConferenceId) ;
-
-
-
+              onPressed: () {
+                jumpToMeetingPage(context, conferenceId: randomConferenceId);
               },
-
-               icon: Icon(Icons.video_call),
-               label: Text("start call"),
-               style: OutlinedButton.styleFrom(
-                primary: Colors.indigo,
-                side: BorderSide(color: Colors.indigo),
+              icon: const Icon(Icons.video_call),
+              label: Text(AppLocalizations.of(context)!.startCall),
+              style: OutlinedButton.styleFrom(
+                primary: AppColor.primaryColor,
+                side: const BorderSide(color: Colors.indigo),
                 fixedSize: Size(350, 30),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25)),
-              ), ),
-
-
+              ),
+            ),
           ],
         ),
       ),
     );
   }
+
   void resultsCounter(String output) {
-
-
     switch (output) {
       case "0 angry":
         angry++;
@@ -152,33 +164,15 @@ class _NewMeetingState extends State<NewMeeting> {
       case "5 sad":
         sad++;
 
-
         break;
       case "6 surprise":
         surprise++;
         break;
 
       default:
-
         break;
     }
-    print('----------------------------------------------------');
-    print('----------------------------------------------------');
-    print('----------------------------------------------------');
-    print("angry $angry");
-    print("disgust $disgust");
-    print("fear $fear");
-    print("happy $happy");
-    print("neutral $neutral");
-    print("sad $sad");
-    print("surprise $surprise");
-    print("sumOfResults $sumOfResults");
-    print('----------------------------------------------------');
-    print('----------------------------------------------------');
-    print('----------------------------------------------------');
 
     sumOfResults = angry + disgust + fear + happy + neutral + sad + surprise;
-
   }
-
 }

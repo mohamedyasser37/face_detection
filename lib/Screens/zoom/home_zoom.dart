@@ -28,7 +28,7 @@ class HomeZoom extends StatelessWidget {
             ),
           ),
         ),
-        Divider(
+        const Divider(
           thickness: 1,
           height: 30,
           indent: 40,
@@ -38,15 +38,14 @@ class HomeZoom extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
           child: OutlinedButton.icon(
             onPressed: () {
-             // Get.to(JoinWithCode());
               Navigator.pushNamed(context, JoinWithCode.routeName);
             },
-            icon: Icon(Icons.margin),
-            label: Text("Join with a code"),
+            icon: const Icon(Icons.margin),
+            label: const Text("Join with a code"),
             style: OutlinedButton.styleFrom(
               primary: AppColor.primaryColor,
-              side: BorderSide(color: Colors.indigo),
-              fixedSize: Size(350, 30),
+              side: const BorderSide(color: Colors.indigo),
+              fixedSize: const Size(350, 30),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25)),
             ),

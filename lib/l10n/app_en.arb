@@ -11,6 +11,15 @@
     "pdf":"Materiales",
     "zoom":"Zoom",
     "join":"Join",
+    "shareInvite":"Share Invite",
+    "startMeeting":"New Meeting",
+    "startCall":"Start Call",
     "meetingCode":"Meeting Code",
-    "exampleCode":"Example : 123-456"
+    "exampleCode":"Example : 123-456",
+    "logOut":"Logout",
+    "setting":"Setting",
+    "lecture":"Lecture"
+
+
+
 }

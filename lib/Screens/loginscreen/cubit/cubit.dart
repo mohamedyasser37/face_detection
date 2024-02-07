@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hieroglyphic_app/Screens/loginscreen/cubit/state.dart';
-
+import '../../../compenets/cashe_helper.dart';
 import '../../../compenets/constants.dart';
-import '../../register_screen/register_screen.dart';
 
 class socialloginCubit extends Cubit<LoginState> {
   socialloginCubit() : super(LoginInitial());
+
+
 
   Future<void> LoginUser(
       {required String email,
@@ -21,16 +22,15 @@ class socialloginCubit extends Cubit<LoginState> {
           .signInWithEmailAndPassword(email: email, password: password)
           .then((values) {
         uid = values.user!.uid;
-        print(uid);
+       // print(uid);
 
         CollectionReference data =
             FirebaseFirestore.instance.collection('users');
         data.where("uId", isEqualTo: uid).get().then((value) {
           value.docs.forEach((element) {
-            print(element.data());
-            print('#######################');
-            print(element.get('isAdmin'));
-            print('#######################');
+
+            name = element.get('name');
+            CacheHelper.saveData(key: 'name', value: name);
             if (element.get('isAdmin') == true) {
               emit(IsAdmin());
             } else {
