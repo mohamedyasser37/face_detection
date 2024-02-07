@@ -1,8 +1,13 @@
 import 'package:bloc/bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hieroglyphic_app/Screens/loginscreen/loginscreen.dart';
 
 import 'package:meta/meta.dart';
+
+import '../../../compenets/cashe_helper.dart';
 
 part 'home_state.dart';
 
@@ -67,5 +72,34 @@ void changeLanguage(){
 
 
 }
+
+  Future<void> logOut(context) async {
+    await FirebaseAuth.instance.signOut().then((value) {
+
+      CacheHelper.removeData(key: 'Login');
+      Navigator.pushAndRemoveUntil(context,
+          MaterialPageRoute(builder: (context) => LoginScreen(),)
+          , (route) => false);
+
+    //  currentIndex = 0;
+      emit(Logout());
+    }).catchError((error) {
+      emit(LogoutError(error.toString()));
+      });
+    }
+
+
+
+
+  Future<void> _fetchData() async {
+    try {
+      final QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('myCollection').get();
+      for (var doc in querySnapshot.docs) {
+        print(doc.data());
+      }
+    } catch (e) {
+    print(e);
+    }
+  }
 
 }

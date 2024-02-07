@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hieroglyphic_app/generated/l10n.dart';
 import 'package:hieroglyphic_app/screens/home_screen/cubit/home_cubit.dart';
 
+import '../compenets/cashe_helper.dart';
 import '../compenets/constant/colors.dart';
+import '../compenets/constants.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MainDrawer extends StatefulWidget {
   const MainDrawer({
@@ -21,7 +25,7 @@ class _MainDrawerState extends State<MainDrawer> {
         children: [
           DrawerHeader(
             padding: const EdgeInsets.all(20),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: AppColor.primaryColor,
             ),
             child: Row(
@@ -30,31 +34,50 @@ class _MainDrawerState extends State<MainDrawer> {
                 CircleAvatar(
                   child: Image.asset('assets/images/logo.png'),
                   radius: 50,
-                 backgroundColor: Colors.white,
+                  backgroundColor: Colors.white,
                 )
               ],
             ),
           ),
           ListTile(
-            leading: Icon(
+            leading: const Icon(
               Icons.person_pin,
               color: AppColor.primaryColor,
             ),
             title: Text(
-              "Private information",
+              "${CacheHelper.getData(key: 'name')}",
+              overflow: TextOverflow.ellipsis,
               style: Theme.of(context)
                   .textTheme
                   .titleLarge!
-                  .copyWith(color:AppColor.primaryColor),
+                  .copyWith(color: AppColor.primaryColor),
             ),
           ),
           ListTile(
-            leading: Icon(
+            leading: const Icon(
+              Icons.logout_outlined,
+              color: AppColor.primaryColor,
+            ),
+            title: InkWell(
+              onTap: () {
+                HomeCubit.get(context).logOut(context);
+              },
+              child: Text(
+                AppLocalizations.of(context)!.logOut,
+                style: Theme.of(context)
+                    .textTheme
+                    .titleLarge!
+                    .copyWith(color: AppColor.primaryColor),
+              ),
+            ),
+          ),
+          ListTile(
+            leading: const Icon(
               Icons.settings,
-              color:AppColor.primaryColor,
+              color: AppColor.primaryColor,
             ),
             title: Text(
-              "settings",
+              AppLocalizations.of(context)!.setting,
               style: Theme.of(context)
                   .textTheme
                   .titleLarge!
@@ -64,7 +87,9 @@ class _MainDrawerState extends State<MainDrawer> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(HomeCubit.get(context).isEnglish?'Light Mode':'الوضع العادي'),
+              Text(HomeCubit.get(context).isEnglish
+                  ? 'Light Mode'
+                  : 'الوضع العادي'),
               Switch(
                 activeColor: AppColor.primaryColor,
                 value: HomeCubit.get(context).isDark ? true : false,
@@ -72,13 +97,15 @@ class _MainDrawerState extends State<MainDrawer> {
                   HomeCubit.get(context).changeMode();
                 },
               ),
-              Text(HomeCubit.get(context).isEnglish?'Dark Mode':'الوضع الليلي'),
+              Text(HomeCubit.get(context).isEnglish
+                  ? 'Dark Mode'
+                  : 'الوضع الليلي'),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(HomeCubit.get(context).isEnglish? 'Arabic':'عربي'),
+              Text(HomeCubit.get(context).isEnglish ? 'Arabic' : 'عربي'),
               Switch(
                 activeColor: AppColor.primaryColor,
                 value: HomeCubit.get(context).isEnglish ? true : false,
@@ -86,7 +113,7 @@ class _MainDrawerState extends State<MainDrawer> {
                   HomeCubit.get(context).changeLanguage();
                 },
               ),
-              Text(HomeCubit.get(context).isEnglish? 'ُEnglish':'انجليزي'),
+              Text(HomeCubit.get(context).isEnglish ? 'ُEnglish' : 'انجليزي'),
             ],
           ),
         ],

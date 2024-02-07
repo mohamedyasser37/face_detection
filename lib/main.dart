@@ -6,12 +6,13 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hieroglyphic_app/Screens/loginscreen/loginscreen.dart';
 import 'package:hieroglyphic_app/Screens/pdf/pdf.dart';
+import 'package:hieroglyphic_app/Screens/pdf_screen/pdf_cubit.dart';
 import 'package:hieroglyphic_app/Screens/zoom/join_with_code.dart';
 import 'package:hieroglyphic_app/compenets/cashe_helper.dart';
-import 'package:hieroglyphic_app/screens/favorite_screen.dart';
 import 'package:hieroglyphic_app/screens/home_screen/cubit/home_cubit.dart';
 import 'package:hieroglyphic_app/screens/home_screen/home_screen.dart';
 import 'package:hieroglyphic_app/screens/onBoarding_Screen.dart';
+import 'Screens/pdf_screen/favorite_screen.dart';
 import 'Screens/zoom/new_meeting.dart';
 import 'firebase_options.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -33,8 +34,8 @@ void main() async {
   Widget widget;
   bool? onBoarding = CacheHelper.getData(key: 'onBoarding');
   bool? Login = CacheHelper.getData(key: 'Login');
-  print(onBoarding);
-  print(Login);
+
+ // print(Login);
 
   if (onBoarding != null) {
     if (Login != null) {
@@ -45,7 +46,7 @@ void main() async {
   } else {
     widget = const OnBoardingScreen();
   }
-  print(widget);
+ // print(widget);
   runApp(MyApp(
     startWidget: widget,
   ));
@@ -57,8 +58,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => HomeCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => HomeCubit(),),
+        BlocProvider(create: (context) => PdfCubit()..getPdf(),),
+
+      ],
       child: BlocConsumer<HomeCubit, HomeState>(
         listener: (context, state) {
         },
@@ -94,7 +99,7 @@ class MyApp extends StatelessWidget {
               NewMeeting.routeName: (context) => NewMeeting(),
 
             },
-            home: HomeScreen(),
+            home: LoginScreen(),
           );
         },
       ),

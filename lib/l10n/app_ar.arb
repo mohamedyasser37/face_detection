@@ -11,6 +11,12 @@
     "pdf":"المحاضرات",
     "zoom":"زوم",
     "join":"انضم",
+    "startMeeting":"مكالمه جديده",
+    "shareInvite":"مشاركه الكود",
+    "startCall":"بدء مكالمه",
     "meetingCode":"رقم الانضمام",
-    "exampleCode":"مثال للرمز : 123-456"
+    "exampleCode":"مثال للرمز : ۳۲۱ - ٦٥٤ ",
+    "logOut":" تسجيل الخروج",
+    "setting":" الاعدادات",
+    "lecture":" محاضره"
 }

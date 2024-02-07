@@ -1,12 +1,14 @@
 import 'dart:io';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hieroglyphic_app/compenets/constant/colors.dart';
 
 class Pdf extends StatefulWidget {
-  static const String routeName='pdf';
+  static const String routeName = 'pdf';
+
   @override
   _PdfState createState() => _PdfState();
 }
@@ -14,18 +16,17 @@ class Pdf extends StatefulWidget {
 class _PdfState extends State<Pdf> {
   PlatformFile? PickedFile;
   UploadTask? uploadTask;
+
   Future uploadFile() async {
     final path = 'files/${PickedFile!.name}';
     final file = File(PickedFile!.path!);
     final ref = FirebaseStorage.instance.ref().child(path);
-    ref.putFile(file);
-    String Imageurl = await ref.getDownloadURL();
-    print(Imageurl);
-    print("=====================");
+   await ref.putFile(file);
+    String fileUrl = await ref.getDownloadURL();
+    await FirebaseFirestore.instance.collection('files').add({'name': fileUrl});
 
-    // final snapshot = await uploadTask!.whenComplete(() {});
-    // final urlDownload = await snapshot.ref.getDownloadURL();
-    // print("Download link is :$urlDownload");
+
+
   }
 
   Future SelectFile() async {
@@ -38,53 +39,71 @@ class _PdfState extends State<Pdf> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
         body: Center(
-
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                if (PickedFile != null)
-                  Expanded(
-                      child: Container(
-                        color: Colors.blue,
-                        child: Center(
-                          child: Text(PickedFile!.name),
-                        ),
-                      )),
-                SizedBox(
-                  height: 30,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          if (PickedFile != null)
+            Container(
+              width: MediaQuery.of(context).size.width * 0.6,
+              height: MediaQuery.of(context).size.height * 0.2,
+              color: AppColor.primaryColor,
+              child: Center(
+                child: Text(
+                  PickedFile!.name,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
                 ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.7,
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(AppColor.primaryColor)
-                    ),
-
-                      onPressed: SelectFile, child: Text("Select",
-                    style: TextStyle(
-                      fontSize: 20
-                    ),
-                  )),
-                ),
-                SizedBox(height: 12,),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.7,
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(AppColor.primaryColor)
-                    ),
-
-                      onPressed: uploadFile, child: Text("Upload",
-                    style: TextStyle(
-                      fontSize: 20
-                    ),
-                  )),
-                ),
-              ],
               ),
-        ));
-    }
+            ),
+           SizedBox(
+            height: MediaQuery.of(context).size.height * 0.2,
+          ),
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.7,
+            child: ElevatedButton(
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all(AppColor.primaryColor)),
+                onPressed: SelectFile,
+                child: const Text(
+                  "Select",
+                  style: TextStyle(fontSize: 20),
+                )),
+          ),
+          const SizedBox(
+            height: 12,
+          ),
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.7,
+            child: ElevatedButton(
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all(AppColor.primaryColor)),
+                onPressed: ()async {
+               await   uploadFile();
+                  setState(() {
+                    PickedFile = null;
+                  });
+                  Fluttertoast.showToast(
+                    msg: 'Uploaded',
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.CENTER,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: AppColor.primaryColor,
+                    textColor: Colors.white,
+                    fontSize: 16.0,
+                  );
+
+                },
+                child: const Text(
+                  "Upload",
+                  style: TextStyle(fontSize: 20),
+                )),
+          ),
+        ],
+      ),
+    ));
+  }
 }

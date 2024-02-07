@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:hieroglyphic_app/compenets/constant/colors.dart';
 import "package:syncfusion_flutter_pdfviewer/pdfviewer.dart";
 
-
 class PdfViewer extends StatefulWidget {
-  static const String routeName='pdf2';
+  static const String routeName = 'pdf2';
 
   @override
   _HomePage createState() => _HomePage();
@@ -19,27 +19,17 @@ class _HomePage extends State<PdfViewer> {
 
   @override
   Widget build(BuildContext context) {
+    var pdfUrl = ModalRoute.of(context)!.settings.arguments as String;
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Syncfusion Flutter PDF Viewer'),
-          actions: <Widget>[
-            IconButton(
-              icon: const Icon(
-                Icons.bookmark,
-                color: Colors.white,
-                semanticLabel: 'Bookmark',
-              ),
-              onPressed: () {
-                _pdfViewerKey.currentState?.openBookmarkView();
-              },
-            ),
-          ],
-        ),
-        body: SfPdfViewer.network(
-          'https://firebasestorage.googleapis.com/v0/b/app-notes-7cf5e.a',
-
-          key: _pdfViewerKey,
-            ),
-        );
-   }
+      appBar: AppBar(
+        backgroundColor: AppColor.primaryColor,
+        title: const Text(' PDF Viewer'),
+        centerTitle: true,
+      ),
+      body: SfPdfViewer.network(
+        pdfUrl,
+        key: _pdfViewerKey,
+      ),
+    );
+  }
 }

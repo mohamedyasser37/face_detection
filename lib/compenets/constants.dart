@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 const  defaultColor=Color(0xff0D83B9);
 var uid;
 
-
+var name;
 int angry = 0;
 int disgust = 0;
 int fear = 0;
