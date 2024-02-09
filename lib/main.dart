@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:hieroglyphic_app/Screens/chat_page/chatPage.dart';
+import 'package:hieroglyphic_app/Screens/chat_page/chat_cubit.dart';
 import 'package:hieroglyphic_app/Screens/loginscreen/loginscreen.dart';
 import 'package:hieroglyphic_app/Screens/pdf/pdf.dart';
 import 'package:hieroglyphic_app/Screens/pdf_screen/pdf_cubit.dart';
@@ -61,6 +63,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => HomeCubit(),),
+        BlocProvider(create: (context) => ChatCubit(),),
         BlocProvider(create: (context) => PdfCubit()..getPdf(),),
 
       ],

@@ -10,8 +10,6 @@ import '../../../compenets/constants.dart';
 class socialloginCubit extends Cubit<LoginState> {
   socialloginCubit() : super(LoginInitial());
 
-
-
   Future<void> LoginUser(
       {required String email,
       required String password,
@@ -28,9 +26,13 @@ class socialloginCubit extends Cubit<LoginState> {
             FirebaseFirestore.instance.collection('users');
         data.where("uId", isEqualTo: uid).get().then((value) {
           value.docs.forEach((element) {
-
             name = element.get('name');
+            print('****************');
+            print(value);
+            print('****************');
+
             CacheHelper.saveData(key: 'name', value: name);
+            CacheHelper.saveData(key: 'email', value: email);
             if (element.get('isAdmin') == true) {
               emit(IsAdmin());
             } else {
@@ -44,6 +46,7 @@ class socialloginCubit extends Cubit<LoginState> {
                   attend.doc(uid).update({"count": x});
                 });
               });
+              //userEmail=email;
               emit(LoginSuccess());
             }
           });

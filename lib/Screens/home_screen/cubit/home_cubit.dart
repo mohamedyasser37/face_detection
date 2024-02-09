@@ -49,6 +49,12 @@ List<Widget> bottomWidget=[
       Text('Zoom',style: TextStyle(color: Colors.white),),
     ],
   ),
+  Column(
+    children: [
+      Icon(Icons.camera,color: Colors.white,),
+      Text('Chat',style: TextStyle(color: Colors.white),),
+    ],
+  ),
 ];
 
 void changeBottomNavBar(int index,BuildContext context){

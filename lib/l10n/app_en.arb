@@ -18,7 +18,9 @@
     "exampleCode":"Example : 123-456",
     "logOut":"Logout",
     "setting":"Setting",
-    "lecture":"Lecture"
+    "lecture":"Lecture",
+    "chat":"Chat",
+    "sendMessage":"Send Message"
 
 
 
