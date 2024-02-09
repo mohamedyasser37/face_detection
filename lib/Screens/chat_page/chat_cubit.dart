@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../../compenets/cashe_helper.dart';
 import '../../compenets/constants.dart';
 import '../../models/message.dart';
 import 'chat_state.dart';
@@ -23,7 +24,7 @@ class ChatCubit extends Cubit<ChatStates> {
     });
     try {
       messages.add(
-        {kMessage: message, kCreatedAt: DateTime.now(), 'id': email,'isAdmin':isAdmin},
+        {kMessage: message, kCreatedAt: DateTime.now(), 'id': email,'name':"${CacheHelper.getData(key: 'name')}"},
       );
     } on Exception catch (e) {
       // TODO

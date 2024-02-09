@@ -42,7 +42,7 @@ class _MainDrawerState extends State<MainDrawer> {
           ),
           ListTile(
             leading: const Icon(
-              Icons.person_pin,
+              Icons.person,
               color: AppColor.primaryColor,
             ),
             title: Text(

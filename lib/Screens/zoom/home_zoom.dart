@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hieroglyphic_app/Screens/zoom/new_meeting.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../compenets/constant/colors.dart';
 import 'join_with_code.dart';
@@ -19,7 +20,7 @@ class HomeZoom extends StatelessWidget {
               Navigator.pushNamed(context, NewMeeting.routeName);
             },
             icon: Icon(Icons.add),
-            label: Text("New Meeting"),
+            label: Text("${AppLocalizations.of(context)!.startMeeting}"),
             style: ElevatedButton.styleFrom(
               fixedSize: Size(350, 30),
               primary: AppColor.primaryColor,
@@ -41,7 +42,7 @@ class HomeZoom extends StatelessWidget {
               Navigator.pushNamed(context, JoinWithCode.routeName);
             },
             icon: const Icon(Icons.margin),
-            label: const Text("Join with a code"),
+            label:  Text("${AppLocalizations.of(context)!.joinWithCode}"),
             style: OutlinedButton.styleFrom(
               primary: AppColor.primaryColor,
               side: const BorderSide(color: Colors.indigo),

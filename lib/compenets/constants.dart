@@ -7,6 +7,7 @@ const kMessage = 'message';
 const kCreatedAt='createdAt';
 var uid;
 var userEmail;
+var changeBubble=false;
 
 var name;
 int angry = 0;

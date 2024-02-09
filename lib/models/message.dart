@@ -1,10 +1,10 @@
 class Message{
  final String message;
  final String id;
- final bool isAdmin;
-  Message(this.message, this.id,this.isAdmin);
+ final String name;
+  Message(this.message, this.id,this.name);
 
  factory Message.fromJson(jsonData){
- return Message(jsonData['message'],jsonData['id'],jsonData['isAdmin']);
+ return Message(jsonData['message'],jsonData['id'],jsonData['name']);
 }
 }
