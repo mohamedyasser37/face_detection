@@ -27,9 +27,7 @@ class socialloginCubit extends Cubit<LoginState> {
         data.where("uId", isEqualTo: uid).get().then((value) {
           value.docs.forEach((element) {
             name = element.get('name');
-            print('****************');
-            print(value);
-            print('****************');
+
 
             CacheHelper.saveData(key: 'name', value: name);
             CacheHelper.saveData(key: 'email', value: email);

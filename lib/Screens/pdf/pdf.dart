@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hieroglyphic_app/compenets/constant/colors.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Pdf extends StatefulWidget {
   static const String routeName = 'pdf';
@@ -67,8 +68,8 @@ class _PdfState extends State<Pdf> {
                     backgroundColor:
                         MaterialStateProperty.all(AppColor.primaryColor)),
                 onPressed: SelectFile,
-                child: const Text(
-                  "Select",
+                child:  Text(
+                  "${AppLocalizations.of(context)!.selectPdf}",
                   style: TextStyle(fontSize: 20),
                 )),
           ),
@@ -97,8 +98,8 @@ class _PdfState extends State<Pdf> {
                   );
 
                 },
-                child: const Text(
-                  "Upload",
+                child:  Text(
+                  "${AppLocalizations.of(context)!.upLoadPdf}",
                   style: TextStyle(fontSize: 20),
                 )),
           ),

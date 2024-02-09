@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../compenets/constants.dart';
 import '../models/message.dart';
 
 class ChatBubleForFriend extends StatelessWidget {
@@ -14,21 +15,34 @@ class ChatBubleForFriend extends StatelessWidget {
     return Align(
       alignment: Alignment.centerRight,
       child: Container(
-        padding: const EdgeInsets.only(left: 16, top: 32, bottom: 32, right: 32),
-        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: const EdgeInsets.only(left: 8,top: 4,bottom: 12,right: 10),
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(32),
-            topRight: Radius.circular(32),
-            bottomLeft: Radius.circular(32),
+            topLeft: Radius.circular(18),
+            topRight: Radius.circular(18),
+            bottomLeft: Radius.circular(18),
           ),
-          color: Color(0xff006D84),
+          color: Color(0xff4A4E69),
         ),
-        child: Text(
-          message.message,
-          style: const TextStyle(
-            color: Colors.white,
-          ),
+        child: Column(
+          crossAxisAlignment:changeBubble? CrossAxisAlignment.end: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom:4),
+              child: Text(message.name,
+                style: const TextStyle(color: Colors.grey,
+                    fontSize: 14,fontWeight: FontWeight.bold),),
+            ),
+
+
+            Text(
+              message.message,
+              style: const TextStyle(
+                color: Colors.white,
+              ),
+            ),
+          ],
         ),
       ),
     );

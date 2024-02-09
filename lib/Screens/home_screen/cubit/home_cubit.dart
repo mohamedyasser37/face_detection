@@ -8,6 +8,7 @@ import 'package:hieroglyphic_app/Screens/loginscreen/loginscreen.dart';
 import 'package:meta/meta.dart';
 
 import '../../../compenets/cashe_helper.dart';
+import '../../../compenets/constants.dart';
 
 part 'home_state.dart';
 
@@ -21,8 +22,8 @@ List<Widget> bottomWidget=[
   Column(
 
     children: [
-      Icon(Icons.favorite,color: Colors.white,),
-      Text('Favorite',style: TextStyle(color: Colors.white),),
+      Icon(Icons.menu_book_sharp,color: Colors.white,),
+      Text('Lectures  ',style: TextStyle(color: Colors.white),),
     ],
   ),
   Column(
@@ -51,7 +52,7 @@ List<Widget> bottomWidget=[
   ),
   Column(
     children: [
-      Icon(Icons.camera,color: Colors.white,),
+      Icon(Icons.chat_rounded,color: Colors.white,),
       Text('Chat',style: TextStyle(color: Colors.white),),
     ],
   ),
@@ -73,6 +74,7 @@ void changeMode(){
   var isEnglish=false;
 
 void changeLanguage(){
+  changeBubble=!isEnglish;
   isEnglish=!isEnglish;
     emit(ChangeLanguage());
 

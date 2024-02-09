@@ -72,8 +72,6 @@ class ChatPage extends StatelessWidget {
                     controller.clear();
                     FocusScope.of(context).unfocus();
 
-
-
                   },
                   child: Icon(
                     Icons.send,
