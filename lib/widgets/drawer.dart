@@ -21,6 +21,7 @@ class _MainDrawerState extends State<MainDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      width: MediaQuery.of(context).size.width*0.62,
       child: Column(
         children: [
           DrawerHeader(

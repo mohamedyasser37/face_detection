@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hieroglyphic_app/Screens/chat_page/chat_cubit.dart';
 import 'package:hieroglyphic_app/Screens/home_screen/home_screen.dart';
 import 'package:hieroglyphic_app/Screens/loginscreen/cubit/state.dart';
-import 'package:hieroglyphic_app/Screens/test_real.dart';
 import 'package:hieroglyphic_app/compenets/components.dart';
 import 'package:hieroglyphic_app/Screens/register_screen/register_screen.dart';
 import 'package:hieroglyphic_app/compenets/constant/colors.dart';
@@ -33,6 +33,7 @@ class LoginScreen extends StatelessWidget {
             isLoading=false;
           }
           else if(state is LoginSuccess){
+            BlocProvider.of<ChatCubit>(context).getMessages();
             Navigator.pushNamed(
                 context, HomeScreen.routeName, arguments: emailController.text);
             isLoading=false;

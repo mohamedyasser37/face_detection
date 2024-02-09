@@ -1,6 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hieroglyphic_app/Screens/chat_page/chatPage.dart';
 import 'package:hieroglyphic_app/Screens/pdf/pdf.dart';
 import 'package:hieroglyphic_app/Screens/pdf_screen/favorite_screen.dart';
 import 'package:hieroglyphic_app/Screens/zoom/home_zoom.dart';
@@ -28,6 +29,8 @@ class HomeScreen extends StatelessWidget {
        AppLocalizations.of(context)!.testCamera,
        AppLocalizations.of(context)!.pdf,
        AppLocalizations.of(context)!.zoom,
+      AppLocalizations.of(context)!.chat,
+
 
     ];
 
@@ -69,7 +72,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-List<Widget> tabs=[FavoriteScreen(),TestReal(),TestCamera(),Pdf(),HomeZoom()];
+List<Widget> tabs=[FavoriteScreen(),TestReal(),TestCamera(),Pdf(),HomeZoom(),ChatPage()];
 }
 
 
