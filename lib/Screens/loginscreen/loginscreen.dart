@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hieroglyphic_app/Screens/chat_page/chat_cubit.dart';
 import 'package:hieroglyphic_app/Screens/home_screen/home_screen.dart';
 import 'package:hieroglyphic_app/Screens/loginscreen/cubit/state.dart';
@@ -145,15 +146,7 @@ class LoginScreen extends StatelessWidget {
                               border: OutlineInputBorder(),
                             ),
                           ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          textButton(
-                            function: () {
-                              // navigateTo(context, const RestPasswordScreen());
-                            },
-                            text: "Forgotten password?",
-                          ),
+
                           const SizedBox(
                             height: 20,
                           ),
@@ -175,22 +168,33 @@ class LoginScreen extends StatelessWidget {
                           ),
                           Row(
                             children: [
-                              const Text(
+                               Text(
                                 'Don\'t have an account?',
-                                style:
-                                    TextStyle(fontSize: 16, color: Colors.grey),
-                              ),
-                              const SizedBox(
+                                style: GoogleFonts.lobster(
+                                  fontSize: 15.0,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w600,
+                              ),),
+                               SizedBox(
                                 width: 10,
                               ),
-                              textButton(
 
-                                function: () {
-                                  navigateTo(context, RegisterScreen());
-                                },
+                              TextButton(
+                                  onPressed: () {
+                                    navigateTo(context, RegisterScreen());
+                                  },
+                                  child: Text(
+                                    'Register Now!',
+                                    style: GoogleFonts.lobster(
+                                      fontSize: 18.0,
+                                      color: AppColor.primaryColor,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  )),
 
-                                text: 'Register Now!',
-                              ),
+
+
+
                             ],
                           ),
                         ],

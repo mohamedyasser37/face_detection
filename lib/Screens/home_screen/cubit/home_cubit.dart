@@ -23,7 +23,7 @@ List<Widget> bottomWidget=[
 
     children: [
       Icon(Icons.menu_book_sharp,color: Colors.white,),
-      Text('Lectures  ',style: TextStyle(color: Colors.white),),
+      Text('Lectures  ',style: TextStyle(color: Colors.white,fontSize: 12),),
     ],
   ),
   Column(

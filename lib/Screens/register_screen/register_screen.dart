@@ -321,7 +321,7 @@ class RegisterScreen extends StatelessWidget {
                               Text(
                                 'Already have acount',
                                 style: GoogleFonts.lobster(
-                                  fontSize: 20.0,
+                                  fontSize: 15.0,
                                   color: Colors.black,
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -333,7 +333,7 @@ class RegisterScreen extends StatelessWidget {
                                   child: Text(
                                     'Login',
                                     style: GoogleFonts.lobster(
-                                      fontSize: 20.0,
+                                      fontSize: 18.0,
                                       color: AppColor.primaryColor,
                                       fontWeight: FontWeight.w600,
                                     ),

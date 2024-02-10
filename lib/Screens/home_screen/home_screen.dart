@@ -26,7 +26,7 @@ class HomeScreen extends StatelessWidget {
     List<String> screensName=[
        AppLocalizations.of(context)!.homeTitle,
        AppLocalizations.of(context)!.testReal,
-       AppLocalizations.of(context)!.testCamera,
+      AppLocalizations.of(context)!.testCamera,
        AppLocalizations.of(context)!.pdf,
        AppLocalizations.of(context)!.zoom,
       AppLocalizations.of(context)!.chat,
@@ -40,6 +40,7 @@ class HomeScreen extends StatelessWidget {
       builder: (context, state) {
         var cubit=HomeCubit.get(context);
         return Scaffold(
+
           appBar: AppBar(
             title:  Text(screensName[cubit.currentIndex]),
 
@@ -72,7 +73,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-List<Widget> tabs=[FavoriteScreen(),TestReal(),TestCamera(),Pdf(),HomeZoom(),ChatPage()];
+List<Widget> tabs=[FeedbackScreen(),TestReal(),TestCamera(),Pdf(),HomeZoom(),ChatPage()];
 }
 
 

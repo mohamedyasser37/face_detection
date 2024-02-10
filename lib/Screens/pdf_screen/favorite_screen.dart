@@ -7,10 +7,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../compenets/constant/colors.dart';
 
-class FavoriteScreen extends StatelessWidget {
+class FeedbackScreen extends StatelessWidget {
   static const String routeName = 'favorite';
 
-  const FavoriteScreen({super.key});
+  const FeedbackScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
