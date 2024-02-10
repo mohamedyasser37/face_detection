@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:hieroglyphic_app/Screens/chat_page/chatPage.dart';
 import 'package:hieroglyphic_app/Screens/chat_page/chat_cubit.dart';
 import 'package:hieroglyphic_app/Screens/loginscreen/loginscreen.dart';
 import 'package:hieroglyphic_app/Screens/pdf/pdf.dart';
@@ -91,18 +90,20 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             themeMode: cubit.isDark ? ThemeMode.dark : ThemeMode.light,
             theme:
-                ThemeData(appBarTheme: const AppBarTheme(color: Colors.blue)),
+                ThemeData(
+
+                    appBarTheme: const AppBarTheme(color: Colors.blue)),
             darkTheme:
                 ThemeData(appBarTheme: const AppBarTheme(color: Colors.amber)),
             routes: {
               HomeScreen.routeName: (context) => HomeScreen(),
-              FavoriteScreen.routeName: (context) =>  FavoriteScreen(),
+              FeedbackScreen.routeName: (context) =>  FeedbackScreen(),
               Pdf.routeName: (context) => Pdf(),
               JoinWithCode.routeName: (context) => JoinWithCode(),
               NewMeeting.routeName: (context) => NewMeeting(),
 
             },
-            home: OnBoardingScreen(),
+            home: startWidget,
           );
         },
       ),

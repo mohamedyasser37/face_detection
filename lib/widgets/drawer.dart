@@ -21,7 +21,7 @@ class _MainDrawerState extends State<MainDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      width: MediaQuery.of(context).size.width*0.62,
+      width: MediaQuery.of(context).size.width * 0.62,
       child: Column(
         children: [
           DrawerHeader(
@@ -46,7 +46,8 @@ class _MainDrawerState extends State<MainDrawer> {
               color: AppColor.primaryColor,
             ),
             title: Text(
-              "${CacheHelper.getData(key: 'name')}",
+               "${CacheHelper.getData(key: 'name')}"
+              ,
               overflow: TextOverflow.ellipsis,
               style: Theme.of(context)
                   .textTheme
@@ -65,6 +66,7 @@ class _MainDrawerState extends State<MainDrawer> {
               },
               child: Text(
                 AppLocalizations.of(context)!.logOut,
+                overflow: TextOverflow.ellipsis,
                 style: Theme.of(context)
                     .textTheme
                     .titleLarge!
@@ -79,6 +81,7 @@ class _MainDrawerState extends State<MainDrawer> {
             ),
             title: Text(
               AppLocalizations.of(context)!.setting,
+              overflow: TextOverflow.ellipsis,
               style: Theme.of(context)
                   .textTheme
                   .titleLarge!
@@ -98,9 +101,11 @@ class _MainDrawerState extends State<MainDrawer> {
                   HomeCubit.get(context).changeMode();
                 },
               ),
-              Text(HomeCubit.get(context).isEnglish
-                  ? 'Dark Mode'
-                  : 'الوضع الليلي'),
+              Text(
+                  overflow: TextOverflow.ellipsis,
+                  HomeCubit.get(context).isEnglish
+                      ? 'Dark Mode'
+                      : 'الوضع الليلي'),
             ],
           ),
           Row(
