@@ -21,6 +21,7 @@ class socialloginCubit extends Cubit<LoginState> {
           .then((values) {
         uid = values.user!.uid;
        // print(uid);
+       // print(uid);
 
         CollectionReference data =
             FirebaseFirestore.instance.collection('users');
