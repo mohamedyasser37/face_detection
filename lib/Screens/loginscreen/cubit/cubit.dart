@@ -21,12 +21,14 @@ class socialloginCubit extends Cubit<LoginState> {
           .then((values) {
         uid = values.user!.uid;
        // print(uid);
+       // print(uid);
 
         CollectionReference data =
             FirebaseFirestore.instance.collection('users');
         data.where("uId", isEqualTo: uid).get().then((value) {
           value.docs.forEach((element) {
             name = element.get('name');
+             CacheHelper.saveData(key: 'Login', value:true);
 
 
             CacheHelper.saveData(key: 'name', value: name);

@@ -39,7 +39,7 @@ void main() async {
  // print(Login);
 
   if (onBoarding != null) {
-    if (Login != null) {
+    if (Login == true) {
       widget = HomeScreen();
     } else {
       widget = LoginScreen();
