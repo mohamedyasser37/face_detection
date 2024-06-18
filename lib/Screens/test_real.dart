@@ -76,10 +76,10 @@ class _TestRealState extends State<TestReal> {
 
   loadModel() async {
     await Tflite.loadModel(
-        // model: 'assets/models/model3.tflite',
-        //labels: 'assets/models/labels2.txt');
-        model: 'assets/models/best-fp16.tflite',
-        labels: 'assets/models/best-fp.txt');
+        model: 'assets/models/best2.tflite',
+        labels: 'assets/models/labels.txt');
+        // model: 'assets/models/best-fp16.tflite',
+        // labels: 'assets/models/best-fp.txt');
   }
 
   @override

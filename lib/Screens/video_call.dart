@@ -129,23 +129,33 @@ class _VideoCallState extends State<VideoCall> {
             await FirebaseFirestore.instance.collection('results').doc('${widget.conferenceId}').get(
 
             ).then((value) {
-              angry += value.get('anger');
-              disgust += value.get('disgust');
-              fear += value.get('fear');
-              happy += value.get('happy');
-              neutral += value.get('neutral');
-              sad += value.get('sad');
-              surprise += value.get('surprise');
+              totalangry = angry+ value.get('anger');
+              totaldisgust = disgust + value.get('disgust');
+              totaleFear = fear + value.get('fear');
+              totalhappy = happy + value.get('happy');
+              totalneutral = neutral + value.get('neutral');
+              totalsad = sad + value.get('sad');
+              totalsurprise = surprise + value.get('surprise');
+
+              // to += value.get('disgust');
+              // fear += value.get('fear');
+              // happy += value.get('happy');
+              // neutral += value.get('neutral');
+              // sad += value.get('sad');
+              // surprise += value.get('surprise');
             });
 
+            isAdmin?null:
+
             await FirebaseFirestore.instance.collection('results').doc('${widget.conferenceId}').set({
-              'anger': angry,
-              'disgust': disgust,
-              'fear': fear,
-              'happy': happy,
-              'neutral': neutral,
-              'sad': sad,
-              'surprise': surprise,
+              'anger': totalangry,
+              'disgust': totaldisgust,
+              'fear': totaleFear,
+              'happy': totalhappy,
+              'neutral': totalneutral,
+              'sad': totalsad,
+              'surprise': totalsurprise,
+
             });
 
 

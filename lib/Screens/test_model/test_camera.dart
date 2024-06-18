@@ -49,8 +49,11 @@ class _TestCameraState extends State<TestCamera> {
 
   loadmodel() async {
     await Tflite.loadModel(
-        model: 'assets/models/model3.tflite',
-        labels: 'assets/models/labels2.txt');
+        model: 'assets/models/best2.tflite',
+        labels: 'assets/models/labels.txt');
+
+        // model: 'assets/models/model3.tflite',
+        // labels: 'assets/models/labels2.txt');
 
   }
 
