@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -17,6 +18,7 @@ class ResultPage extends StatefulWidget {
 
 class PieChart2State extends State {
   int touchedIndex = -1;
+@override
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +38,7 @@ class PieChart2State extends State {
           },
         ),
       ),
-      body: Column(
+      body:isAdmin?Text('data')  : Column(
         children: [
           Row(
             children: <Widget>[
@@ -149,46 +151,7 @@ class PieChart2State extends State {
           Text('$fear'),
           Text('$disgust'),
           Text('$sad'),
-          // Row(
-          //   children: <Widget>[
-          //     const SizedBox(
-          //       height: 18,
-          //     ),
-          //     Expanded(
-          //       child: AspectRatio(
-          //         aspectRatio: 1,
-          //         child: PieChart(
-          //           PieChartData(
-          //             pieTouchData: PieTouchData(
-          //               touchCallback: (FlTouchEvent event, pieTouchResponse) {
-          //                 setState(() {
-          //                   if (!event.isInterestedForInteractions ||
-          //                       pieTouchResponse == null ||
-          //                       pieTouchResponse.touchedSection == null) {
-          //                     touchedIndex = -1;
-          //                     return;
-          //                   }
-          //                   touchedIndex = pieTouchResponse
-          //                       .touchedSection!.touchedSectionIndex;
-          //                 });
-          //               },
-          //             ),
-          //             borderData: FlBorderData(
-          //               show: false,
-          //             ),
-          //             sectionsSpace: 0,
-          //             centerSpaceRadius: 40,
-          //             sections: showingSections(),
-          //           ),
-          //         ),
-          //       ),
-          //     ),
-          //
-          //     const SizedBox(
-          //       width: 28,
-          //     ),
-          //   ],
-          // ),
+
         ],
       ),
     );

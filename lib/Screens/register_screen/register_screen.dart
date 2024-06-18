@@ -11,6 +11,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../compenets/constants.dart';
+
 // ignore: must_be_immutable
 class RegisterScreen extends StatelessWidget {
   var formKey = GlobalKey<FormState>();
@@ -25,7 +27,7 @@ class RegisterScreen extends StatelessWidget {
 
   File? profileImage;
   var pickerController = ImagePicker();
-  bool isAdmin = false;
+
 
   RegisterScreen({super.key});
 
