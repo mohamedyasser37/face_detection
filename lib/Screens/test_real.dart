@@ -1,16 +1,12 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:hieroglyphic_app/Screens/first_page.dart';
-import 'package:hieroglyphic_app/Screens/home_screen/home_screen.dart';
+import 'package:hieroglyphic_app/Screens/result_page.dart';
 import 'package:hieroglyphic_app/main.dart';
-import 'package:hieroglyphic_app/screens/test_real.dart';
 import 'package:tflite/tflite.dart';
-
 import '../compenets/constants.dart';
 
 class TestReal extends StatefulWidget {
   static const String routeName = 'realtime';
-
   @override
   State<TestReal> createState() => _TestRealState();
 }
@@ -33,9 +29,7 @@ class _TestRealState extends State<TestReal> {
     super.dispose();
     loadCamera().dispose();
     loadModel().dispose();
-  //  runModel().dispose();
-
-
+    //  runModel().dispose();
   }
 
   loadCamera() {
@@ -75,7 +69,6 @@ class _TestRealState extends State<TestReal> {
           output = element['label'];
           print(output);
           resultsCounter(output);
-
         });
       });
     }
@@ -83,15 +76,17 @@ class _TestRealState extends State<TestReal> {
 
   loadModel() async {
     await Tflite.loadModel(
-        model: 'assets/models/model3.tflite',
-        labels: 'assets/models/labels2.txt');
+        // model: 'assets/models/model3.tflite',
+        //labels: 'assets/models/labels2.txt');
+        model: 'assets/models/best-fp16.tflite',
+        labels: 'assets/models/best-fp.txt');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('test real'),
+        title: const Text('test real'),
       ),
       body: SingleChildScrollView(
         child: Column(children: [
@@ -111,18 +106,21 @@ class _TestRealState extends State<TestReal> {
             output,
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
-          ElevatedButton(onPressed: (){
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => FirstPage(),));
-          }, child: Text('Exit'))
+          ElevatedButton(
+              onPressed: () {
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ResultPage(),
+                    ));
+              },
+              child: Text('Exit'))
         ]),
       ),
     );
   }
 
   void resultsCounter(String output) {
-
-
     switch (output) {
       case "0 angry":
         angry++;
@@ -149,18 +147,15 @@ class _TestRealState extends State<TestReal> {
       case "5 sad":
         sad++;
 
-
         break;
       case "6 surprise":
         surprise++;
         break;
 
       default:
-
         break;
     }
 
-    print('----------------------------------------------------');
     print('----------------------------------------------------');
     print('----------------------------------------------------');
     print("angry $angry");
@@ -173,9 +168,7 @@ class _TestRealState extends State<TestReal> {
     print("sumOfResults $sumOfResults");
     print('----------------------------------------------------');
     print('----------------------------------------------------');
-    print('----------------------------------------------------');
 
     sumOfResults = angry + disgust + fear + happy + neutral + sad + surprise;
-
   }
 }

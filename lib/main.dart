@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hieroglyphic_app/Screens/chat_page/chat_cubit.dart';
+import 'package:hieroglyphic_app/Screens/result_page.dart';
 import 'package:hieroglyphic_app/Screens/loginscreen/loginscreen.dart';
 import 'package:hieroglyphic_app/Screens/pdf/pdf.dart';
 import 'package:hieroglyphic_app/Screens/pdf_screen/pdf_cubit.dart';
@@ -23,7 +24,6 @@ void main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: '.env');
-
   camera = await availableCameras();
   await CacheHelper.init();
 

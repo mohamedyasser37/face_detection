@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -36,11 +37,20 @@ class _NewMeetingState extends State<NewMeeting> {
   String output = '';
   String name = '';
 
-  jumpToMeetingPage(BuildContext context, {required String conferenceId}) {
+  jumpToMeetingPage(BuildContext context, {required String conferenceId}) async {
     Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) => VideoCall(conferenceId: conferenceId)));
+    await FirebaseFirestore.instance.collection('results').doc('$conferenceId').set({
+      'anger': 0,
+      'disgust': 0,
+      'fear': 0,
+      'happy': 0,
+      'neutral': 0,
+      'sad': 0,
+      'surprise': 0,
+    });
   }
 
   @override
