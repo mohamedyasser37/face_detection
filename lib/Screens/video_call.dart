@@ -1,18 +1,18 @@
-
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hieroglyphic_app/Screens/zoom/new_meeting.dart';
 import 'package:tflite/tflite.dart';
 import 'package:zego_uikit_prebuilt_video_conference/zego_uikit_prebuilt_video_conference.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../compenets/constants.dart';
 import '../main.dart';
-import 'first_page.dart';
-
+import 'result_page.dart';
 
 class VideoCall extends StatefulWidget {
   final String conferenceId;
+
   VideoCall({super.key, required this.conferenceId});
 
   @override
@@ -36,6 +36,9 @@ class _VideoCallState extends State<VideoCall> {
     super.initState();
     loadCamera();
     loadModel();
+  //  loadFocusModel();
+
+
   }
 
   @override
@@ -43,14 +46,12 @@ class _VideoCallState extends State<VideoCall> {
     super.dispose();
     loadCamera().dispose();
     loadModel().dispose();
+  //  loadFocusModel().dispose();
     runModel().dispose();
-
-
   }
 
   loadCamera() {
-    cameraController = CameraController(camera![0],
-        ResolutionPreset.ultraHigh);
+    cameraController = CameraController(camera![0], ResolutionPreset.ultraHigh);
     cameraController!.initialize().then((value) {
       if (!mounted) {
         return;
@@ -58,7 +59,8 @@ class _VideoCallState extends State<VideoCall> {
         setState(() {
           cameraController!.startImageStream((imageStream) {
             cameraImage = imageStream;
-            runModel(); // runModel();
+            runModel();
+          //  runFocusModel();
           });
         });
       }
@@ -84,13 +86,18 @@ class _VideoCallState extends State<VideoCall> {
 
         setState(() {
           output = element['label'];
+          print('#####################');
           print(output);
-          resultsCounter(output);
+          print('#####################');
 
+          resultsCounter(output);
         });
       });
     }
   }
+
+
+
 
   loadModel() async {
     await Tflite.loadModel(
@@ -98,60 +105,81 @@ class _VideoCallState extends State<VideoCall> {
         labels: 'assets/models/labels2.txt');
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: ZegoUIKitPrebuiltVideoConference(
+      child: ZegoUIKitPrebuiltVideoConference(
+        appID: appID,
+        appSign: appSign.toString(),
+        userID: userId,
+        conferenceID: widget.conferenceId,
+        controller: controller,
+        config: ZegoUIKitPrebuiltVideoConferenceConfig(
+          background: Text(""),
 
-            appID: appID ,
-            appSign: appSign.toString() ,
-            userID: userId,
-            conferenceID: widget.conferenceId,
-            controller: controller,
-            config: ZegoUIKitPrebuiltVideoConferenceConfig(
-              background:Text(""),
+          onLeave: () async {
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ResultPage(),
+                ));
+
+            await FirebaseFirestore.instance.collection('results').doc('${widget.conferenceId}').get(
+
+            ).then((value) {
+              angry += value.get('anger');
+              disgust += value.get('disgust');
+              fear += value.get('fear');
+              happy += value.get('happy');
+              neutral += value.get('neutral');
+              sad += value.get('sad');
+              surprise += value.get('surprise');
+            });
+
+            await FirebaseFirestore.instance.collection('results').doc('${widget.conferenceId}').set({
+              'anger': angry,
+              'disgust': disgust,
+              'fear': fear,
+              'happy': happy,
+              'neutral': neutral,
+              'sad': sad,
+              'surprise': surprise,
+            });
 
 
 
 
-              onLeave: () {
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => FirstPage(),));
-
-              },
-
-              leaveConfirmDialogInfo: ZegoLeaveConfirmDialogInfo(
-
-                title: "Leave the conference",
-                message: "Are you sure to leave the conference?",
-                cancelButtonName: "Cancel",
-                confirmButtonName: "ok",
-              ),
-
-              avatarBuilder: (BuildContext context, Size size,
-                  ZegoUIKitUser? user, Map extraInfo) {
-                return user != null
-                    ? Container(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      image: NetworkImage(
-                        'https://your_server/app/avatar/${user.id}.png',
+          },
+          leaveConfirmDialogInfo: ZegoLeaveConfirmDialogInfo(
+            title: "Leave the conference",
+            message: "Are you sure to leave the conference?",
+            cancelButtonName: "Cancel",
+            confirmButtonName: "ok",
+          ),
+          avatarBuilder: (BuildContext context, Size size, ZegoUIKitUser? user,
+              Map extraInfo) {
+            return user != null
+                ? Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        image: NetworkImage(
+                          'https://your_server/app/avatar/${user.id}.png',
+                        ),
                       ),
                     ),
-                  ),
-                )
-                    : const SizedBox();
-              },
-            ),
-            userName: 'user_ $userId',
+                  )
+                : const SizedBox();
+          },
+        ),
+        userName: 'user_ $userId',
+      ),
+    );
+  }
 
-            ),
-        );
-    }
   void resultsCounter(String output) {
-
-
     switch (output) {
       case "0 angry":
         angry++;
@@ -178,20 +206,15 @@ class _VideoCallState extends State<VideoCall> {
       case "5 sad":
         sad++;
 
-
         break;
       case "6 surprise":
         surprise++;
         break;
 
       default:
-
         break;
     }
 
     sumOfResults = angry + disgust + fear + happy + neutral + sad + surprise;
-
   }
-
 }
-

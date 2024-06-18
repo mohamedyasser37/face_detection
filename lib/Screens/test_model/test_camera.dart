@@ -6,7 +6,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:tflite/tflite.dart';
 
 class TestCamera extends StatefulWidget {
-  static const String routeName='test image';
+  static const String routeName = 'test image';
+
   @override
   _TestCameraState createState() => _TestCameraState();
 }
@@ -26,23 +27,31 @@ class _TestCameraState extends State<TestCamera> {
   }
 
   detectimage(File image) async {
-
     var prediction = await Tflite.runModelOnImage(
         path: image.path,
         numResults: 2,
         threshold: 0.1,
         imageMean: 127.5,
-        imageStd: 127.5,asynch: true);
+        imageStd: 127.5,
+        asynch: true);
 
     setState(() {
+
       _output = prediction!;
       loading = false;
+
+      print("################################");
+      print(_output);
+      print("################################");
+
     });
   }
 
   loadmodel() async {
     await Tflite.loadModel(
-        model: 'assets/models/model3.tflite', labels: 'assets/models/labels2.txt');
+        model: 'assets/models/model3.tflite',
+        labels: 'assets/models/labels2.txt');
+
   }
 
   @override
@@ -61,7 +70,11 @@ class _TestCameraState extends State<TestCamera> {
   }
 
   pickimage_gallery() async {
-    var image = await imagepicker.pickImage(source: ImageSource.gallery,maxHeight: 224,maxWidth: 224, );
+    var image = await imagepicker.pickImage(
+      source: ImageSource.gallery,
+      maxHeight: 224,
+      maxWidth: 224,
+    );
     if (image == null) {
       return null;
     } else {
@@ -133,25 +146,23 @@ class _TestCameraState extends State<TestCamera> {
             ),
             loading != true
                 ? Column(
-                  children: [
-                    Container(
-                      height: 220,
-                      // width: double.infinity,
-                      padding: const EdgeInsets.all(15),
-                      child: Image.file(_image),
-                    ),
-                    _output != null
-                        ? Text(
-                            (_output[0]['label']).toString().substring(2),
-                            style: GoogleFonts.roboto(fontSize: 18))
-                        : const Text(''),
-                    _output != null
-                        ? Text(
-                            'Confidence: ${_output[0]['confidence']}',
-                            style: GoogleFonts.roboto(fontSize: 18))
-                        : const Text('')
-                  ],
-                )
+                    children: [
+                      Container(
+                        height: 220,
+                        // width: double.infinity,
+                        padding: const EdgeInsets.all(15),
+                        child: Image.file(_image),
+                      ),
+                      _output != null
+                          ? Text((_output[0]['label']).toString().substring(0),
+                              style: GoogleFonts.roboto(fontSize: 18))
+                          : const Text(''),
+                      _output != null
+                          ? Text('Confidence: ${_output[0]['confidence']}',
+                              style: GoogleFonts.roboto(fontSize: 18))
+                          : const Text('')
+                    ],
+                  )
                 : Container()
           ],
         ),

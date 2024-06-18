@@ -1,10 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import '../../compenets/cashe_helper.dart';
 import '../../compenets/constants.dart';
 import '../../models/message.dart';
 import 'chat_state.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ChatCubit extends Cubit<ChatStates> {
@@ -24,7 +22,10 @@ class ChatCubit extends Cubit<ChatStates> {
     });
     try {
       messages.add(
-        {kMessage: message, kCreatedAt: DateTime.now(), 'id': email,'name':"${CacheHelper.getData(key: 'name')}"},
+        {kMessage: message,
+          kCreatedAt: DateTime.now(),
+          'id': email,
+          'name':"${CacheHelper.getData(key: 'name')}"},
       );
     } on Exception catch (e) {
       // TODO

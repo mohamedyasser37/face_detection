@@ -47,7 +47,7 @@ List<Widget> bottomWidget=[
   Column(
     children: [
       Icon(Icons.videocam,color: Colors.white,),
-      Text('Zoom',style: TextStyle(color: Colors.white),),
+      Text('Metting',style: TextStyle(color: Colors.white,fontSize: 12),),
     ],
   ),
   Column(
