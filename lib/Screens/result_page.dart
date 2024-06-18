@@ -19,11 +19,7 @@ class ResultPage extends StatefulWidget {
 class PieChart2State extends State {
   int touchedIndex = -1;
 @override
-  Future<void> initState() async {
-    // TODO: implement initState
-    super.initState();
-  //  isAdmin?await FirebaseFirestore.instance.collection('results').doc('${widget.conferenceId}').get
-  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
