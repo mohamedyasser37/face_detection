@@ -16,7 +16,7 @@ import 'package:hieroglyphic_app/screens/home_screen/cubit/home_cubit.dart';
 import 'package:hieroglyphic_app/screens/home_screen/home_screen.dart';
 import 'package:hieroglyphic_app/screens/onBoarding_Screen.dart';
 import 'Screens/pdf_screen/lecture_screen.dart';
-import 'Screens/quiz_screens/start_screen.dart';
+import 'Screens/quiz_screens/quiz_screen.dart';
 import 'Screens/zoom/new_meeting.dart';
 import 'firebase_options.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

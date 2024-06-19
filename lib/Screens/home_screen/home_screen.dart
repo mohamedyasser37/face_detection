@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hieroglyphic_app/Screens/chat_page/chatPage.dart';
 import 'package:hieroglyphic_app/Screens/pdf/pdf.dart';
 import 'package:hieroglyphic_app/Screens/pdf_screen/lecture_screen.dart';
-import 'package:hieroglyphic_app/Screens/quiz_screens/start_screen.dart';
+import 'package:hieroglyphic_app/Screens/quiz_screens/quiz_screen.dart';
 import 'package:hieroglyphic_app/Screens/zoom/home_zoom.dart';
 import 'package:hieroglyphic_app/screens/home_screen/cubit/home_cubit.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -86,7 +86,7 @@ class HomeScreen extends StatelessWidget {
   }
 
 List<Widget> tabs= [LectureScreen(),Pdf(),HomeZoom(),ChatPage()];
-List<Widget> tabs2= [LectureScreen(),StartScreen(),HomeZoom(),ChatPage()];
+List<Widget> tabs2= [LectureScreen(),QuizScreen(),HomeZoom(),ChatPage()];
 }
 
 
