@@ -24,7 +24,7 @@ class _PdfState extends State<Pdf> {
     final ref = FirebaseStorage.instance.ref().child(path);
    await ref.putFile(file);
     String fileUrl = await ref.getDownloadURL();
-    await FirebaseFirestore.instance.collection('files').add({'name': fileUrl});
+    await FirebaseFirestore.instance.collection('files').add({'name': fileUrl,'title':PickedFile!.name});
 
 
 
@@ -41,69 +41,81 @@ class _PdfState extends State<Pdf> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          if (PickedFile != null)
-            Container(
-              width: MediaQuery.of(context).size.width * 0.6,
-              height: MediaQuery.of(context).size.height * 0.2,
-              color: AppColor.primaryColor,
-              child: Center(
-                child: Text(
-                  PickedFile!.name,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 2,
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+
+            Image.asset(
+              'assets/images/pdf.png',
+              width: 150,
+              height: 150,
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.04,
+            ),
+
+            if (PickedFile != null)
+              Container(
+                width: MediaQuery.of(context).size.width * 0.5,
+                height: MediaQuery.of(context).size.height * 0.15,
+                color: AppColor.primaryColor,
+                child: Center(
+                  child: Text(
+                    PickedFile!.name,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                  ),
                 ),
               ),
+             SizedBox(
+              height: MediaQuery.of(context).size.height * 0.07,
             ),
-           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.2,
-          ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.7,
-            child: ElevatedButton(
-                style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all(AppColor.primaryColor)),
-                onPressed: SelectFile,
-                child:  Text(
-                  "${AppLocalizations.of(context)!.selectPdf}",
-                  style: TextStyle(fontSize: 20),
-                )),
-          ),
-          const SizedBox(
-            height: 12,
-          ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.7,
-            child: ElevatedButton(
-                style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all(AppColor.primaryColor)),
-                onPressed: ()async {
-               await   uploadFile();
-                  setState(() {
-                    PickedFile = null;
-                  });
-                  Fluttertoast.showToast(
-                    msg: 'Uploaded',
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.CENTER,
-                    timeInSecForIosWeb: 1,
-                    backgroundColor: AppColor.primaryColor,
-                    textColor: Colors.white,
-                    fontSize: 16.0,
-                  );
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.7,
+              child: ElevatedButton(
+                  style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all(AppColor.primaryColor)),
+                  onPressed: SelectFile,
+                  child:  Text(
+                    "${AppLocalizations.of(context)!.selectPdf}",
+                    style: TextStyle(fontSize: 20),
+                  )),
+            ),
+            const SizedBox(
+              height: 12,
+            ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.7,
+              child: ElevatedButton(
+                  style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all(AppColor.primaryColor)),
+                  onPressed: ()async {
+                 await   uploadFile();
+                    setState(() {
+                      PickedFile = null;
+                    });
+                    Fluttertoast.showToast(
+                      msg: 'Uploaded',
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.CENTER,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: AppColor.primaryColor,
+                      textColor: Colors.white,
+                      fontSize: 16.0,
+                    );
 
-                },
-                child:  Text(
-                  "${AppLocalizations.of(context)!.upLoadPdf}",
-                  style: TextStyle(fontSize: 20),
-                )),
-          ),
-        ],
+                  },
+                  child:  Text(
+                    "${AppLocalizations.of(context)!.upLoadPdf}",
+                    style: TextStyle(fontSize: 20),
+                  )),
+            ),
+          ],
+        ),
       ),
     ));
   }

@@ -37,299 +37,305 @@ class PieChart2State extends State {
             Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => HomeScreen(),
+                  builder: (context) => HomeScreen(
+
+                  ),
                 ));
           },
         ),
       ),
 
 
-      body:isAdmin?Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(height: 250,width: 300,
-            child: PieChart(
-              PieChartData(
-                pieTouchData: PieTouchData(
-                  touchCallback: (FlTouchEvent event, pieTouchResponse) {
-                    setState(() {
-                      if (!event.isInterestedForInteractions ||
-                          pieTouchResponse == null ||
-                          pieTouchResponse.touchedSection == null) {
-                        touchedIndex = -1;
-                        return;
-                      }
-                      touchedIndex = pieTouchResponse
-                          .touchedSection!.touchedSectionIndex;
-                    });
-                  },
+      body:isAdmin?SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(height: 250,width: 300,
+              child: PieChart(
+                PieChartData(
+                  pieTouchData: PieTouchData(
+                    touchCallback: (FlTouchEvent event, pieTouchResponse) {
+                      setState(() {
+                        if (!event.isInterestedForInteractions ||
+                            pieTouchResponse == null ||
+                            pieTouchResponse.touchedSection == null) {
+                          touchedIndex = -1;
+                          return;
+                        }
+                        touchedIndex = pieTouchResponse
+                            .touchedSection!.touchedSectionIndex;
+                      });
+                    },
+                  ),
+                  borderData: FlBorderData(
+                    show: false,
+                  ),
+                  sectionsSpace: 0,
+                  centerSpaceRadius: 40,
+                  sections: showingTotalSections(),
                 ),
-                borderData: FlBorderData(
-                  show: false,
-                ),
-                sectionsSpace: 0,
-                centerSpaceRadius: 40,
-                sections: showingTotalSections(),
               ),
             ),
+            const SizedBox(height: 30,),
+        ListTile(
+          contentPadding: const EdgeInsets.symmetric(horizontal: 60,vertical: 4),
+          leading: Container(
+            width: 20,
+            height: 20,
+            decoration: const ShapeDecoration(
+              color: Color(0xFF208BC7),
+              shape: OvalBorder(),
+            ),
           ),
-          const SizedBox(height: 30,),
-      ListTile(
-        contentPadding: const EdgeInsets.symmetric(horizontal: 60,vertical: 4),
-        leading: Container(
-          width: 20,
-          height: 20,
-          decoration: const ShapeDecoration(
-            color: Color(0xFF208BC7),
-            shape: OvalBorder(),
+          title: Text(
+            'angry',
           ),
+
         ),
-        title: Text(
-          'angry',
+            ListTile(
+              contentPadding: EdgeInsets.symmetric(horizontal: 60,vertical: 4),
+              leading: Container(
+                width: 20,
+                height: 20,
+                decoration: ShapeDecoration(
+                  color: Color(0xFF4DB7F2),
+                  shape: const OvalBorder(),
+                ),
+              ),
+              title: Text(
+                'happy',
+                // style: AppStyles.styleRegular16(context),
+              ),
+
+            ),
+            ListTile(
+              contentPadding: EdgeInsets.symmetric(horizontal: 60,vertical: 4),
+              leading: Container(
+                width: 20,
+                height: 20,
+                decoration: ShapeDecoration(
+                  color: Color(0xFF064060),
+                  shape: const OvalBorder(),
+                ),
+              ),
+              title: Text(
+                'sad',
+                // style: AppStyles.styleRegular16(context),
+              ),
+
+            ),
+            ListTile(
+              contentPadding: EdgeInsets.symmetric(horizontal: 60,vertical: 4),
+              leading: Container(
+                width: 20,
+                height: 20,
+                decoration: ShapeDecoration(
+                  color: Color(0xFFb388eb),
+                  shape: const OvalBorder(),
+                ),
+              ),
+              title: Text(
+                'disgust',
+                // style: AppStyles.styleRegular16(context),
+              ),
+
+            ),
+            ListTile(
+              contentPadding: EdgeInsets.symmetric(horizontal: 60,vertical: 4),
+              leading: Container(
+                width: 20,
+                height: 20,
+                decoration: ShapeDecoration(
+                  color: Color(0xff023e8a),
+                  shape: const OvalBorder(),
+                ),
+              ),
+              title: Text(
+                'fear',
+                // style: AppStyles.styleRegular16(context),
+              ),
+
+            ),
+            ListTile(
+              contentPadding: EdgeInsets.symmetric(horizontal: 60,vertical: 4),
+              leading: Container(
+                width: 20,
+                height: 20,
+                decoration: ShapeDecoration(
+                  color: Color(0xFF3c099c),
+                  shape: const OvalBorder(),
+                ),
+              ),
+              title: Text(
+                'surprise',
+                // style: AppStyles.styleRegular16(context),
+              ),
+
+            ),
+            ListTile(
+              contentPadding: EdgeInsets.symmetric(horizontal: 60,vertical: 4),
+              leading: Container(
+                width: 20,
+                height: 20,
+                decoration: ShapeDecoration(
+                  color:Color(0xFFE2DECD),
+                  shape: const OvalBorder(),
+                ),
+              ),
+              title: Text(
+                'neutral',
+                // style: AppStyles.styleRegular16(context),
+              ),
+
+            ),
+
+          ],
         ),
-
-      ),
-          ListTile(
-            contentPadding: EdgeInsets.symmetric(horizontal: 60,vertical: 4),
-            leading: Container(
-              width: 20,
-              height: 20,
-              decoration: ShapeDecoration(
-                color: Color(0xFF4DB7F2),
-                shape: const OvalBorder(),
-              ),
-            ),
-            title: Text(
-              'happy',
-              // style: AppStyles.styleRegular16(context),
-            ),
-
-          ),
-          ListTile(
-            contentPadding: EdgeInsets.symmetric(horizontal: 60,vertical: 4),
-            leading: Container(
-              width: 20,
-              height: 20,
-              decoration: ShapeDecoration(
-                color: Color(0xFF064060),
-                shape: const OvalBorder(),
-              ),
-            ),
-            title: Text(
-              'sad',
-              // style: AppStyles.styleRegular16(context),
-            ),
-
-          ),
-          ListTile(
-            contentPadding: EdgeInsets.symmetric(horizontal: 60,vertical: 4),
-            leading: Container(
-              width: 20,
-              height: 20,
-              decoration: ShapeDecoration(
-                color: Color(0xFFb388eb),
-                shape: const OvalBorder(),
-              ),
-            ),
-            title: Text(
-              'disgust',
-              // style: AppStyles.styleRegular16(context),
-            ),
-
-          ),
-          ListTile(
-            contentPadding: EdgeInsets.symmetric(horizontal: 60,vertical: 4),
-            leading: Container(
-              width: 20,
-              height: 20,
-              decoration: ShapeDecoration(
-                color: Color(0xff023e8a),
-                shape: const OvalBorder(),
-              ),
-            ),
-            title: Text(
-              'fear',
-              // style: AppStyles.styleRegular16(context),
-            ),
-
-          ),
-          ListTile(
-            contentPadding: EdgeInsets.symmetric(horizontal: 60,vertical: 4),
-            leading: Container(
-              width: 20,
-              height: 20,
-              decoration: ShapeDecoration(
-                color: Color(0xFF3c099c),
-                shape: const OvalBorder(),
-              ),
-            ),
-            title: Text(
-              'surprise',
-              // style: AppStyles.styleRegular16(context),
-            ),
-
-          ),
-          ListTile(
-            contentPadding: EdgeInsets.symmetric(horizontal: 60,vertical: 4),
-            leading: Container(
-              width: 20,
-              height: 20,
-              decoration: ShapeDecoration(
-                color:Color(0xFFE2DECD),
-                shape: const OvalBorder(),
-              ),
-            ),
-            title: Text(
-              'neutral',
-              // style: AppStyles.styleRegular16(context),
-            ),
-
-          ),
-
-        ],
-      ): Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(height: 250,width: 300,
-            child: PieChart(
-              PieChartData(
-                pieTouchData: PieTouchData(
-                  touchCallback: (FlTouchEvent event, pieTouchResponse) {
-                    setState(() {
-                      if (!event.isInterestedForInteractions ||
-                          pieTouchResponse == null ||
-                          pieTouchResponse.touchedSection == null) {
-                        touchedIndex = -1;
-                        return;
-                      }
-                      touchedIndex = pieTouchResponse
-                          .touchedSection!.touchedSectionIndex;
-                    });
-                  },
+      ): SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(height: 250,width: 300,
+              child: PieChart(
+                PieChartData(
+                  pieTouchData: PieTouchData(
+                    touchCallback: (FlTouchEvent event, pieTouchResponse) {
+                      setState(() {
+                        if (!event.isInterestedForInteractions ||
+                            pieTouchResponse == null ||
+                            pieTouchResponse.touchedSection == null) {
+                          touchedIndex = -1;
+                          return;
+                        }
+                        touchedIndex = pieTouchResponse
+                            .touchedSection!.touchedSectionIndex;
+                      });
+                    },
+                  ),
+                  borderData: FlBorderData(
+                    show: false,
+                  ),
+                  sectionsSpace: 0,
+                  centerSpaceRadius: 40,
+                  sections: showingSections(),
                 ),
-                borderData: FlBorderData(
-                  show: false,
+              ),
+            ),
+            const SizedBox(height: 30,),
+            ListTile(
+              contentPadding: const EdgeInsets.symmetric(horizontal: 60,vertical: 4),
+              leading: Container(
+                width: 20,
+                height: 20,
+                decoration: const ShapeDecoration(
+                  color: Color(0xFF208BC7),
+                  shape: OvalBorder(),
                 ),
-                sectionsSpace: 0,
-                centerSpaceRadius: 40,
-                sections: showingSections(),
               ),
-            ),
-          ),
-          const SizedBox(height: 30,),
-          ListTile(
-            contentPadding: const EdgeInsets.symmetric(horizontal: 60,vertical: 4),
-            leading: Container(
-              width: 20,
-              height: 20,
-              decoration: const ShapeDecoration(
-                color: Color(0xFF208BC7),
-                shape: OvalBorder(),
+              title: Text(
+                'angry',
               ),
+
             ),
-            title: Text(
-              'angry',
+            ListTile(
+              contentPadding: EdgeInsets.symmetric(horizontal: 60,vertical: 4),
+              leading: Container(
+                width: 20,
+                height: 20,
+                decoration: ShapeDecoration(
+                  color: Color(0xFF4DB7F2),
+                  shape: const OvalBorder(),
+                ),
+              ),
+              title: Text(
+                'happy',
+                // style: AppStyles.styleRegular16(context),
+              ),
+
+            ),
+            ListTile(
+              contentPadding: EdgeInsets.symmetric(horizontal: 60,vertical: 4),
+              leading: Container(
+                width: 20,
+                height: 20,
+                decoration: ShapeDecoration(
+                  color: Color(0xFF064060),
+                  shape: const OvalBorder(),
+                ),
+              ),
+              title: Text(
+                'sad',
+                // style: AppStyles.styleRegular16(context),
+              ),
+
+            ),
+            ListTile(
+              contentPadding: EdgeInsets.symmetric(horizontal: 60,vertical: 4),
+              leading: Container(
+                width: 20,
+                height: 20,
+                decoration: ShapeDecoration(
+                  color: Color(0xFFb388eb),
+                  shape: const OvalBorder(),
+                ),
+              ),
+              title: Text(
+                'disgust',
+                // style: AppStyles.styleRegular16(context),
+              ),
+
+            ),
+            ListTile(
+              contentPadding: EdgeInsets.symmetric(horizontal: 60,vertical: 4),
+              leading: Container(
+                width: 20,
+                height: 20,
+                decoration: ShapeDecoration(
+                  color: Color(0xff023e8a),
+                  shape: const OvalBorder(),
+                ),
+              ),
+              title: Text(
+                'fear',
+                // style: AppStyles.styleRegular16(context),
+              ),
+
+            ),
+            ListTile(
+              contentPadding: EdgeInsets.symmetric(horizontal: 60,vertical: 4),
+              leading: Container(
+                width: 20,
+                height: 20,
+                decoration: ShapeDecoration(
+                  color: Color(0xFF3c099c),
+                  shape: const OvalBorder(),
+                ),
+              ),
+              title: Text(
+                'surprise',
+                // style: AppStyles.styleRegular16(context),
+              ),
+
+            ),
+            ListTile(
+              contentPadding: EdgeInsets.symmetric(horizontal: 60,vertical: 4),
+              leading: Container(
+                width: 20,
+                height: 20,
+                decoration: ShapeDecoration(
+                  color:Color(0xFFE2DECD),
+                  shape: const OvalBorder(),
+                ),
+              ),
+              title: Text(
+                'neutral',
+                // style: AppStyles.styleRegular16(context),
+              ),
+
             ),
 
-          ),
-          ListTile(
-            contentPadding: EdgeInsets.symmetric(horizontal: 60,vertical: 4),
-            leading: Container(
-              width: 20,
-              height: 20,
-              decoration: ShapeDecoration(
-                color: Color(0xFF4DB7F2),
-                shape: const OvalBorder(),
-              ),
-            ),
-            title: Text(
-              'happy',
-              // style: AppStyles.styleRegular16(context),
-            ),
-
-          ),
-          ListTile(
-            contentPadding: EdgeInsets.symmetric(horizontal: 60,vertical: 4),
-            leading: Container(
-              width: 20,
-              height: 20,
-              decoration: ShapeDecoration(
-                color: Color(0xFF064060),
-                shape: const OvalBorder(),
-              ),
-            ),
-            title: Text(
-              'sad',
-              // style: AppStyles.styleRegular16(context),
-            ),
-
-          ),
-          ListTile(
-            contentPadding: EdgeInsets.symmetric(horizontal: 60,vertical: 4),
-            leading: Container(
-              width: 20,
-              height: 20,
-              decoration: ShapeDecoration(
-                color: Color(0xFFb388eb),
-                shape: const OvalBorder(),
-              ),
-            ),
-            title: Text(
-              'disgust',
-              // style: AppStyles.styleRegular16(context),
-            ),
-
-          ),
-          ListTile(
-            contentPadding: EdgeInsets.symmetric(horizontal: 60,vertical: 4),
-            leading: Container(
-              width: 20,
-              height: 20,
-              decoration: ShapeDecoration(
-                color: Color(0xff023e8a),
-                shape: const OvalBorder(),
-              ),
-            ),
-            title: Text(
-              'fear',
-              // style: AppStyles.styleRegular16(context),
-            ),
-
-          ),
-          ListTile(
-            contentPadding: EdgeInsets.symmetric(horizontal: 60,vertical: 4),
-            leading: Container(
-              width: 20,
-              height: 20,
-              decoration: ShapeDecoration(
-                color: Color(0xFF3c099c),
-                shape: const OvalBorder(),
-              ),
-            ),
-            title: Text(
-              'surprise',
-              // style: AppStyles.styleRegular16(context),
-            ),
-
-          ),
-          ListTile(
-            contentPadding: EdgeInsets.symmetric(horizontal: 60,vertical: 4),
-            leading: Container(
-              width: 20,
-              height: 20,
-              decoration: ShapeDecoration(
-                color:Color(0xFFE2DECD),
-                shape: const OvalBorder(),
-              ),
-            ),
-            title: Text(
-              'neutral',
-              // style: AppStyles.styleRegular16(context),
-            ),
-
-          ),
-
-        ],
+          ],
+        ),
       )
 
     );

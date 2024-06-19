@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 const  defaultColor=Color(0xff0D83B9);
-const kPrimaryColor=Color(0xff2b475e);
+var kPrimaryColor=Color(0xff2b475e);
+const kDarkColor=Color(0xff4A4E69);
 const kLogo = 'assets/images/logo.png';
 const kMessagesCollections = 'messages';
 const kMessage = 'message';

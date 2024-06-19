@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 
 class DBconnect {
   final url = Uri.parse(
-      'https://hieroglyphic-app-default-rtdb.firebaseio.com/');
+      'https://quizapp-978e1-default-rtdb.firebaseio.com/questions.json');
   Future<void> addQuestion(Question question) async {
     http.post(url,
         body: json

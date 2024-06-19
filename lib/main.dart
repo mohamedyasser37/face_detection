@@ -15,7 +15,8 @@ import 'package:hieroglyphic_app/compenets/cashe_helper.dart';
 import 'package:hieroglyphic_app/screens/home_screen/cubit/home_cubit.dart';
 import 'package:hieroglyphic_app/screens/home_screen/home_screen.dart';
 import 'package:hieroglyphic_app/screens/onBoarding_Screen.dart';
-import 'Screens/pdf_screen/favorite_screen.dart';
+import 'Screens/pdf_screen/lecture_screen.dart';
+import 'Screens/quiz_screens/start_screen.dart';
 import 'Screens/zoom/new_meeting.dart';
 import 'firebase_options.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -43,7 +44,8 @@ void main() async {
 
   if (onBoarding != null) {
     if (Login == true) {
-      widget = HomeScreen();
+      widget = HomeScreen(
+      );
     } else {
       widget = LoginScreen();
     }
@@ -59,6 +61,8 @@ void main() async {
   //     options: {'100': false, '200': true, '150': false, '300': false}));
   db.fetchQuestions();
 
+  
+  
  // print(widget);
   runApp(MyApp(
     startWidget: widget,
@@ -75,7 +79,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => HomeCubit(),),
         BlocProvider(create: (context) => ChatCubit(),),
-        BlocProvider(create: (context) => PdfCubit()..getPdf(),),
+        BlocProvider(create: (context) => PdfCubit()),
 
       ],
       child: BlocConsumer<HomeCubit, HomeState>(
@@ -100,22 +104,25 @@ class MyApp extends StatelessWidget {
             ],
             locale: cubit.isEnglish ? Locale('en') : Locale('ar'),
             debugShowCheckedModeBanner: false,
-            themeMode: cubit.isDark ? ThemeMode.dark : ThemeMode.light,
-            theme:
-                ThemeData(
 
-                    appBarTheme: const AppBarTheme(color: Colors.blue)),
-            darkTheme:
-                ThemeData(appBarTheme: const AppBarTheme(color: Colors.amber)),
+            themeMode: cubit.isDark ? ThemeMode.dark : ThemeMode.light,
+            // theme:
+            //     ThemeData(
+            //
+            //         primarySwatch: Colors.blue,
+            //
+            //         appBarTheme: const AppBarTheme(color: Colors.blue)),
+            // darkTheme:
+            //     ThemeData(appBarTheme: const AppBarTheme(color: Colors.amber)),
             routes: {
               HomeScreen.routeName: (context) => HomeScreen(),
-              FeedbackScreen.routeName: (context) =>  FeedbackScreen(),
+              LectureScreen.routeName: (context) =>  LectureScreen(),
               Pdf.routeName: (context) => Pdf(),
               JoinWithCode.routeName: (context) => JoinWithCode(),
               NewMeeting.routeName: (context) => NewMeeting(),
 
             },
-            home: startWidget,
+            home: HomeScreen(),
           );
         },
       ),
@@ -123,3 +130,5 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+

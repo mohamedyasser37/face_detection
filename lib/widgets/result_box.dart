@@ -49,7 +49,7 @@ class ResultBox extends StatelessWidget {
             const SizedBox(height: 25),
             GestureDetector(
               onTap: onPressed,
-              child: const Text(
+              child:  Text(
                 "Start Over",
                 style: TextStyle(
                     color: kPrimaryColor, fontSize: 20, letterSpacing: 1),

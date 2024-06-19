@@ -12,13 +12,19 @@ class PdfCubit extends Cubit<PdfState> {
   static PdfCubit get(context) => BlocProvider.of(context);
 
   List<String> pdfUrl = [];
+  List<String> pdfTitle = [];
 
   Future<void> getPdf() async {
     try {
+      pdfUrl.clear();
+      pdfTitle.clear();
       final QuerySnapshot querySnapshot =
           await FirebaseFirestore.instance.collection('files').get();
       for (var doc in querySnapshot.docs) {
         pdfUrl.add(doc.get('name'));
+      }
+      for (var doc in querySnapshot.docs) {
+        pdfTitle.add(doc.get('title'));
       }
       emit(getPdfSucsess());
     } catch (e) {
