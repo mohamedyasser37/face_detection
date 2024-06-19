@@ -50,6 +50,7 @@ class _NewMeetingState extends State<NewMeeting> {
       'neutral': 0,
       'sad': 0,
       'surprise': 0,
+      'sumOfResults': 0,
     });
   }
 

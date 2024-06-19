@@ -29,3 +29,5 @@ num totalneutral = 0;
 num totalsad = 0;
 num totalsurprise = 0;
 num totalsumOfResults = 0;
+
+const String cid='';

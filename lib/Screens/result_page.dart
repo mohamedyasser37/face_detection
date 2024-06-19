@@ -11,7 +11,8 @@ import '../widgets/income_chart.dart';
 import '../widgets/indicator.dart';
 
 class ResultPage extends StatefulWidget {
-  const ResultPage({super.key});
+   ResultPage({super.key,});
+ // final  id;
 
   @override
   State<StatefulWidget> createState() => PieChart2State();
@@ -19,6 +20,8 @@ class ResultPage extends StatefulWidget {
 
 class PieChart2State extends State {
   int touchedIndex = -1;
+
+  @override
 @override
 
   @override

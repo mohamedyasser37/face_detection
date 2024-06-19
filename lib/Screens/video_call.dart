@@ -14,7 +14,6 @@ class VideoCall extends StatefulWidget {
   final String conferenceId;
 
   VideoCall({super.key, required this.conferenceId});
-
   @override
   State<VideoCall> createState() => _VideoCallState();
 }
@@ -29,6 +28,7 @@ class _VideoCallState extends State<VideoCall> {
   CameraController? cameraController;
   String output = '';
   String name = '';
+ // cid = conferenceId;
 
   @override
   void initState() {
@@ -122,6 +122,7 @@ class _VideoCallState extends State<VideoCall> {
             Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
+
                   builder: (context) => ResultPage(),
                 ));
 
@@ -135,16 +136,15 @@ class _VideoCallState extends State<VideoCall> {
               totalneutral = neutral + value.get('neutral');
               totalsad = sad + value.get('sad');
               totalsurprise = surprise + value.get('surprise');
+              totalsumOfResults= totalsad;
 
-              // to += value.get('disgust');
-              // fear += value.get('fear');
-              // happy += value.get('happy');
-              // neutral += value.get('neutral');
-              // sad += value.get('sad');
-              // surprise += value.get('surprise');
+
+
+
             });
 
-
+            totalsumOfResults =  totalangry + totaldisgust + totaleFear + totalhappy + totalneutral +
+                totalsad + totalsurprise;
 
             await FirebaseFirestore.instance.collection('results').doc('${widget.conferenceId}').set({
               'anger': totalangry,
@@ -154,6 +154,7 @@ class _VideoCallState extends State<VideoCall> {
               'neutral': totalneutral,
               'sad': totalsad,
               'surprise': totalsurprise,
+              'sumOfResults': totalsumOfResults,
 
             });
 
@@ -223,7 +224,19 @@ class _VideoCallState extends State<VideoCall> {
       default:
         break;
     }
-
+    // totalsumOfResults =  totalangry + totaldisgust + totaleFear + totalhappy + totalneutral +
+    //     totalsad + totalsurprise;
+    print('######################');
+    print('######################');
+    print('######################');
+    print('######################');
+    print(sad);
+    print(totalsad);
+print(totalsumOfResults);
+print('######################');
+print('######################');
+print('######################');
+print('######################');
     sumOfResults = angry + disgust + fear + happy + neutral + sad + surprise;
   }
 }
