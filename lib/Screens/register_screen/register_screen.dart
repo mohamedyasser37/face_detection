@@ -24,7 +24,7 @@ class RegisterScreen extends StatelessWidget {
   String? grade;
 
   String? selectedGrade = 'Select your grade';
-
+ // bool isAdmin  = false;
   File? profileImage;
   var pickerController = ImagePicker();
 

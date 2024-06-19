@@ -9,7 +9,7 @@ var uid;
 var userEmail;
 var changeBubble=false;
 
-bool isAdmin = false;
+var isAdmin  = false;
 
 var name;
 num angry = 0;

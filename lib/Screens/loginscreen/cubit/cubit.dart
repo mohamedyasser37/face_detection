@@ -21,7 +21,7 @@ class socialloginCubit extends Cubit<LoginState> {
           .then((values) {
         uid = values.user!.uid;
        // print(uid);
-       // print(uid);
+       // pri
 
         CollectionReference data =
             FirebaseFirestore.instance.collection('users');
@@ -34,6 +34,7 @@ class socialloginCubit extends Cubit<LoginState> {
             CacheHelper.saveData(key: 'name', value: name);
             CacheHelper.saveData(key: 'email', value: email);
             if (element.get('isAdmin') == true) {
+              isAdmin = true;
               emit(IsAdmin());
             } else {
               CollectionReference attend =

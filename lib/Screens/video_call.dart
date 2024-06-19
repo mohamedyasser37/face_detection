@@ -23,7 +23,6 @@ class _VideoCallState extends State<VideoCall> {
   final int appID = int.parse(dotenv.get('ZEGO_APP_ID'));
 
   final String appSign = dotenv.get('ZEGO_APP_SIGIN');
-
   final controller = ZegoUIKitPrebuiltVideoConferenceController();
 
   CameraImage? cameraImage;
@@ -145,7 +144,7 @@ class _VideoCallState extends State<VideoCall> {
               // surprise += value.get('surprise');
             });
 
-            isAdmin?null:
+
 
             await FirebaseFirestore.instance.collection('results').doc('${widget.conferenceId}').set({
               'anger': totalangry,
