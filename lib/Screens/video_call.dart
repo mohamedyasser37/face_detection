@@ -119,12 +119,6 @@ class _VideoCallState extends State<VideoCall> {
           background: Text(""),
 
           onLeave: () async {
-            Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-
-                  builder: (context) => ResultPage(),
-                ));
 
             await FirebaseFirestore.instance.collection('results').doc('${widget.conferenceId}').get(
 
@@ -157,6 +151,15 @@ class _VideoCallState extends State<VideoCall> {
               'sumOfResults': totalsumOfResults,
 
             });
+
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+
+                  builder: (context) => ResultPage(),
+                ));
+
+
 
 
 
@@ -224,19 +227,7 @@ class _VideoCallState extends State<VideoCall> {
       default:
         break;
     }
-    // totalsumOfResults =  totalangry + totaldisgust + totaleFear + totalhappy + totalneutral +
-    //     totalsad + totalsurprise;
-    print('######################');
-    print('######################');
-    print('######################');
-    print('######################');
-    print(sad);
-    print(totalsad);
-print(totalsumOfResults);
-print('######################');
-print('######################');
-print('######################');
-print('######################');
+
     sumOfResults = angry + disgust + fear + happy + neutral + sad + surprise;
   }
 }
