@@ -31,3 +31,8 @@ num totalsurprise = 0;
 num totalsumOfResults = 0;
 
 const String cid='';
+
+
+const Color correct = Color(0xFF32AB5B);
+const Color incorrect = Color(0xFFAB3232);
+const Color neutral1 = Color(0xFFE7E7E7);

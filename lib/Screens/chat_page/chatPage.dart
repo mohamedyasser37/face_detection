@@ -10,13 +10,30 @@ import 'chat_cubit.dart';
 import 'chat_state.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class ChatPage extends StatelessWidget {
+class ChatPage extends StatefulWidget {
   static String id = 'ChatPage';
+
+  @override
+  State<ChatPage> createState() => _ChatPageState();
+}
+
+class _ChatPageState extends State<ChatPage> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    BlocProvider.of<ChatCubit>(context).getMessages();
+
+  }
+
   final _controller = ScrollController();
 
   CollectionReference messages =
   FirebaseFirestore.instance.collection(kMessagesCollections);
+
   TextEditingController controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     var email  = CacheHelper.getData(key: 'name');
@@ -95,7 +112,4 @@ class ChatPage extends StatelessWidget {
       ),
     );
     }
-
-
-
 }

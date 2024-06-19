@@ -9,6 +9,7 @@ import 'package:meta/meta.dart';
 
 import '../../../compenets/cashe_helper.dart';
 import '../../../compenets/constants.dart';
+import '../../chat_page/chat_cubit.dart';
 
 part 'home_state.dart';
 
@@ -60,7 +61,10 @@ List<Widget> bottomWidget=[
 
 void changeBottomNavBar(int index,BuildContext context){
   currentIndex=index;
-
+// if(currentIndex==5){
+//   BlocProvider.of<ChatCubit>(context).getMessages();
+//
+// }
   emit(HomeBottomNavBar());
 }
 var isDark=false;
