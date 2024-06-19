@@ -20,6 +20,8 @@ import 'Screens/zoom/new_meeting.dart';
 import 'firebase_options.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'models/quiz_model/db_connect.dart';
+
 List<CameraDescription>? camera;
 void main() async {
 
@@ -48,6 +50,15 @@ void main() async {
   } else {
     widget = const OnBoardingScreen();
   }
+
+
+  var db = DBconnect();
+  // db.addQuestion(Question(
+  //     id: '20',
+  //     title: 'What is 20 x 100 ?',
+  //     options: {'100': false, '200': true, '150': false, '300': false}));
+  db.fetchQuestions();
+
  // print(widget);
   runApp(MyApp(
     startWidget: widget,
@@ -104,7 +115,7 @@ class MyApp extends StatelessWidget {
               NewMeeting.routeName: (context) => NewMeeting(),
 
             },
-            home: RegisterScreen(),
+            home: startWidget,
           );
         },
       ),
