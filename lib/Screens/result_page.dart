@@ -7,6 +7,7 @@ import 'package:hieroglyphic_app/compenets/constants.dart';
 
 import '../compenets/constant/colors.dart';
 import '../widgets/app_color.dart';
+import '../widgets/income_chart.dart';
 import '../widgets/indicator.dart';
 
 class ResultPage extends StatefulWidget {
@@ -19,11 +20,7 @@ class ResultPage extends StatefulWidget {
 class PieChart2State extends State {
   int touchedIndex = -1;
 @override
-  Future<void> initState() async {
-    // TODO: implement initState
-    super.initState();
-  //  isAdmin?await FirebaseFirestore.instance.collection('results').doc('${widget.conferenceId}').get
-  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +39,152 @@ class PieChart2State extends State {
           },
         ),
       ),
-      body:isAdmin?Text('data')  : Column(
+
+
+      body:isAdmin?Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(height: 250,width: 300,
+            child: PieChart(
+              PieChartData(
+                pieTouchData: PieTouchData(
+                  touchCallback: (FlTouchEvent event, pieTouchResponse) {
+                    setState(() {
+                      if (!event.isInterestedForInteractions ||
+                          pieTouchResponse == null ||
+                          pieTouchResponse.touchedSection == null) {
+                        touchedIndex = -1;
+                        return;
+                      }
+                      touchedIndex = pieTouchResponse
+                          .touchedSection!.touchedSectionIndex;
+                    });
+                  },
+                ),
+                borderData: FlBorderData(
+                  show: false,
+                ),
+                sectionsSpace: 0,
+                centerSpaceRadius: 40,
+                sections: showingSections(),
+              ),
+            ),
+          ),
+          const SizedBox(height: 30,),
+      ListTile(
+        contentPadding: const EdgeInsets.symmetric(horizontal: 60,vertical: 4),
+        leading: Container(
+          width: 20,
+          height: 20,
+          decoration: const ShapeDecoration(
+            color: Color(0xFF208BC7),
+            shape: OvalBorder(),
+          ),
+        ),
+        title: Text(
+          'angry',
+        ),
+
+      ),
+          ListTile(
+            contentPadding: EdgeInsets.symmetric(horizontal: 60,vertical: 4),
+            leading: Container(
+              width: 20,
+              height: 20,
+              decoration: ShapeDecoration(
+                color: Color(0xFF4DB7F2),
+                shape: const OvalBorder(),
+              ),
+            ),
+            title: Text(
+              'happy',
+              // style: AppStyles.styleRegular16(context),
+            ),
+
+          ),
+          ListTile(
+            contentPadding: EdgeInsets.symmetric(horizontal: 60,vertical: 4),
+            leading: Container(
+              width: 20,
+              height: 20,
+              decoration: ShapeDecoration(
+                color: Color(0xFF064060),
+                shape: const OvalBorder(),
+              ),
+            ),
+            title: Text(
+              'sad',
+              // style: AppStyles.styleRegular16(context),
+            ),
+
+          ),
+          ListTile(
+            contentPadding: EdgeInsets.symmetric(horizontal: 60,vertical: 4),
+            leading: Container(
+              width: 20,
+              height: 20,
+              decoration: ShapeDecoration(
+                color: Color(0xFFb388eb),
+                shape: const OvalBorder(),
+              ),
+            ),
+            title: Text(
+              'disgust',
+              // style: AppStyles.styleRegular16(context),
+            ),
+
+          ),
+          ListTile(
+            contentPadding: EdgeInsets.symmetric(horizontal: 60,vertical: 4),
+            leading: Container(
+              width: 20,
+              height: 20,
+              decoration: ShapeDecoration(
+                color: Color(0xff023e8a),
+                shape: const OvalBorder(),
+              ),
+            ),
+            title: Text(
+              'fear',
+              // style: AppStyles.styleRegular16(context),
+            ),
+
+          ),
+          ListTile(
+            contentPadding: EdgeInsets.symmetric(horizontal: 60,vertical: 4),
+            leading: Container(
+              width: 20,
+              height: 20,
+              decoration: ShapeDecoration(
+                color: Color(0xFF3c099c),
+                shape: const OvalBorder(),
+              ),
+            ),
+            title: Text(
+              'surprise',
+              // style: AppStyles.styleRegular16(context),
+            ),
+
+          ),
+          ListTile(
+            contentPadding: EdgeInsets.symmetric(horizontal: 60,vertical: 4),
+            leading: Container(
+              width: 20,
+              height: 20,
+              decoration: ShapeDecoration(
+                color:Color(0xFFE2DECD),
+                shape: const OvalBorder(),
+              ),
+            ),
+            title: Text(
+              'neutral',
+              // style: AppStyles.styleRegular16(context),
+            ),
+
+          ),
+
+        ],
+      ): Column(
         children: [
           Row(
             children: <Widget>[
@@ -170,92 +312,92 @@ class PieChart2State extends State {
       switch (i) {
         case 0:
           return PieChartSectionData(
-            color: AppColors.contentColorBlue,
+            color: Color(0xFF4DB7F2),
             value: ((happy / sumOfResults) * 100).truncate().toDouble(),
             title: '${((happy / sumOfResults) * 100).truncate()}%',
             radius: radius,
             titleStyle: TextStyle(
               fontSize: fontSize,
               fontWeight: FontWeight.bold,
-              color: AppColors.mainTextColor1,
+              color:  Colors.white,
               shadows: shadows,
             ),
           );
         case 1:
           return PieChartSectionData(
-            color: AppColors.contentColorYellow,
+            color: Color(0xFF064060),
             value:((sad / sumOfResults) * 100).truncate().toDouble(),
             title: '${((sad / sumOfResults) * 100).truncate()}%',
             radius: radius,
             titleStyle: TextStyle(
               fontSize: fontSize,
               fontWeight: FontWeight.bold,
-              color: AppColors.mainTextColor1,
+              color:  Colors.white,
               shadows: shadows,
             ),
           );
         case 2:
           return PieChartSectionData(
-            color: AppColors.contentColorPurple,
+            color:  Color(0xFF3c099c),
             value: ((fear / sumOfResults) * 100).truncate().toDouble(),
             title: '${((fear / sumOfResults) * 100).truncate()}%',
             radius: radius,
             titleStyle: TextStyle(
               fontSize: fontSize,
               fontWeight: FontWeight.bold,
-              color: AppColors.mainTextColor1,
+              color:  Colors.white,
               shadows: shadows,
             ),
           );
         case 3:
           return PieChartSectionData(
-            color: Colors.red,
+            color: Color(0xFF208BC7),
             value: ((angry / sumOfResults) * 100).truncate().toDouble(),
             title: '${((angry / sumOfResults) * 100).truncate()}%',
             radius: radius,
             titleStyle: TextStyle(
               fontSize: fontSize,
               fontWeight: FontWeight.bold,
-              color: AppColors.mainTextColor1,
+              color: Colors.white,
               shadows: shadows,
             ),
           );
         case 4:
           return PieChartSectionData(
-            color: Colors.blueAccent,
+            color: Color(0xFFb388eb),
             value: ((disgust / sumOfResults) * 100).truncate().toDouble(),
             title: '${((disgust / sumOfResults) * 100).truncate()}%',
             radius: radius,
             titleStyle: TextStyle(
               fontSize: fontSize,
               fontWeight: FontWeight.bold,
-              color: AppColors.mainTextColor1,
+              color: Colors.white,
               shadows: shadows,
             ),
           );
         case 5:
           return PieChartSectionData(
-            color: Colors.greenAccent,
+            color:Color(0xFFE2DECD),
             value: ((neutral / sumOfResults) * 100).truncate().toDouble(),
             title: '${((neutral / sumOfResults) * 100).truncate()}%',
             radius: radius,
             titleStyle: TextStyle(
               fontSize: fontSize,
               fontWeight: FontWeight.bold,
-              color: AppColors.mainTextColor1,
+              color:  Colors.white,
               shadows: shadows,
             ),
           );
         case 6:
           return PieChartSectionData(
-            color: Colors.cyan,
+            color: Color(0xFFb388eb),
             value: ((surprise / sumOfResults) * 100).truncate().toDouble(),
             title: '${((surprise / sumOfResults) * 100).truncate()}%',
             radius: radius,
             titleStyle: TextStyle(
               fontSize: fontSize,
               fontWeight: FontWeight.bold,
-              color: AppColors.mainTextColor1,
+              color: Colors.white,
               shadows: shadows,
             ),
           );
