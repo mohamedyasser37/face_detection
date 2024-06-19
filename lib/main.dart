@@ -106,14 +106,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
 
             themeMode: cubit.isDark ? ThemeMode.dark : ThemeMode.light,
-            // theme:
-            //     ThemeData(
-            //
-            //         primarySwatch: Colors.blue,
-            //
-            //         appBarTheme: const AppBarTheme(color: Colors.blue)),
-            // darkTheme:
-            //     ThemeData(appBarTheme: const AppBarTheme(color: Colors.amber)),
+
             routes: {
               HomeScreen.routeName: (context) => HomeScreen(),
               LectureScreen.routeName: (context) =>  LectureScreen(),
