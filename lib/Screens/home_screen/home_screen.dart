@@ -54,37 +54,35 @@ class HomeScreen extends StatelessWidget {
       },
       builder: (context, state) {
         var cubit=HomeCubit.get(context);
-        return SafeArea(
-          child: Scaffold(
+        return Scaffold(
 
-            appBar: AppBar(
-              title:  Text(
+          appBar: AppBar(
+            title:  Text(
 
-                  isAdmin?screensName[cubit.currentIndex]:screensNameUser[cubit.currentIndex],),
+                isAdmin?screensName[cubit.currentIndex]:screensNameUser[cubit.currentIndex],),
 
-              backgroundColor: AppColor.primaryColor,
-              ),
-
-            drawer: MainDrawer(),
-
-            bottomNavigationBar:
-            CurvedNavigationBar(
-
-             // buttonBackgroundColor:  Colors.white ,
-              color:AppColor.primaryColor ,
-              height: 50,
-
-              backgroundColor: Colors.white.withOpacity(.8),
-              items:isAdmin? cubit.bottomWidget:cubit.bottomWidgetUser,
-              index: cubit.currentIndex,
-              onTap: (index) {
-              cubit.changeBottomNavBar(index,context);
-              },
+            backgroundColor: AppColor.primaryColor,
             ),
-            body:isAdmin?tabs[cubit.currentIndex]:tabs2[cubit.currentIndex],
 
+          drawer: MainDrawer(),
 
+          bottomNavigationBar:
+          CurvedNavigationBar(
+
+           // buttonBackgroundColor:  Colors.white ,
+            color:AppColor.primaryColor ,
+            height: 50,
+
+            backgroundColor: Colors.white.withOpacity(.8),
+            items:isAdmin? cubit.bottomWidget:cubit.bottomWidgetUser,
+            index: cubit.currentIndex,
+            onTap: (index) {
+            cubit.changeBottomNavBar(index,context);
+            },
           ),
+          body:isAdmin?tabs[cubit.currentIndex]:tabs2[cubit.currentIndex],
+
+
         );
       },
     );

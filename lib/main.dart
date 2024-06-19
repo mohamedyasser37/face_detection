@@ -122,7 +122,7 @@ class MyApp extends StatelessWidget {
               NewMeeting.routeName: (context) => NewMeeting(),
 
             },
-            home: HomeScreen(),
+            home: startWidget,
           );
         },
       ),
