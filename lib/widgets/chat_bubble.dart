@@ -15,7 +15,7 @@ final Message message;
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 5,horizontal: 16),
        padding: const EdgeInsets.only(left: 8,top: 4,bottom: 12,right: 10),
-        decoration: const BoxDecoration(
+        decoration:  BoxDecoration(
           color: AppColor.primaryColor,
           borderRadius: BorderRadius.only(
             topRight: Radius.circular(18),

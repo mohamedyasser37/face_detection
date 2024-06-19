@@ -5,10 +5,10 @@
     "englishLanguage": "English",
     "loginAppBar": "تسجيل الدخول",
     "registerAppBar": "التسجيل",
-    "homeTitle":"الصفحه الرئيسيه",
+    "homeTitle":"المحاضرات",
     "testReal":"ريل موديل",
     "testCamera":"موديل",
-    "pdf":"المحاضرات",
+    "pdf":" رفع المحاضرات",
     "selectPdf":"اختر ملف",
     "upLoadPdf":"ارفع ملف",
     "zoom":"زوم",
@@ -23,5 +23,7 @@
     "setting":" الاعدادات",
     "lecture":" محاضره",
     "chat":"محادثه",
-    "sendMessage":"ارسال رساله"
+    "sendMessage":"ارسال رساله",
+    "quiz":"امتحان",
+    "startquiz":"ابدا الامتحان"
 }

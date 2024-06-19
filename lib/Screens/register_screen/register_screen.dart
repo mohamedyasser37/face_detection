@@ -65,7 +65,7 @@ class RegisterScreen extends StatelessWidget {
                           const SizedBox(
                             height: 10,
                           ),
-                          const Center(
+                           Center(
                             child: Text(
                               " Welcome ",
                               style: TextStyle(
@@ -77,7 +77,7 @@ class RegisterScreen extends StatelessWidget {
                           const SizedBox(
                             height: 10,
                           ),
-                          const Center(
+                           Center(
                             child: Text(
                               "Rgister Now",
                               textAlign: TextAlign.center,

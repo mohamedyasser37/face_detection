@@ -84,7 +84,7 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
         actions: [
           TextButton(
               onPressed: submit,
-              child: const Text(
+              child:  Text(
                 "Skip",
                 style: TextStyle(
                   color: AppColor.primaryColor,
@@ -125,7 +125,7 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
                 SmoothPageIndicator(
                   controller: pageController,
                   count: boarding.length,
-                  effect: const ExpandingDotsEffect(
+                  effect:  ExpandingDotsEffect(
                     dotWidth: 10.0,
                     dotHeight: 10.0,
                     dotColor: Colors.grey,
@@ -137,7 +137,7 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
                 ),
                 const Spacer(),
                 FloatingActionButton(
-                  child: const Icon(
+                  child:  Icon(
                     Icons.play_arrow_outlined,
                     size: 35.0,
                     color: AppColor.primaryColor,
@@ -183,7 +183,7 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
               children: [
                 Text(
                   model.title,
-                  style: const TextStyle(
+                  style:  TextStyle(
                       color: AppColor.primaryColor,
                       fontSize: 20,
                       fontWeight: FontWeight.bold),

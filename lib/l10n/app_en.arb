@@ -23,7 +23,9 @@
     "setting":"Setting",
     "lecture":"Lecture",
     "chat":"Chat",
-    "sendMessage":"Send Message"
+    "sendMessage":"Send Message",
+    "quiz":"Quiz",
+    "startquiz":"Start Quiz"
 
 
 

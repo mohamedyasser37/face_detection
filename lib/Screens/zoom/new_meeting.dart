@@ -74,75 +74,77 @@ class _NewMeetingState extends State<NewMeeting> {
         title: Text(AppLocalizations.of(context)!.startMeeting),
       ),
       body: SafeArea(
-        child: Column(
-          children: [
-            const SizedBox(height: 50),
-            Image.asset(
-              "assets/images/zoom2.png",
-              fit: BoxFit.cover,
-              height: 100,
-            ),
-            const SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(15, 20, 15, 0),
-              child: Card(
-                  color: Colors.grey[300],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const SizedBox(height: 50),
+              Image.asset(
+                "assets/images/zoom2.png",
+                fit: BoxFit.cover,
+                height: 100,
+              ),
+              const SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(15, 20, 15, 0),
+                child: Card(
+                    color: Colors.grey[300],
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    child: ListTile(
+                      leading: const Icon(Icons.link),
+                      title: SelectableText(
+                        randomConferenceId,
+                        style: TextStyle(fontWeight: FontWeight.w300),
+                      ),
+                      trailing: IconButton(
+                        icon: const Icon(Icons.copy),
+                        onPressed: () {
+                          copyNumberToClipboard(randomConferenceId);
+                          Fluttertoast.showToast(
+                            msg: 'Copied',
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: AppColor.primaryColor,
+                            textColor: Colors.white,
+                            fontSize: 16.0,
+                          );
+                        },
+                      ),
+                    )),
+              ),
+              const Divider(thickness: 1, height: 40, indent: 20, endIndent: 20),
+              ElevatedButton.icon(
+                onPressed: () {
+                  Share.share("Meeting Code : $randomConferenceId");
+                },
+                icon: const Icon(Icons.arrow_drop_down),
+                label: Text(AppLocalizations.of(context)!.shareInvite),
+                style: ElevatedButton.styleFrom(
+                  fixedSize: const Size(350, 30),
+                  primary: AppColor.primaryColor,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                  child: ListTile(
-                    leading: const Icon(Icons.link),
-                    title: SelectableText(
-                      randomConferenceId,
-                      style: TextStyle(fontWeight: FontWeight.w300),
-                    ),
-                    trailing: IconButton(
-                      icon: const Icon(Icons.copy),
-                      onPressed: () {
-                        copyNumberToClipboard(randomConferenceId);
-                        Fluttertoast.showToast(
-                          msg: 'Copied',
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.BOTTOM,
-                          timeInSecForIosWeb: 1,
-                          backgroundColor: AppColor.primaryColor,
-                          textColor: Colors.white,
-                          fontSize: 16.0,
-                        );
-                      },
-                    ),
-                  )),
-            ),
-            const Divider(thickness: 1, height: 40, indent: 20, endIndent: 20),
-            ElevatedButton.icon(
-              onPressed: () {
-                Share.share("Meeting Code : $randomConferenceId");
-              },
-              icon: const Icon(Icons.arrow_drop_down),
-              label: Text(AppLocalizations.of(context)!.shareInvite),
-              style: ElevatedButton.styleFrom(
-                fixedSize: const Size(350, 30),
-                primary: AppColor.primaryColor,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25)),
+                      borderRadius: BorderRadius.circular(25)),
+                ),
               ),
-            ),
-            const SizedBox(height: 20),
-            OutlinedButton.icon(
-              onPressed: () {
-                jumpToMeetingPage(context, conferenceId: randomConferenceId);
-              },
-              icon: const Icon(Icons.video_call),
-              label: Text(AppLocalizations.of(context)!.startCall),
-              style: OutlinedButton.styleFrom(
-                primary: AppColor.primaryColor,
-                side: const BorderSide(color: Colors.indigo),
-                fixedSize: Size(350, 30),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25)),
+              const SizedBox(height: 20),
+              OutlinedButton.icon(
+                onPressed: () {
+                  jumpToMeetingPage(context, conferenceId: randomConferenceId);
+                },
+                icon: const Icon(Icons.video_call),
+                label: Text(AppLocalizations.of(context)!.startCall),
+                style: OutlinedButton.styleFrom(
+                  primary: AppColor.primaryColor,
+                  side: const BorderSide(color: Colors.indigo),
+                  fixedSize: Size(350, 30),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25)),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

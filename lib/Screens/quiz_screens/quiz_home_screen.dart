@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hieroglyphic_app/compenets/constant/colors.dart';
 import 'package:hieroglyphic_app/compenets/constants.dart';
 
 import '../../models/quiz_model/db_connect.dart';
@@ -124,13 +125,14 @@ class _QuizHomeScreenState extends State<QuizHomeScreen> {
           } else if (snapshot.hasData) {
             var extractedData = snapshot.data as List<Question>;
             return Scaffold(
-              backgroundColor: kPrimaryColor,
+              backgroundColor: AppColor.primaryColor,
               appBar: AppBar(
+
                 title: const Text(
                   'Quiz Questions',
                   style: TextStyle(color: Colors.white),
                 ),
-                backgroundColor: kPrimaryColor,
+                backgroundColor: AppColor.primaryColor,
                 shadowColor: Colors.transparent,
                 actions: [
                   Padding(
@@ -140,39 +142,47 @@ class _QuizHomeScreenState extends State<QuizHomeScreen> {
                   )
                 ],
               ),
-              body: Container(
-                width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    QuestionWidget(
-                        question: extractedData[index].title,
-                        indexAction: index,
-                        totalQuestions: extractedData.length),
-                    const Divider(color: neutral1),
-                    const SizedBox(height: 25),
-                    for (int i = 0;
-                        i < extractedData[index].options.length;
-                        i++)
-                      GestureDetector(
-                        onTap: () => checkAnswerAndUpdate(
-                            extractedData[index].options.values.toList()[i]),
-                        child: OptionCard(
-                          option: extractedData[index].options.keys.toList()[i],
-                          color: isPressed
-                              ? extractedData[index]
-                                          .options
-                                          .values
-                                          .toList()[i] ==
-                                      true
-                                  ? correct
-                                  : incorrect
-                              : neutral1,
-                        ),
-                      ),
-                  ],
-                ),
+              body: Column(
+
+                children: [
+                  SizedBox(
+                    height: 50,
+                  ),
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        QuestionWidget(
+                            question: extractedData[index].title,
+                            indexAction: index,
+                            totalQuestions: extractedData.length),
+                        const Divider(color: neutral1),
+                        const SizedBox(height: 25),
+                        for (int i = 0;
+                            i < extractedData[index].options.length;
+                            i++)
+                          GestureDetector(
+                            onTap: () => checkAnswerAndUpdate(
+                                extractedData[index].options.values.toList()[i]),
+                            child: OptionCard(
+                              option: extractedData[index].options.keys.toList()[i],
+                              color: isPressed
+                                  ? extractedData[index]
+                                              .options
+                                              .values
+                                              .toList()[i] ==
+                                          true
+                                      ? correct
+                                      : incorrect
+                                  : neutral1,
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
               floatingActionButton: GestureDetector(
                 onTap: () => nextQuestion(extractedData.length),

@@ -72,7 +72,7 @@ class LoginScreen extends StatelessWidget {
                           const SizedBox(
                             height: 20,
                           ),
-                          const Center(
+                           Center(
                             child: Text(
                               "Welcome Back",
                               style: TextStyle(
@@ -84,7 +84,7 @@ class LoginScreen extends StatelessWidget {
                           const SizedBox(
                             height: 20,
                           ),
-                          const Center(
+                           Center(
                             child: Text(
                               "Login to continue",
                               textAlign: TextAlign.center,

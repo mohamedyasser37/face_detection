@@ -35,6 +35,7 @@ class socialloginCubit extends Cubit<LoginState> {
             CacheHelper.saveData(key: 'email', value: email);
             if (element.get('isAdmin') == true) {
               isAdmin = true;
+              adminWidget();
               emit(IsAdmin());
             } else {
               CollectionReference attend =
@@ -48,6 +49,7 @@ class socialloginCubit extends Cubit<LoginState> {
                 });
               });
               //userEmail=email;
+              adminWidget();
               emit(LoginSuccess());
             }
           });
@@ -67,3 +69,15 @@ class socialloginCubit extends Cubit<LoginState> {
     }
   }
 }
+
+Widget adminWidget() {
+  if (isAdmin == true) {
+    print(isAdmin);
+    return const Text('pdf');
+  } else {
+    print(isAdmin);
+
+    return const Text('quiz');
+  }
+}
+
