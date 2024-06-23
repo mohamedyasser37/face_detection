@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hieroglyphic_app/Screens/loginscreen/cubit/cubit.dart';
 import 'package:hieroglyphic_app/Screens/loginscreen/loginscreen.dart';
 import 'package:hieroglyphic_app/compenets/constant/colors.dart';
 
@@ -11,7 +10,6 @@ import 'package:meta/meta.dart';
 
 import '../../../compenets/cashe_helper.dart';
 import '../../../compenets/constants.dart';
-import '../../chat_page/chat_cubit.dart';
 
 part 'home_state.dart';
 

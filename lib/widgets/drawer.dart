@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hieroglyphic_app/Screens/quiz_screens/start_screen.dart';
+import 'package:hieroglyphic_app/Screens/quiz_screens/quiz_screen.dart';
 import 'package:hieroglyphic_app/generated/l10n.dart';
 import 'package:hieroglyphic_app/screens/home_screen/cubit/home_cubit.dart';
 

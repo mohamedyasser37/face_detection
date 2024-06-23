@@ -86,32 +86,6 @@ class _QuizHomeScreenState extends State<QuizHomeScreen> {
     super.initState();
   }
 
-  // List<Question> _questions = [
-  //   Question(
-  //       id: '10',
-  //       title: "What is 2+3 ",
-  //       options: {'5': true, '10': false, '8': false, '6': false}),
-  //   Question(
-  //       id: '11',
-  //       title: "What is 5+3 ",
-  //       options: {'5': false, '10': false, '8': true, '6': false}),
-  //   Question(
-  //       id: '12',
-  //       title: "What is 3+3 ",
-  //       options: {'5': false, '10': false, '8': false, '6': true}),
-  //   Question(
-  //       id: '13',
-  //       title: "What is 7+3 ",
-  //       options: {'10': true, '9': false, '8': false, '6': false}),
-  //   Question(
-  //       id: '14',
-  //       title: "What is 1+3 ",
-  //       options: {'4': true, '10': false, '8': false, '6': false}),
-  //   Question(
-  //       id: '15',
-  //       title: "What is 6+3 ",
-  //       options: {'9': true, '10': false, '8': false, '6': false}),
-  // ];
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(

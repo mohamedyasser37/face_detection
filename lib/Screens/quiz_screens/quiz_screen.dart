@@ -7,8 +7,8 @@ import '../../compenets/constant/colors.dart';
 import '../../compenets/constants.dart';
 import '../../widgets/next_button.dart';
 
-class StartScreen extends StatelessWidget {
-  const StartScreen({super.key});
+class QuizScreen extends StatelessWidget {
+  const QuizScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

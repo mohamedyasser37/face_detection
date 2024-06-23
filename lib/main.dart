@@ -16,7 +16,7 @@ import 'package:hieroglyphic_app/screens/home_screen/cubit/home_cubit.dart';
 import 'package:hieroglyphic_app/screens/home_screen/home_screen.dart';
 import 'package:hieroglyphic_app/screens/onBoarding_Screen.dart';
 import 'Screens/pdf_screen/lecture_screen.dart';
-import 'Screens/quiz_screens/start_screen.dart';
+import 'Screens/quiz_screens/quiz_screen.dart';
 import 'Screens/zoom/new_meeting.dart';
 import 'firebase_options.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -55,10 +55,7 @@ void main() async {
 
 
   var db = DBconnect();
-  // db.addQuestion(Question(
-  //     id: '20',
-  //     title: 'What is 20 x 100 ?',
-  //     options: {'100': false, '200': true, '150': false, '300': false}));
+
   db.fetchQuestions();
 
   
@@ -106,14 +103,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
 
             themeMode: cubit.isDark ? ThemeMode.dark : ThemeMode.light,
-            // theme:
-            //     ThemeData(
-            //
-            //         primarySwatch: Colors.blue,
-            //
-            //         appBarTheme: const AppBarTheme(color: Colors.blue)),
-            // darkTheme:
-            //     ThemeData(appBarTheme: const AppBarTheme(color: Colors.amber)),
+
             routes: {
               HomeScreen.routeName: (context) => HomeScreen(),
               LectureScreen.routeName: (context) =>  LectureScreen(),
@@ -122,7 +112,7 @@ class MyApp extends StatelessWidget {
               NewMeeting.routeName: (context) => NewMeeting(),
 
             },
-            home: HomeScreen(),
+            home: startWidget,
           );
         },
       ),
