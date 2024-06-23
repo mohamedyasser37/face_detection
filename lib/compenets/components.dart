@@ -44,6 +44,7 @@ class DefalutTextFormField extends StatelessWidget {
       this.suffix,
       this.isPassword = false,
       this.suffixPressed});
+
   TextEditingController controller;
   TextInputType type;
   Function? onSubmit;
@@ -155,14 +156,15 @@ Widget textButton(
         required Function function,
         double width = 200}) =>
     TextButton(
-        style: ButtonStyle(
-
-
-        ),
+        style: ButtonStyle(),
         onPressed: () {
           return function();
         },
-        child: Text(text,style: TextStyle(color: AppColor.primaryColor),));
+        child: Text(
+          text,
+          style: TextStyle(color: AppColor.primaryColor),
+        ));
+
 Widget defaultMaterialButton({
   required Function function,
   required String text,
@@ -195,6 +197,7 @@ Widget defaultMaterialButton({
         ),
       ),
     );
+
 void ShowToast({
   required String text,
   required ToastStates state,
@@ -239,6 +242,7 @@ void navigateAndFinish(context, Widget) => Navigator.pushAndRemoveUntil(
         ), (route) {
       return false;
     });
+
 void navigateTo(context, Widget) => Navigator.push(
       context,
       MaterialPageRoute(

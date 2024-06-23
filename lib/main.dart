@@ -12,6 +12,7 @@ import 'package:hieroglyphic_app/Screens/pdf/pdf.dart';
 import 'package:hieroglyphic_app/Screens/pdf_screen/pdf_cubit.dart';
 import 'package:hieroglyphic_app/Screens/zoom/join_with_code.dart';
 import 'package:hieroglyphic_app/compenets/cashe_helper.dart';
+import 'package:hieroglyphic_app/compenets/constants.dart';
 import 'package:hieroglyphic_app/screens/home_screen/cubit/home_cubit.dart';
 import 'package:hieroglyphic_app/screens/home_screen/home_screen.dart';
 import 'package:hieroglyphic_app/screens/onBoarding_Screen.dart';
@@ -30,17 +31,16 @@ void main() async {
   await dotenv.load(fileName: '.env');
   camera = await availableCameras();
   await CacheHelper.init();
-
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
 
-
   );
+
   Widget widget;
   bool? onBoarding = CacheHelper.getData(key: 'onBoarding');
   bool? Login = CacheHelper.getData(key: 'Login');
 
- // print(Login);
+
 
   if (onBoarding != null) {
     if (Login == true) {
@@ -60,7 +60,6 @@ void main() async {
 
   
   
- // print(widget);
   runApp(MyApp(
     startWidget: widget,
   ));
@@ -90,7 +89,6 @@ class MyApp extends StatelessWidget {
               title: 'Flutter Demo',
               localizationsDelegates: const [
                 AppLocalizations.delegate, // Add this line
-
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
@@ -101,7 +99,6 @@ class MyApp extends StatelessWidget {
             ],
             locale: cubit.isEnglish ? Locale('en') : Locale('ar'),
             debugShowCheckedModeBanner: false,
-
             themeMode: cubit.isDark ? ThemeMode.dark : ThemeMode.light,
 
             routes: {

@@ -25,7 +25,9 @@
     "chat":"Chat",
     "sendMessage":"Send Message",
     "quiz":"Quiz",
-    "startquiz":"Start Quiz"
+    "startquiz":"Start Quiz",
+    "quizResults":"Quiz Results"
+
 
 
 

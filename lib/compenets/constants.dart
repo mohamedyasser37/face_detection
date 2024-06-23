@@ -12,6 +12,7 @@ var changeBubble=false;
 
 var isAdmin  = false;
 
+var frontcmaera;
 var name;
 num angry = 0;
 num disgust = 0;

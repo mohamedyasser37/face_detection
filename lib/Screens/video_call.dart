@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -28,14 +31,12 @@ class _VideoCallState extends State<VideoCall> {
   CameraController? cameraController;
   String output = '';
   String name = '';
- // cid = conferenceId;
 
   @override
   void initState() {
     super.initState();
     loadCamera();
     loadModel();
-  //  loadFocusModel();
 
 
   }
@@ -229,5 +230,25 @@ class _VideoCallState extends State<VideoCall> {
     }
 
     sumOfResults = angry + disgust + fear + happy + neutral + sad + surprise;
+  }
+  Future<void> _resetApi() async {
+    try {
+      final response = await http.post(
+        Uri.parse('https://1c98-102-43-164-18.ngrok-free.app/reset'), // Replace with your Flask API URL
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, int>{'reset': 0}),
+      );
+
+      if (response.statusCode == 200) {
+        final jsonResponse = json.decode(response.body);
+        print('Reset Response: $jsonResponse');
+      } else {
+        print('Failed to reset: ${response.reasonPhrase}');
+      }
+    } catch (e) {
+      print('Error during reset: $e');
+    }
   }
 }
