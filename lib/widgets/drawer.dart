@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hieroglyphic_app/Screens/quiz_screens/quiz_screen.dart';
-import 'package:hieroglyphic_app/generated/l10n.dart';
+
 import 'package:hieroglyphic_app/screens/home_screen/cubit/home_cubit.dart';
 
+import '../Screens/quiz_screens/quiz_result.dart';
 import '../compenets/cashe_helper.dart';
 import '../compenets/constant/colors.dart';
 import '../compenets/constants.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../compenets/constants.dart';
-import '../compenets/constants.dart';
-import '../compenets/constants.dart';
 
 class MainDrawer extends StatefulWidget {
   const MainDrawer({
@@ -32,7 +28,7 @@ class _MainDrawerState extends State<MainDrawer> {
           children: [
             DrawerHeader(
               padding: const EdgeInsets.all(20),
-              decoration:  BoxDecoration(
+              decoration: BoxDecoration(
                 color: AppColor.primaryColor,
               ),
               child: Row(
@@ -47,13 +43,12 @@ class _MainDrawerState extends State<MainDrawer> {
               ),
             ),
             ListTile(
-              leading:  Icon(
+              leading: Icon(
                 Icons.person,
                 color: AppColor.primaryColor,
               ),
               title: Text(
-                 "${CacheHelper.getData(key: 'name')}"
-                ,
+                "${CacheHelper.getData(key: 'name')}",
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context)
                     .textTheme
@@ -61,8 +56,33 @@ class _MainDrawerState extends State<MainDrawer> {
                     .copyWith(color: AppColor.primaryColor),
               ),
             ),
+            isAdmin
+                ? ListTile(
+              leading: Icon(
+                Icons.quiz_outlined,
+                color: AppColor.primaryColor,
+              ),
+              title: InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => QuizResultsScreen(),
+                      ));
+                },
+                child: Text(
+                  AppLocalizations.of(context)!.quizResults,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge!
+                      .copyWith(color: AppColor.primaryColor),
+                ),
+              ),
+            )
+                : const SizedBox(),
             ListTile(
-              leading:  Icon(
+              leading: Icon(
                 Icons.logout_outlined,
                 color: AppColor.primaryColor,
               ),
@@ -81,7 +101,7 @@ class _MainDrawerState extends State<MainDrawer> {
               ),
             ),
             ListTile(
-              leading:  Icon(
+              leading: Icon(
                 Icons.settings,
                 color: AppColor.primaryColor,
               ),
@@ -119,7 +139,7 @@ class _MainDrawerState extends State<MainDrawer> {
               children: [
                 Text(HomeCubit.get(context).isEnglish ? 'Arabic' : 'عربي'),
                 Switch(
-                  activeColor:AppColor.primaryColor,
+                  activeColor: AppColor.primaryColor,
                   value: HomeCubit.get(context).isEnglish ? true : false,
                   onChanged: (enabled) {
                     HomeCubit.get(context).changeLanguage();
@@ -128,7 +148,6 @@ class _MainDrawerState extends State<MainDrawer> {
                 Text(HomeCubit.get(context).isEnglish ? 'ُEnglish' : 'انجليزي'),
               ],
             ),
-
           ],
         ),
       ),

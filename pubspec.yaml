@@ -68,7 +68,7 @@ dependencies:
   camera: ^0.10.5+5
   shared_preferences: ^2.2.2
   smooth_page_indicator: ^1.1.0
-
+  image: ^4.2.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

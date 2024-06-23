@@ -3,6 +3,7 @@ import 'package:hieroglyphic_app/Screens/zoom/new_meeting.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../compenets/constant/colors.dart';
+import '../../compenets/constants.dart';
 import 'join_with_code.dart';
 
 class HomeZoom extends StatelessWidget {
@@ -15,27 +16,30 @@ class HomeZoom extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
             children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
-            child: ElevatedButton.icon(
-              onPressed: () {
-                Navigator.pushNamed(context, NewMeeting.routeName);
-              },
-              icon: Icon(Icons.add),
-              label: Text("${AppLocalizations.of(context)!.startMeeting}"),
-              style: ElevatedButton.styleFrom(
-                fixedSize: Size(350, 30),
-                primary: AppColor.primaryColor,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25)),
+         isAdmin ? Column(
+           children: [
+             Padding(
+                padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
+                child: ElevatedButton.icon(
+                  onPressed: () {
+                    Navigator.pushNamed(context, NewMeeting.routeName);
+                  },
+                  icon: Icon(Icons.add),
+                  label: Text("${AppLocalizations.of(context)!.startMeeting}"),
+                  style: ElevatedButton.styleFrom(
+                    fixedSize: Size(350, 30),
+                    primary: AppColor.primaryColor,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25)),
+                  ),
+                ),
               ),
-            ),
-          ),
-          const Divider(
-            thickness: 1,
-            height: 30,
-            indent: 40,
-            endIndent: 20,
+             const Divider(thickness: 1, height: 40, indent: 20, endIndent: 20),
+
+           ],
+         ):
+          const SizedBox(
+            height: 50,
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
@@ -54,7 +58,7 @@ class HomeZoom extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 50),
+          const SizedBox(height: 50),
           Image.asset('assets/images/zoom.png'),
 
         ]),

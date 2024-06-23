@@ -1,14 +1,24 @@
+import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
+import 'dart:typed_data';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hieroglyphic_app/Screens/home_screen/home_screen.dart';
+import 'package:hieroglyphic_app/compenets/cashe_helper.dart';
+import 'package:image/image.dart' as img;
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:hieroglyphic_app/compenets/constant/colors.dart';
 import 'package:hieroglyphic_app/compenets/constants.dart';
-
+import 'package:hieroglyphic_app/main.dart';
+import 'package:http/http.dart' as http;
+import 'package:path_provider/path_provider.dart';
 import '../../models/quiz_model/db_connect.dart';
 import '../../models/quiz_model/question_model.dart';
 import '../../widgets/next_button.dart';
 import '../../widgets/option_card.dart';
 import '../../widgets/question_widget.dart';
 import '../../widgets/result_box.dart';
-
 
 class QuizHomeScreen extends StatefulWidget {
   const QuizHomeScreen({super.key});
@@ -22,14 +32,141 @@ class _QuizHomeScreenState extends State<QuizHomeScreen> {
   int score = 0;
   bool isAlreadySelected = false;
   bool isPressed = false;
+  late CameraController _controller;
+  late Future<void> _initializeControllerFuture;
+  late Timer _timer;
+  String? _response;
+  late double percentageFocus = 75.0;
+  int focus = 75;
+  String cheating='';
+  int questionLength = 0;
+  @override
+  void dispose() {
+    _timer.cancel();
+    //_controller.
+    _controller.dispose();
+    super.dispose();
+  }
+
+  Future<void> _resetApi() async {
+    try {
+      final response = await http.post(
+        Uri.parse(
+            'https://77c2-197-62-9-205.ngrok-free.app/reset'), // Replace with your Flask API URL
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, int>{'reset': 0}),
+      );
+
+      if (response.statusCode == 200) {
+        final jsonResponse = json.decode(response.body);
+        print('Reset Response: $jsonResponse');
+      } else {
+        print('Failed to reset: ${response.reasonPhrase}');
+      }
+    } catch (e) {
+      print('Error during reset: $e');
+    }
+  }
+  Future uploadScore() async {
+
+    await FirebaseFirestore.instance.collection('Quiz reslut').add({'name': "${CacheHelper.getData(key: 'name')}",'score':"$score/$questionLength","cheating":cheating});
+  }
+
+  Uint8List resizeImage(Uint8List imageBytes,
+      {required int width, required int height}) {
+    img.Image? image = img.decodeImage(imageBytes);
+    if (image != null) {
+      img.Image resizedImage =
+      img.copyResize(image, width: width, height: height);
+      Uint8List resizedBytes = Uint8List.fromList(img.encodeJpg(resizedImage));
+      return resizedBytes;
+    } else {
+      throw Exception('Failed to decode image.');
+    }
+  }
+
+  void _startStreaming() {
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) async {
+      await _captureAndUploadFrame();
+    });
+  }
+
+  Future<void> _captureAndUploadFrame() async {
+    try {
+      checkCheating();
+      await _initializeControllerFuture;
+
+      final Directory tempDir = await getTemporaryDirectory();
+      final String tempPath = tempDir.path;
+      final String filePath = '$tempPath/frame.jpg';
+
+      XFile picture = await _controller.takePicture();
+      await picture.saveTo(filePath);
+
+      File file = File(filePath);
+
+      if (await file.exists()) {
+        var request = http.MultipartRequest(
+          'POST',
+          Uri.parse(
+              'https://77c2-197-62-9-205.ngrok-free.app/upload'), // Replace with your Flask API URL
+        );
+        request.files
+            .add(await http.MultipartFile.fromPath('images[]', file.path));
+
+        var response = await request.send();
+
+        if (response.statusCode == 200) {
+          final responseBody = await response.stream.bytesToString();
+          final jsonResponse = json.decode(responseBody);
+          setState(() {
+            _response = jsonResponse.toStrintg();
+            percentageFocus = jsonResponse['percentage_focus'];
+            focus = percentageFocus.truncate();
+            if(percentageFocus<=50.0){
+              cheating='Cheat';
+
+            }
+            else{
+              cheating=' Not cheating';
+            }
+          });
+        } else {
+          setState(() {
+            _response = 'Error: ${response.reasonPhrase}';
+          });
+        }
+
+        file.delete(); // Delete the temporary file after sending
+      } else {
+        print('File does not exist');
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  checkCheating(){
+    if(percentageFocus<=50.0){
+      cheating='Cheating';
+
+    }
+    else{
+      cheating=' Not cheating';
+    }
+  }
   void startOver() {
     setState(() {
+      uploadScore();
       index = 0;
       score = 0;
       isPressed = false;
       isAlreadySelected = false;
     });
-    Navigator.pop(context);
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (_) => HomeScreen()));
   }
 
   void nextQuestion(int questionLength) {
@@ -37,12 +174,15 @@ class _QuizHomeScreenState extends State<QuizHomeScreen> {
       showDialog(
           context: context,
           barrierDismissible:
-              false, //disable the dismiss function on clicking outside of box
-          builder: (ctx) => ResultBox(
-                onPressed: startOver,
-                questionLength: questionLength,
-                result: score,
-              ));
+          false, //disable the dismiss function on clicking outside of box
+          builder: (ctx) {
+            return ResultBox(
+              onPressed: startOver,
+              questionLength: questionLength,
+              result: score,
+              cheating: cheating,
+            );
+          });
     } else {
       if (isPressed) {
         setState(() {
@@ -83,6 +223,16 @@ class _QuizHomeScreenState extends State<QuizHomeScreen> {
   @override
   void initState() {
     _questions = getData();
+    _resetApi();
+
+    _controller = CameraController(
+      camera![1],
+      ResolutionPreset.medium,
+    );
+
+    _initializeControllerFuture = _controller.initialize().then((_) {
+      _startStreaming();
+    });
     super.initState();
   }
 
@@ -98,10 +248,10 @@ class _QuizHomeScreenState extends State<QuizHomeScreen> {
             );
           } else if (snapshot.hasData) {
             var extractedData = snapshot.data as List<Question>;
+            questionLength=extractedData.length;
             return Scaffold(
               backgroundColor: AppColor.primaryColor,
               appBar: AppBar(
-
                 title: const Text(
                   'Quiz Questions',
                   style: TextStyle(color: Colors.white),
@@ -110,14 +260,18 @@ class _QuizHomeScreenState extends State<QuizHomeScreen> {
                 shadowColor: Colors.transparent,
                 actions: [
                   Padding(
-                    padding: const EdgeInsets.all(18),
+                    padding: const EdgeInsets.only(left: 7),
                     child: Text('Score: $score',
+                        style: const TextStyle(fontSize: 18, color: neutral1)),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 7),
+                    child: Text('Focus: $focus',
                         style: const TextStyle(fontSize: 18, color: neutral1)),
                   )
                 ],
               ),
               body: Column(
-
                 children: [
                   SizedBox(
                     height: 50,
@@ -135,21 +289,25 @@ class _QuizHomeScreenState extends State<QuizHomeScreen> {
                         const Divider(color: neutral1),
                         const SizedBox(height: 25),
                         for (int i = 0;
-                            i < extractedData[index].options.length;
-                            i++)
+                        i < extractedData[index].options.length;
+                        i++)
                           GestureDetector(
                             onTap: () => checkAnswerAndUpdate(
-                                extractedData[index].options.values.toList()[i]),
+                                extractedData[index]
+                                    .options
+                                    .values
+                                    .toList()[i]),
                             child: OptionCard(
-                              option: extractedData[index].options.keys.toList()[i],
+                              option:
+                              extractedData[index].options.keys.toList()[i],
                               color: isPressed
                                   ? extractedData[index]
-                                              .options
-                                              .values
-                                              .toList()[i] ==
-                                          true
-                                      ? correct
-                                      : incorrect
+                                  .options
+                                  .values
+                                  .toList()[i] ==
+                                  true
+                                  ? correct
+                                  : incorrect
                                   : neutral1,
                             ),
                           ),
@@ -170,7 +328,7 @@ class _QuizHomeScreenState extends State<QuizHomeScreen> {
                 ),
               ),
               floatingActionButtonLocation:
-                  FloatingActionButtonLocation.centerFloat,
+              FloatingActionButtonLocation.centerFloat,
             );
           }
         } else {

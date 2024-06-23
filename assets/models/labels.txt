@@ -1,2 +1,0 @@
-0 NotFocus
-1 Focus

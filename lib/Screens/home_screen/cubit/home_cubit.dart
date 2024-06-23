@@ -27,18 +27,7 @@ List<Widget> bottomWidget=[
       Text('Lectures  ',style: TextStyle(color: Colors.white,fontSize: 12),),
     ],
   ),
-  // Column(
-  //   children: [
-  //     Icon(Icons.list,color: Colors.white,),
-  //     Text('List',style: TextStyle(color: Colors.white),),
-  //   ],
-  // ),
-  // Column(
-  //   children: [
-  //     Icon(Icons.more_vert,color: Colors.white,),
-  //     Text('Test Camera',style: TextStyle(color: Colors.white),),
-  //   ],
-  // ),
+
   Column(
     children: [
 
@@ -140,7 +129,7 @@ if(isDark){
 
 }
 
-  var isEnglish=false;
+  var isEnglish=true;
 
 void changeLanguage(){
   changeBubble=!isEnglish;
@@ -159,7 +148,6 @@ void changeLanguage(){
           MaterialPageRoute(builder: (context) => LoginScreen(),)
           , (route) => false);
 
-    //  currentIndex = 0;
       emit(Logout());
     }).catchError((error) {
       emit(LogoutError(error.toString()));

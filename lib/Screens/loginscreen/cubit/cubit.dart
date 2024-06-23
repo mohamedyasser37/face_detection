@@ -20,8 +20,7 @@ class socialloginCubit extends Cubit<LoginState> {
           .signInWithEmailAndPassword(email: email, password: password)
           .then((values) {
         uid = values.user!.uid;
-       // print(uid);
-       // pri
+
 
         CollectionReference data =
             FirebaseFirestore.instance.collection('users');

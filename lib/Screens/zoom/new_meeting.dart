@@ -33,6 +33,7 @@ class NewMeeting extends StatefulWidget {
 
 class _NewMeetingState extends State<NewMeeting> {
   CameraImage? cameraImage;
+
   CameraController? cameraController;
   String output = '';
   String name = '';
@@ -53,6 +54,8 @@ class _NewMeetingState extends State<NewMeeting> {
       'sumOfResults': 0,
     });
   }
+
+
 
   @override
   void initState() {
@@ -143,6 +146,8 @@ class _NewMeetingState extends State<NewMeeting> {
                       borderRadius: BorderRadius.circular(25)),
                 ),
               ),
+
+
             ],
           ),
         ),

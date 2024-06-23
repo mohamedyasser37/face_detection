@@ -269,27 +269,7 @@ class RegisterScreen extends StatelessWidget {
                                   ),
                                 )
                               : Center(
-                                  child: DropdownButton<String>(
-                                    hint: Text(selectedGrade!),
-                                    value: grade,
-                                    onChanged: (String? value) {
-                                      grade = value;
-                                      selectedGrade =
-                                          SocialRegisterCubit.get(context)
-                                              .CheckGrade(grade!);
-                                    },
-                                    items: <String>[
-                                      'one',
-                                      'two',
-                                      'three',
-                                      'four'
-                                    ].map((String value) {
-                                      return DropdownMenuItem<String>(
-                                        value: value,
-                                        child: Text(value),
-                                      );
-                                    }).toList(),
-                                  ),
+                                  child: SizedBox(),
                                 ),
                           const SizedBox(
                             height: 10,
@@ -321,7 +301,7 @@ class RegisterScreen extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                'Already have acount',
+                                'Already have account',
                                 style: GoogleFonts.lobster(
                                   fontSize: 15.0,
                                   color: Colors.black,
